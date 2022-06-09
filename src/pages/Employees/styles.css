@@ -1,0 +1,75 @@
+.container-employees {
+    width: 100%;
+    height: 100vh;
+    padding: 2rem 7rem 1rem;
+    background-color: var(--primary-100);
+    margin-left: 12.5rem;
+    overflow: auto;
+}
+
+.container-employees .p-toolbar {
+    background-color: var(--primary-100);
+    width: 100%;
+}
+
+.container-employees .p-card {
+    margin: 0.313rem 0.625rem 0.313rem;
+    font-size: 0.938rem;
+}
+
+.container-employees .p-button-rounded {
+    margin-right: 0.625rem;
+}
+
+.p-carousel .p-carousel-indicators .p-carousel-indicator button {
+    background-color: var(--primary-400);
+}
+
+.container-employees .p-carousel-header {
+    margin-right: 3.1rem;
+    margin-left: 3rem;
+}
+
+@media only screen and (max-width: 950px) {
+    .container-employees {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+    }
+
+    .container-employees .p-card {
+        width: 100%;
+        margin: 0.625rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .container-employees {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+    }
+
+    .container-employees .p-card {
+        width: 100%;
+        margin: 0.625rem;
+    }
+}
+
+@media only screen and (max-width: 560px) {
+    .container-employees .p-toolbar-group-left {
+        margin-bottom: 10px;
+    }
+
+    .container-employees .p-carousel-header .p-toolbar-group-left,
+    .container-employees .p-carousel-header .p-toolbar-group-left button {
+        width: 100%;
+    }
+
+    .container-employees .p-toolbar-group-right,
+    .container-employees .p-input-icon-left,
+    .container-employees .p-input-icon-left input {
+        width: 100%;
+    }
+
+}

@@ -1,8 +1,18 @@
 import { LoginForm } from "../../forms/Login"
+import { Image } from 'primereact/image';
+
+import "./styles.css"
 
 const Login = () => {
+    const logo = require('../../assets/home.png')
+
     return (
-        <LoginForm />
+        <main className="login-main">
+            <div className="img-box">
+                <Image src={logo} />
+            </div>
+            <LoginForm />
+        </main>
     )
 }
 

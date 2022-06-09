@@ -1,0 +1,46 @@
+.product-dialog-groups {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.product-dialog-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 5px;
+}
+
+.product-dialog-group>* {
+    margin: 10px;
+}
+
+.product-dialog-group .p-float-label,
+.product-dialog-group .p-float-label input,
+.product-dialog-group .p-float-label .p-password,
+.product-dialog-group .p-float-label .p-dropdown,
+.product-dialog-group .field-checkbox .p-checkbox {
+    width: 100%;
+}
+
+.group-street> :first-child {
+    width: 80%;
+}
+
+.group-street> :last-child {
+    width: 20%;
+}
+
+.user-type {
+    width: 50%;
+}
+
+.product-dialog-group .field-checkbox {
+    display: flex;
+}
+
+.product-dialog-group .field-checkbox label {
+    margin-right: 10px;
+}

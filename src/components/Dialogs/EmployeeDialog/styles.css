@@ -1,0 +1,37 @@
+.employee-dialog-groups {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.employee-dialog-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 5px;
+}
+
+.employee-dialog-group>* {
+    margin: 10px;
+}
+
+.employee-dialog-group .p-float-label,
+.employee-dialog-group .p-float-label input,
+.employee-dialog-group .p-float-label .p-password,
+.employee-dialog-group .p-float-label .p-dropdown  {
+    width: 100%;
+}
+
+.group-street > :first-child {
+    width: 80%;
+}
+
+.group-street > :last-child {
+    width: 20%;
+}
+
+.user-type {
+    width: 50%;
+}
