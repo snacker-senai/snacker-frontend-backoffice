@@ -17,16 +17,16 @@ Requester.interceptors.request.use((config: AxiosRequestConfig) => {
     return config
 })
 
-// Requester.interceptors.response.use(response => {
-//     return response
-// }, error => {
-//     if (error.response.status === 401) {
-//         // eslint-disable-next-line no-restricted-globals
-//         location.href = '/login'
-//         localStorage.removeItem(KeyTokenLocalStorage)
-//     }
-//     return error
-// })
+Requester.interceptors.response.use(response => {
+    return response
+}, error => {
+    if (error.response.status === 401) {
+        // eslint-disable-next-line no-restricted-globals
+        location.href = '/login'
+        localStorage.removeItem(KeyTokenLocalStorage)
+    }
+    return error
+})
 
 export const Endpoints = {
     EMPLOYEE_FROM_RESTAURANT: '/user/fromrestaurant',
