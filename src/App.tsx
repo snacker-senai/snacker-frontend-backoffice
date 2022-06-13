@@ -31,25 +31,26 @@ export default function App() {
     <div className="principal-container">
 
       {isLoggedIn && 
-      <>
-      <Navbar navigationBars={navigationBars}/>
-      <Router>
-      <Switch>
-        <Route path="/home" component={Home}></Route>
-        <Route path="/dashboard" component={componentDefault} />
-        <Route path="/employees" component={Employees} />
-        <Route path="/products" component={Products} />
-        <Route path="/categories" component={Categories} />
-        <Route path="/foods" component={componentDefault} />
-        <Route path="/deliveries" component={componentDefault} />
-        <Route path="/perfil" component={componentDefault} />
-        <Route path="/configurations" component={componentDefault} />
-        <Route path="/restaurants" component={componentDefault} />
+        <>
+          <Router>
+            <Navbar navigationBars={navigationBars}/>
+            <Switch>
+              <Route path="/home" component={Home}></Route>
+              <Route path="/dashboard" component={componentDefault} />
+              <Route path="/employees" component={Employees} />
+              <Route path="/products" component={Products} />
+              <Route path="/categories" component={Categories} />
+              <Route path="/foods" component={componentDefault} />
+              <Route path="/deliveries" component={componentDefault} />
+              <Route path="/perfil" component={componentDefault} />
+              <Route path="/configurations" component={componentDefault} />
+              <Route path="/restaurants" component={componentDefault} />
 
-        <Redirect to={'/home'} />
-      </Switch>
-    </Router>
-    </>}
+              <Redirect to={'/home'} />
+            </Switch>
+          </Router>
+        </>
+      }
       {!isLoggedIn && <Login />}
     </div>
   )

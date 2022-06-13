@@ -1,9 +1,9 @@
 import { NavItem, PropsNavBar } from "./Models";
+import { Link } from 'react-router-dom'
 
 import './styles.css'
 
 const Navbar = (props: PropsNavBar) => {
-    
     return (
         <nav className="navbar">
             <ul className="navbar-nav">
@@ -14,10 +14,10 @@ const Navbar = (props: PropsNavBar) => {
                 </li>
                 {props.navigationBars.map((navigation: NavItem) => (
                     <li key={navigation.label} className="nav-item nav-active">
-                        <a href={navigation.linkTo} className="nav-link">
+                        <Link to={navigation.linkTo} className="nav-link">
                             <i className={"pi " + navigation.icon}></i>
                             <span className="link-text">{navigation.label}</span>
-                        </a>
+                        </Link>
                     </li>
                 ))}
             </ul>
