@@ -16,6 +16,7 @@ import { Products } from "./pages/Products";
 import { Categories } from "./pages/Categories";
 import { Orders } from "./pages/Orders";
 import { useEffect, useState } from "react";
+import { Deliveries } from "./pages/Deliveries";
 
 export default function App() {
   const [navItens, setNavItens] = useState<NavItem[] | null>(null)
@@ -50,7 +51,7 @@ export default function App() {
               <Route path="/products" component={Products} />
               <Route path="/categories" component={Categories} />
               <Route path="/foods" component={Orders} />
-              <Route path="/deliveries" component={componentDefault} />
+              <Route path="/deliveries" component={Deliveries} />
               <Route path="/perfil" component={componentDefault} />
               <Route path="/configurations" component={componentDefault} />
               <Route path="/restaurants" component={componentDefault} />

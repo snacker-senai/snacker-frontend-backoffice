@@ -1,6 +1,8 @@
 import React from 'react'
 import { Button } from 'primereact/button'
 
+import './styles.css'
+
 interface IOrderCardProps {
     tableNumber: string
     time: string
