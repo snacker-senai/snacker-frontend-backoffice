@@ -145,7 +145,7 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
             case 0:
                 return (
                     <Button
-                        label='próximo'
+                        label='Próximo'
                         onClick={() => nextTabPanel(1)}
                     />
                 )
@@ -153,11 +153,11 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
                 return (
                     <div>
                         <Button
-                            label='voltar'
+                            label='Voltar'
                             onClick={() => nextTabPanel(0)}
                         />
                         <Button
-                            label='próximo'
+                            label='Próximo'
                             onClick={() => nextTabPanel(2)}
                         />
                     </div>
@@ -165,8 +165,8 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
             case 2:
                 return (
                     <div>
-                        <Button label='voltar' onClick={() => nextTabPanel(1)}></Button>
-                        <Button type='submit' label={props.employee?.id ? 'alterar' : 'cadastrar'} onClick={() => formik.handleSubmit()}></Button>
+                        <Button label='Voltar' onClick={() => nextTabPanel(1)}></Button>
+                        <Button type='submit' label={props.employee?.id ? 'Alterar' : 'Cadastrar'} onClick={() => formik.handleSubmit()}></Button>
                     </div>
                 )
         }

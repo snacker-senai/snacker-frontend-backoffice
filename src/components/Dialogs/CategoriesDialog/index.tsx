@@ -61,7 +61,7 @@ export const ProductsCategoryDialog = (props: ProspProductsCategroyDialog) => {
 
     const renderFooter = () => {
         return (
-            <Button type='submit' label={props.productCategory?.id ? 'alterar' : 'cadastrar'} onClick={() => formik.handleSubmit()}></Button>
+            <Button type='submit' label={props.productCategory?.id ? 'Alterar' : 'Cadastrar'} onClick={() => formik.handleSubmit()}></Button>
         )
     }
 
