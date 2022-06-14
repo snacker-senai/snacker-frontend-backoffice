@@ -36,6 +36,7 @@ export const Endpoints = {
     PRODUCT_FROM_RESTAURANT: '/product/fromrestaurant',
     PRODUCT: '/product',
     PRODUCT_CATEGORY_FROM_RESTAURANT: '/productcategory/fromrestaurant',
-    PRODUCT_CATEGORY: '/productcategory'
+    PRODUCT_CATEGORY: '/productcategory',
+    AUTH_CLAIMS: '/auth/tokenclaims'
 }
 
