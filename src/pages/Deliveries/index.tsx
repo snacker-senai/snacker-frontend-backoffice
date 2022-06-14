@@ -1,27 +1,45 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { OrderCard } from '../../components/OrderCard'
+import { OrderWithProducts } from '../../services/order/Models'
+import { OrderService } from '../../services/order/OrderService'
 
 import './styles.css'
 
 export const Deliveries = () => {
+    const [orders, setOrders] = useState<OrderWithProducts[]>([])
+
+    const getOrders = async () => {
+        const orders = await OrderService.getOrderByStatusId(2)
+        setOrders(orders)
+    }
+
+    const deliverOrder = async (orderId: number) => {
+        try {
+            await OrderService.setOrderStatusByOrderId(orderId, 3)
+            const filteredOrders = orders.filter(order => order.id !== orderId)
+            setOrders(filteredOrders)
+        } catch (error) {
+            alert(error)
+        }
+    }
+
+    useEffect(() => {
+        setInterval(() => {
+            getOrders()
+        }, 5000)
+    }, [])
+
     return (
         <div className="container-deliveries">
-            <OrderCard
-                buttonLabel="Entregar"
-                tableNumber="5"
-                time="12:30:45"
-                products={[
-                    {
-                        name: 'Pizza de brócolis',
-                        quantity: 5,
-                        details: 'Sem brócolis'
-                    },
-                    {
-                        name: 'Pizza de cebola',
-                        quantity: 2
-                    }
-                ]}
-            />
+            {orders.map(order => (
+                <OrderCard
+                    buttonLabel="Entregar"
+                    handleButtonClick={() => deliverOrder(order.id)}
+                    table={order.table}
+                    time={order.createdAt}
+                    products={order.productsWithQuantity}
+                />
+            ))}
         </div>
     )
 }
