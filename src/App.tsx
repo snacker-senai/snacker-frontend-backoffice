@@ -11,16 +11,24 @@ import { Navbar } from "./components/Navbar";
 import { NavItem } from "./components/Navbar/Models";
 import { NavBarsService } from "./services/permission-user/NavBarsService";
 import { Employees } from "./pages/Employees";
-import { AuthService } from "./services/auth/AuthService";
+import { AuthService, UserAuth } from "./services/auth/AuthService";
 import { Products } from "./pages/Products";
 import { Categories } from "./pages/Categories";
 import { Orders } from "./pages/Orders";
+import { useEffect, useState } from "react";
 
 export default function App() {
+  const [navItens, setNavItens] = useState<NavItem[] | null>(null)
+  const [infoUser, setInfoUser] = useState<UserAuth | null>(null)
 
-  const navigationBars: NavItem[] = NavBarsService.getNavigationBarsByTypeUser("Gerente")
-
-  const isLoggedIn = AuthService.isLoggedIn()
+  useEffect(() => {
+    AuthService.getInfoUserLogged().then((data: UserAuth | undefined) => {
+      if (data) {
+        setInfoUser(data)
+        setNavItens(NavBarsService.getNavigationBarsByTypeUser(data.role))
+      }
+    })
+  }, [])
 
   const componentDefault = () => {
     return (
@@ -31,10 +39,10 @@ export default function App() {
   return (
     <div className="principal-container">
 
-      {isLoggedIn && 
+      {infoUser &&
         <>
           <Router>
-            <Navbar navigationBars={navigationBars}/>
+            <Navbar navigationBars={navItens} />
             <Switch>
               <Route path="/home" component={Home}></Route>
               <Route path="/dashboard" component={componentDefault} />
@@ -52,7 +60,7 @@ export default function App() {
           </Router>
         </>
       }
-      {!isLoggedIn && <Login />}
+      {!infoUser && <Login />}
     </div>
   )
 }

@@ -5,5 +5,5 @@ export interface NavItem {
 }
 
 export interface PropsNavBar {
-    navigationBars: NavItem[]
+    navigationBars: NavItem[] | null
 }

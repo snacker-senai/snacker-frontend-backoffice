@@ -2,6 +2,12 @@ import { FormLogin } from "./Model";
 
 import { Requester, Endpoints, KeyTokenLocalStorage } from '../configuration-proxy/ConfigurationProxy'
 
+export interface UserAuth {
+    role: string
+    email: string
+    restaurantId: number
+}
+
 export class AuthService {
     static async login(formLogin: FormLogin): Promise<boolean> {
         const { data, status } = await Requester.post<string>(Endpoints.LOGIN, formLogin)
@@ -12,8 +18,14 @@ export class AuthService {
         return false
     }
 
-    static isLoggedIn(): boolean {
+    static async getInfoUserLogged(): Promise<UserAuth | undefined> {
         const token = localStorage.getItem(KeyTokenLocalStorage)
-        return (token !== null && token !== undefined)
+
+        if (token !== null && token !== undefined) {
+            const { data } = await Requester.get<UserAuth>(Endpoints.AUTH_CLAIMS)
+            return data
+        }
+
+        return undefined
     }
 }
