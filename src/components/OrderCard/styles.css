@@ -1,0 +1,69 @@
+.order-component {
+    width: 100%;
+    background-color: white;
+    padding: 16px;
+    border-radius: 7px;
+    box-shadow: rgba(149, 157, 165, 0.05) 0px 4px 24px;
+    margin-bottom: 33px;
+}
+
+.order-component .order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.order-component .table {
+    color: rgb(66, 66, 66);
+    font-size: 1.3em;
+}
+
+.order-component .time {
+    color: rgb(66, 66, 66);
+    font-size: 1.05em;
+    font-weight: bold;
+}
+
+.order-component .order-item {
+    margin-top: 10px;
+    background-color: rgb(243, 243, 243);
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.order-component .item-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-component .order-item .item-name {
+    color: rgb(66, 66, 66);
+    font-weight: bold;
+    font-size: 1.05em;
+}
+
+.order-component .order-item .item-quantity {
+    font-size: 0.86em;
+    background-color: rgb(177, 177, 208);
+    color: rgb(61, 63, 96);
+    font-weight: bolder;
+    border-radius: 4px;
+    padding: 4px;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.order-component .order-item .item-observation {
+    color: rgb(100, 100, 100);
+    font-size: 0.92em;
+    padding-top: 2px;
+}
+
+.order-component .order-actions {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    padding-top: 17px;
+}

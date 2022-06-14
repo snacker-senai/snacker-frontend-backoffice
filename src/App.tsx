@@ -14,6 +14,7 @@ import { Employees } from "./pages/Employees";
 import { AuthService } from "./services/auth/AuthService";
 import { Products } from "./pages/Products";
 import { Categories } from "./pages/Categories";
+import { Orders } from "./pages/Orders";
 
 export default function App() {
 
@@ -40,7 +41,7 @@ export default function App() {
               <Route path="/employees" component={Employees} />
               <Route path="/products" component={Products} />
               <Route path="/categories" component={Categories} />
-              <Route path="/foods" component={componentDefault} />
+              <Route path="/foods" component={Orders} />
               <Route path="/deliveries" component={componentDefault} />
               <Route path="/perfil" component={componentDefault} />
               <Route path="/configurations" component={componentDefault} />
