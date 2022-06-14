@@ -3,35 +3,18 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "./GlobalStyles.css"
 
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import { Login } from "./pages/Login";
 import { Home } from "./pages/Home";
-import { Navbar } from "./components/Navbar";
-import { NavItem } from "./components/Navbar/Models";
-import { NavBarsService } from "./services/permission-user/NavBarsService";
 import { Employees } from "./pages/Employees";
-import { AuthService, UserAuth } from "./services/auth/AuthService";
 import { Products } from "./pages/Products";
 import { Categories } from "./pages/Categories";
 import { Orders } from "./pages/Orders";
-import { useEffect, useState } from "react";
 import { Deliveries } from "./pages/Deliveries";
+import { PrivateRoute } from "./components/PrivateRoute";
 
 export default function App() {
-  const [navItens, setNavItens] = useState<NavItem[] | null>(null)
-  const [infoUser, setInfoUser] = useState<UserAuth | null>(null)
-
-  useEffect(() => {
-    AuthService.getInfoUserLogged().then((data: UserAuth | undefined) => {
-      if (data) {
-        setInfoUser(data)
-        setNavItens(NavBarsService.getNavigationBarsByTypeUser(data.role))
-      }
-    })
-  }, [])
-
-  const componentDefault = () => {
+  const ComponentDefault = () => {
     return (
       <h1>teste</h1>
     )
@@ -39,29 +22,20 @@ export default function App() {
 
   return (
     <div className="principal-container">
-
-      {infoUser &&
-        <>
-          <Router>
-            <Navbar navigationBars={navItens} />
-            <Switch>
-              <Route path="/home" component={Home}></Route>
-              <Route path="/dashboard" component={componentDefault} />
-              <Route path="/employees" component={Employees} />
-              <Route path="/products" component={Products} />
-              <Route path="/categories" component={Categories} />
-              <Route path="/foods" component={Orders} />
-              <Route path="/deliveries" component={Deliveries} />
-              <Route path="/perfil" component={componentDefault} />
-              <Route path="/configurations" component={componentDefault} />
-              <Route path="/restaurants" component={componentDefault} />
-
-              <Redirect to={'/home'} />
-            </Switch>
-          </Router>
-        </>
-      }
-      {!infoUser && <Login />}
+      <Router>
+        <Switch>
+          <Route path="/home"><PrivateRoute children={<Home />} /></Route>
+          <Route path="/dashboard"><PrivateRoute children={<ComponentDefault />} /></Route>
+          <Route path="/employees"><PrivateRoute children={<Employees />} /></Route>
+          <Route path="/products"><PrivateRoute children={<Products />} /></Route>
+          <Route path="/categories"><PrivateRoute children={<Categories />} /></Route>
+          <Route path="/foods"><PrivateRoute children={<Orders />} /></Route>
+          <Route path="/deliveries"><PrivateRoute children={<Deliveries />} /></Route>
+          <Route path="/perfil"><PrivateRoute children={<ComponentDefault />} /></Route>
+          <Route path="/configurations"><PrivateRoute children={<ComponentDefault />} /></Route>
+          <Route path="/restaurants"><PrivateRoute children={<ComponentDefault />} /></Route>
+        </Switch>
+      </Router>
     </div>
   )
 }
