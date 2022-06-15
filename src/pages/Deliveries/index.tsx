@@ -24,6 +24,8 @@ export const Deliveries = () => {
     }
 
     useEffect(() => {
+        getOrders()
+    
         setInterval(() => {
             getOrders()
         }, 5000)
