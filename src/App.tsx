@@ -12,6 +12,7 @@ import { Categories } from "./pages/Categories";
 import { Orders } from "./pages/Orders";
 import { Deliveries } from "./pages/Deliveries";
 import { PrivateRoute } from "./components/PrivateRoute";
+import { MenuProvider } from "./context/MenuContext";
 
 export default function App() {
   const ComponentDefault = () => {
@@ -22,20 +23,22 @@ export default function App() {
 
   return (
     <div className="principal-container">
-      <Router>
-        <Switch>
-          <Route path="/home"><PrivateRoute children={<Home />} /></Route>
-          <Route path="/dashboard"><PrivateRoute children={<ComponentDefault />} /></Route>
-          <Route path="/employees"><PrivateRoute children={<Employees />} /></Route>
-          <Route path="/products"><PrivateRoute children={<Products />} /></Route>
-          <Route path="/categories"><PrivateRoute children={<Categories />} /></Route>
-          <Route path="/foods"><PrivateRoute children={<Orders />} /></Route>
-          <Route path="/deliveries"><PrivateRoute children={<Deliveries />} /></Route>
-          <Route path="/perfil"><PrivateRoute children={<ComponentDefault />} /></Route>
-          <Route path="/configurations"><PrivateRoute children={<ComponentDefault />} /></Route>
-          <Route path="/restaurants"><PrivateRoute children={<ComponentDefault />} /></Route>
-        </Switch>
-      </Router>
+      <MenuProvider>
+        <Router>
+          <Switch>
+            <Route path="/home"><PrivateRoute menu={-1} children={<Home />} /></Route>
+            <Route path="/dashboard"><PrivateRoute menu={0} children={<ComponentDefault />} /></Route>
+            <Route path="/employees"><PrivateRoute menu={1} children={<Employees />} /></Route>
+            <Route path="/products"><PrivateRoute menu={2} children={<Products />} /></Route>
+            <Route path="/categories"><PrivateRoute menu={3} children={<Categories />} /></Route>
+            <Route path="/foods"><PrivateRoute menu={4} children={<Orders />} /></Route>
+            <Route path="/deliveries"><PrivateRoute menu={5} children={<Deliveries />} /></Route>
+            <Route path="/perfil"><PrivateRoute menu={6} children={<ComponentDefault />} /></Route>
+            <Route path="/configurations"><PrivateRoute menu={7} children={<ComponentDefault />} /></Route>
+            <Route path="/restaurants"><PrivateRoute menu={8} children={<ComponentDefault />} /></Route>
+          </Switch>
+        </Router>
+      </MenuProvider>
     </div>
   )
 }
