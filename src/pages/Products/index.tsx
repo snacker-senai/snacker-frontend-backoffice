@@ -104,24 +104,6 @@ export const Products = () => {
         }
     ];
 
-    const productTemplate = (product: Product) => {
-        return (
-            <Card
-                key={product.name + product.description}
-                title={product.name}
-                style={{ width: '17em', height: '100%' }}
-                footer={footer(product)}
-            >
-                <div className="product-image">
-                    <img src={product.image} alt={product.name} />
-                </div>
-                <p><strong>Descrição:</strong> {product.description}</p>
-                <p><strong>Preço:</strong> {product.price}</p>
-                <p><strong>Ativo:</strong> {product.active ? 'Sim' : 'Não'}</p>
-                <p><strong>Categoria:</strong> {product.productCategory.name}</p>
-            </Card>
-        );
-    }
 
     const showError = (sumary, detail: string) => {
         toast.current.show({ severity: 'error', summary: sumary, detail: detail, life: 3000 });
@@ -132,9 +114,26 @@ export const Products = () => {
             <Loading visible={showSpinnerLoading} />
             <Toast ref={toast} />
             <ProductDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} product={productCurrent} />
-            <div className="card">
-                <Carousel value={products} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions}
-                    itemTemplate={productTemplate} header={header} />
+            <div className="products-list">
+                {products.map(product => (
+                    <div className="product-card">
+                        <div className="product-image">
+                            <img src={product.image} alt={product.name} />
+                        </div>
+                        <div className="product-info">
+                            <p className="product-category">{product.productCategory.name}</p>
+                            <p className="product-name">{product.name}</p>
+                            <p className="product-description">{product.description}</p>
+                            <div className="p-d-flex p-justify-between p-mt-4">
+                                <p className="product-price">R$ {product.price.toLocaleString('pt-br', {minimumFractionDigits: 2})}</p>
+                                {product.active 
+                                    ? <p className="product-active">Ativo</p> 
+                                    : <p className="product-inactive">Inativo</p>    
+                                }
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div >
     )
