@@ -127,7 +127,7 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
             case 0:
                 return (
                     <Button
-                        label='próximo'
+                        label='Próximo'
                         onClick={() => nextTabPanel(1)}
                     />
                 )
@@ -153,11 +153,16 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
         toast.current.show({ severity: 'error', summary: sumary, detail: detail, life: 3000 });
     }
 
+    const onHide = () => {
+        props.onHide()
+        setTabPanelCurrent(0)
+    }
+
     return (
         <div>
             <Toast ref={toast} />
             <Loading visible={showSpinnerLoading} />
-            <Dialog header={props.employee?.id ? 'Alterar Cadastro do ' + formik.values.name : 'Cadastrar funcionário'} onHide={props.onHide} visible={props.visible} breakpoints={{ '960px': '75vw' }} style={{ width: '50vw' }} footer={renderFooter}>
+            <Dialog header={props.employee?.id ? 'Alterar Cadastro do ' + formik.values.name : 'Cadastrar funcionário'} onHide={onHide} visible={props.visible} breakpoints={{ '960px': '75vw' }} style={{ width: '50vw' }} footer={renderFooter}>
                 <TabView className="tabview-header-icon" activeIndex={tabPanelCurrent} onTabChange={(e) => setTabPanelCurrent(e.index)}>
                     <TabPanel header="Dados pessoais" disabled={tabPanelCurrent !== 0}>
                         <div className="employee-dialog-groups">

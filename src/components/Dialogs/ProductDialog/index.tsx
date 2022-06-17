@@ -117,7 +117,7 @@ export const ProductDialog = (props: PropsProductDialog) => {
 
     const renderFooter = () => {
         return (
-            <Button type='submit' label={props.product?.id ? 'alterar' : 'cadastrar'} onClick={() => formik.handleSubmit()}></Button>
+            <Button type='submit' label={props.product?.id ? 'Alterar' : 'Cadastrar'} onClick={() => formik.handleSubmit()}></Button>
         )
     }
 

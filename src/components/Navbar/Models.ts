@@ -1,4 +1,5 @@
 export interface NavItem {
+    id: number
     linkTo: string
     label: string
     icon: string

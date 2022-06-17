@@ -5,32 +5,19 @@ import "./GlobalStyles.css"
 
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
-import { Login } from "./pages/Login";
 import { Home } from "./pages/Home";
-import { Navbar } from "./components/Navbar";
-import { NavItem } from "./components/Navbar/Models";
-import { NavBarsService } from "./services/permission-user/NavBarsService";
 import { Employees } from "./pages/Employees";
-import { AuthService, UserAuth } from "./services/auth/AuthService";
 import { Products } from "./pages/Products";
 import { Categories } from "./pages/Categories";
-import { useEffect, useState } from "react";
+import { Orders } from "./pages/Orders";
+import { Deliveries } from "./pages/Deliveries";
+import { PrivateRoute } from "./components/PrivateRoute";
+import { MenuProvider } from "./context/MenuContext";
+import { Login } from "./pages/Login";
 import { Restaurants } from "./pages/Restaurants";
 
 export default function App() {
-  const [navItens, setNavItens] = useState<NavItem[] | null>(null)
-  const [infoUser, setInfoUser] = useState<UserAuth | null>(null)
-
-  useEffect(() => {
-    AuthService.getInfoUserLogged().then((data: UserAuth | undefined) => {
-      if (data) {
-        setInfoUser(data)
-        setNavItens(NavBarsService.getNavigationBarsByTypeUser(data.role))
-      }
-    })
-  }, [])
-
-  const componentDefault = () => {
+  const ComponentDefault = () => {
     return (
       <h1>teste</h1>
     )
@@ -38,29 +25,24 @@ export default function App() {
 
   return (
     <div className="principal-container">
-
-      {infoUser &&
-        <>
-          <Router>
-            <Navbar navigationBars={navItens} />
-            <Switch>
-              <Route path="/home" component={Home}></Route>
-              <Route path="/dashboard" component={componentDefault} />
-              <Route path="/employees" component={Employees} />
-              <Route path="/products" component={Products} />
-              <Route path="/categories" component={Categories} />
-              <Route path="/foods" component={componentDefault} />
-              <Route path="/deliveries" component={componentDefault} />
-              <Route path="/perfil" component={componentDefault} />
-              <Route path="/configurations" component={componentDefault} />
-              <Route path="/restaurants" component={Restaurants} />
-
-              <Redirect to={'/home'} />
-            </Switch>
-          </Router>
-        </>
-      }
-      {!infoUser && <Login />}
+      <MenuProvider>
+        <Router>
+          <Switch>
+            <Route exact path="/home"><PrivateRoute menu={-1} children={<Home />} /></Route>
+            <Route exact path="/dashboard"><PrivateRoute menu={0} children={<ComponentDefault />} /></Route>
+            <Route exact path="/employees"><PrivateRoute menu={1} children={<Employees />} /></Route>
+            <Route exact path="/products"><PrivateRoute menu={2} children={<Products />} /></Route>
+            <Route exact path="/categories"><PrivateRoute menu={3} children={<Categories />} /></Route>
+            <Route exact path="/foods"><PrivateRoute menu={4} children={<Orders />} /></Route>
+            <Route exact path="/deliveries"><PrivateRoute menu={5} children={<Deliveries />} /></Route>
+            <Route exact path="/perfil"><PrivateRoute menu={6} children={<ComponentDefault />} /></Route>
+            <Route exact path="/configurations"><PrivateRoute menu={7} children={<ComponentDefault />} /></Route>
+            <Route exact path="/restaurants"><PrivateRoute menu={8} children={<Restaurants />} /></Route>
+            <Route exact path="/login" component={Login} />
+            <Route path="/"><Redirect to="/login" /></Route>
+          </Switch>
+        </Router>
+      </MenuProvider>
     </div>
   )
 }
