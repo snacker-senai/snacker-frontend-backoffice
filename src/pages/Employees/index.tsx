@@ -139,12 +139,6 @@ const Employees = () => {
                 <p><strong>Telefone:</strong> {employee.person.phone}</p>
                 <p><strong>CPF:</strong> {employee.person.document}</p>
                 <p><strong>E-mail:</strong> {employee.email}</p>
-                <p><strong>CEP:</strong> {employee.person.address.cep}</p>
-                <p><strong>País:</strong> {employee.person.address.country}</p>
-                <p><strong>Estado:</strong> {employee.person.address.state}</p>
-                <p><strong>Bairro:</strong> {employee.person.address.district}</p>
-                <p><strong>Rua:</strong> {employee.person.address.street}</p>
-                <p><strong>Número:</strong> {employee.person.address.number}</p>
             </Card>
         );
     }

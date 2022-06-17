@@ -37,6 +37,8 @@ export const Endpoints = {
     PRODUCT: '/product',
     PRODUCT_CATEGORY_FROM_RESTAURANT: '/productcategory/fromrestaurant',
     PRODUCT_CATEGORY: '/productcategory',
-    AUTH_CLAIMS: '/auth/tokenclaims'
+    AUTH_CLAIMS: '/auth/tokenclaims',
+    RESTAURANT: '/restaurant',
+    RESTAURANT_CATEGORY: '/restaurantcategory'
 }
 

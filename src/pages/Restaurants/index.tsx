@@ -8,26 +8,28 @@ import { Button } from 'primereact/button'
 import { InputText } from 'primereact/inputtext'
 import { Toast } from 'primereact/toast'
 import { Toolbar } from 'primereact/toolbar';
-import { ProductCategory } from '../../services/product/Models';
-import { ProductCategoryService } from '../../services/product-category/ProductCategoryService';
-import { ProductsCategoryDialog } from '../../components/Dialogs/CategoriesDialog';
+
 import { Loading } from '../../components/Loading';
 
-export const Categories = () => {
-    const [productsCategory, setProductsCategory] = useState<ProductCategory[]>()
+import { Restaurant } from '../../services/employee/Models';
+import { RestaurantService } from '../../services/restaurant/RestaurantService';
+import { RestaurantsDialog } from '../../components/Dialogs/RestaurantsDialog';
+
+export const Restaurants = () => {
+    const [restaurants, setRestaurants] = useState<Restaurant[]>()
     const [visibleDialog, setVisibleDialog] = useState(false)
-    const [productCategoryCurrent, setProductCategoryCurrent] = useState<ProductCategory | undefined>(undefined)
+    const [restaurantCurrent, setRestaurantCurrent] = useState<Restaurant | undefined>(undefined)
     const toast = useRef<any>(null)
     const [showSpinnerLoading, setShowSpinnerLoading] = useState(false)
 
     useEffect(() => {
-        buildProductsCategory()
+        buildRestaurant()
     }, [])
 
-    const buildProductsCategory = async () => {
+    const buildRestaurant = async () => {
         setShowSpinnerLoading(true)
 
-        await ProductCategoryService.get().then((data: ProductCategory[]) => setProductsCategory(data))
+        await RestaurantService.get().then((data: Restaurant[]) => setRestaurants(data))
 
         setShowSpinnerLoading(false)
     }
@@ -35,11 +37,11 @@ export const Categories = () => {
     const leftToolbarTemplate = () => {
         return (
             <Button
-                label="Adicionar categoria"
+                label="Adicionar restaurante"
                 icon="pi pi-plus"
                 className="p-button-success mr-2"
                 onClick={() => {
-                    setProductCategoryCurrent(undefined)
+                    setRestaurantCurrent(undefined)
                     setVisibleDialog(true)
                 }}
             />
@@ -55,14 +57,14 @@ export const Categories = () => {
         )
     }
 
-    const actionBodyTemplate = (row: ProductCategory) => {
+    const actionBodyTemplate = (row: Restaurant) => {
         return (
             <React.Fragment>
                 <Button
                     icon="pi pi-pencil"
                     className="p-button-rounded p-button-success mr-2"
                     onClick={() => {
-                        setProductCategoryCurrent(row)
+                        setRestaurantCurrent(row)
                         setVisibleDialog(true)
                     }} />
                 <Button
@@ -72,13 +74,30 @@ export const Categories = () => {
                         setShowSpinnerLoading(true)
 
                         try {
-                            await ProductCategoryService.del(row.id)
-                            showSuccess("Categoria excluído com sucesso!",
-                                `Categoria ${row.name} removido do sistema!`
+                            await RestaurantService.update({
+                                name: row.name,
+                                id: row.id,
+                                description: row.description,
+                                addressId: row.addressId,
+                                restaurantCategoryId: row.restaurantCategoryId,
+                                active: !row.active,
+                                address: {
+                                    cep: row.address.cep,
+                                    city: row.address.city,
+                                    country: row.address.country,
+                                    district: row.address.district,
+                                    number: row.address.number,
+                                    state: row.address.state,
+                                    street: row.address.street,
+                                    id: row.address.id
+                                }
+                            })
+                            showSuccess("Alterado o status do restaurante com sucesso!",
+                                ``
                             )
-                            buildProductsCategory()
+                            buildRestaurant()
                         } catch (error: any) {
-                            showError("Erro ao remover categoria!", `Erro ao remover: ${error.message}`)
+                            showError("Erro ao alterar o status do restaurante!", `Erro ao alterar: ${error.message}`)
                         }
 
                         setShowSpinnerLoading(false)
@@ -98,20 +117,40 @@ export const Categories = () => {
 
     const loadingAndSetVisibleDialog = (visible: boolean) => {
         setVisibleDialog(visible)
-        buildProductsCategory()
+        buildRestaurant()
     }
 
     return (
-        <div className="container-categories">
+        <div className="container-restaurants">
             <Toast ref={toast} />
             <Loading visible={showSpinnerLoading} />
-            <ProductsCategoryDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} productCategory={productCategoryCurrent} />
+            <RestaurantsDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} restaurant={restaurantCurrent} />
             <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
             <div className='panel'>
-                <DataTable value={productsCategory} >
+                <DataTable value={restaurants}>
                     <Column
                         field='name'
                         header='Nome'
+                    />
+                    <Column
+                        field='description'
+                        header='Descrição'
+                    />
+                    <Column
+                        field='restaurantCategory.name'
+                        header='Categoria'
+                    />
+                    <Column
+                        field='address.country'
+                        header='País'
+                    />
+                    <Column
+                        field='address.state'
+                        header='Estado'
+                    />
+                    <Column
+                        field='address.city'
+                        header='Cidade'
                     />
                     <Column
                         style={{ width: '10rem' }}
@@ -119,7 +158,7 @@ export const Categories = () => {
                         header=""
                         body={actionBodyTemplate}
                         exportable={false}
-                        className='categories-action'
+                        className='restaurants-action'
                     />
                 </DataTable>
             </div>

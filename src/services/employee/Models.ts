@@ -14,23 +14,23 @@ export interface UserType {
 }
 
 export interface Person {
-    id?: number 
+    id?: number
     name: string
     birthDate: Date | undefined
     phone: string
     document: string
     restaurantId?: number
-    address: Address
-    addressId?: number
 }
 
 export interface Restaurant {
+    id?: number
     name: string
     description: string
     address: Address
-    addressId: number
+    addressId?: number
     restaurantCategory: RestaurantCategory
     restaurantCategoryId: number
+    active: boolean
 }
 
 export interface Address {
@@ -45,5 +45,7 @@ export interface Address {
 }
 
 export interface RestaurantCategory {
+    id?: number
     name: string
+    active: boolean
 }

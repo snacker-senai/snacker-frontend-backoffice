@@ -1,0 +1,49 @@
+.restaurants-dialog-groups {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.restaurants-dialog-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 5px;
+}
+
+.restaurants-dialog-group>* {
+    margin: 10px;
+}
+
+.restaurants-dialog-group .p-float-label,
+.restaurants-dialog-group .p-float-label input,
+.restaurants-dialog-group .p-float-label .p-password,
+.restaurants-dialog-group .p-float-label .p-dropdown,
+.restaurants-dialog-group .p-float-label .p-calendar {
+    width: 100%;
+}
+
+.group-street> :first-child {
+    width: 80%;
+}
+
+.group-street> :last-child {
+    width: 20%;
+}
+
+@media only screen and (max-width: 950px) {
+    .restaurants-dialog-group {
+        flex-wrap: wrap;
+        margin: 0;
+    }
+
+    div.group-street * {
+        width: 100% !important;
+    }
+
+    .restaurants-dialog-group>* {
+        margin: 5px;
+    }
+}

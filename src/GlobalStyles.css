@@ -18,6 +18,15 @@
     overflow: auto;
 }
 
+.p-datatable .p-datatable-thead > tr > th {
+    background-color: var(--primary-600);
+    color: var(--primary-50);
+}
+
+.p-datatable .p-datatable-tbody > tr {
+    background-color: var(--primary-200);
+}
+
 /* Small screens */
 @media only screen and (max-width: 950px) {
     .principal-container {

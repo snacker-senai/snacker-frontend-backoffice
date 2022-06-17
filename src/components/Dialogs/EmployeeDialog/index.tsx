@@ -76,17 +76,6 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
                     phone: form.cellphone,
                     name: form.name,
                     id: props.employee?.personId,
-                    addressId: props.employee?.person.addressId,
-                    address: {
-                        id: props.employee?.person.addressId,
-                        cep: form.cep,
-                        city: form.city,
-                        district: form.district,
-                        country: form.country,
-                        state: form.state,
-                        number: form.number,
-                        street: form.street
-                    }
                 },
                 userTypeId: form.userType.code,
             })
@@ -123,13 +112,6 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
             document: props.employee?.person.document ? props.employee.person.document : '',
             cellphone: props.employee?.person.phone ? props.employee.person.phone : '',
             dateBirth: props.employee?.person.birthDate ? new Date(props.employee.person.birthDate) : undefined,
-            country: props.employee?.person.address.country ? props.employee.person.address.country : '',
-            cep: props.employee?.person.address.cep ? props.employee.person.address.cep : '',
-            state: props.employee?.person.address.state ? props.employee.person.address.state : '',
-            city: props.employee?.person.address.city ? props.employee.person.address.city : '',
-            district: props.employee?.person.address.district ? props.employee.person.address.district : '',
-            street: props.employee?.person.address.street ? props.employee.person.address.street : '',
-            number: props.employee?.person.address.number ? props.employee.person.address.number : '',
             email: props.employee?.email ? props.employee.email : '',
             password: props.employee?.password ? props.employee.password : '',
             userType: getUserTypeDefault()
@@ -150,19 +132,6 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
                     />
                 )
             case 1:
-                return (
-                    <div>
-                        <Button
-                            label='voltar'
-                            onClick={() => nextTabPanel(0)}
-                        />
-                        <Button
-                            label='próximo'
-                            onClick={() => nextTabPanel(2)}
-                        />
-                    </div>
-                )
-            case 2:
                 return (
                     <div>
                         <Button label='voltar' onClick={() => nextTabPanel(1)}></Button>
@@ -244,88 +213,6 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
                                 </span>
                             </div>
 
-                        </div>
-                    </TabPanel>
-                    <TabPanel header="Endereço" disabled={tabPanelCurrent !== 1}>
-                        <div className="employee-dialog-groups">
-                            <div className="employee-dialog-group">
-                                <span className="p-float-label">
-                                    <InputText
-                                        id="country"
-                                        value={formik.values.country}
-                                        name="country"
-                                        onChange={formik.handleChange}
-                                        className={classNames({ 'p-invalid': isFormFieldValid('country') }, 'input p-inputtext-sm block mb-2')}
-                                    />
-                                    <label htmlFor="country">País</label>
-                                </span>
-                                <span className="p-float-label">
-                                    <InputMask
-                                        id="cep"
-                                        mask="99999-999"
-                                        value={formik.values.cep}
-                                        name="cep"
-                                        onChange={formik.handleChange}
-                                        className={classNames({ 'p-invalid': isFormFieldValid('cep') }, 'input p-inputtext-sm block mb-2')}
-                                    />
-                                    <label htmlFor="cep">CEP</label>
-                                </span>
-                                <span className="p-float-label">
-                                    <InputText
-                                        id="state"
-                                        value={formik.values.state}
-                                        name="state"
-                                        onChange={formik.handleChange}
-                                        className={classNames({ 'p-invalid': isFormFieldValid('state') }, 'input p-inputtext-sm block mb-2')}
-                                    />
-                                    <label htmlFor="state">Estado</label>
-                                </span>
-                            </div>
-
-                            <div className="employee-dialog-group">
-                                <span className="p-float-label">
-                                    <InputText
-                                        id="city"
-                                        value={formik.values.city}
-                                        name="city"
-                                        onChange={formik.handleChange}
-                                        className={classNames({ 'p-invalid': isFormFieldValid('city') }, 'input p-inputtext-sm block mb-2')}
-                                    />
-                                    <label htmlFor="city">Cidade</label>
-                                </span>
-                                <span className="p-float-label">
-                                    <InputText
-                                        id="district"
-                                        value={formik.values.district}
-                                        name="district"
-                                        onChange={formik.handleChange}
-                                        className={classNames({ 'p-invalid': isFormFieldValid('district') }, 'input p-inputtext-sm block mb-2')}
-                                    />
-                                    <label htmlFor="district">Bairro</label>
-                                </span>
-                            </div>
-                            <div className="employee-dialog-group group-street">
-                                <span className="p-float-label">
-                                    <InputText
-                                        id="street"
-                                        value={formik.values.street}
-                                        name="street"
-                                        onChange={formik.handleChange}
-                                        className={classNames({ 'p-invalid': isFormFieldValid('street') }, 'input p-inputtext-sm block mb-2')}
-                                    />
-                                    <label htmlFor="street">Rua</label>
-                                </span>
-                                <span className="p-float-label">
-                                    <InputText
-                                        id="number"
-                                        value={formik.values.number}
-                                        name="number"
-                                        onChange={formik.handleChange}
-                                        className={classNames({ 'p-invalid': isFormFieldValid('number') }, 'input p-inputtext-sm block mb-2')}
-                                    />
-                                    <label htmlFor="number">Número</label>
-                                </span>
-                            </div>
                         </div>
                     </TabPanel>
                     <TabPanel header="Usuário" disabled={tabPanelCurrent !== 2}>

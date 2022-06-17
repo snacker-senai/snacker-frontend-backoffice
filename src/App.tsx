@@ -15,6 +15,7 @@ import { AuthService, UserAuth } from "./services/auth/AuthService";
 import { Products } from "./pages/Products";
 import { Categories } from "./pages/Categories";
 import { useEffect, useState } from "react";
+import { Restaurants } from "./pages/Restaurants";
 
 export default function App() {
   const [navItens, setNavItens] = useState<NavItem[] | null>(null)
@@ -52,7 +53,7 @@ export default function App() {
               <Route path="/deliveries" component={componentDefault} />
               <Route path="/perfil" component={componentDefault} />
               <Route path="/configurations" component={componentDefault} />
-              <Route path="/restaurants" component={componentDefault} />
+              <Route path="/restaurants" component={Restaurants} />
 
               <Redirect to={'/home'} />
             </Switch>
