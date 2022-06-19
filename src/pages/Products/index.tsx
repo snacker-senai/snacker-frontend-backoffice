@@ -1,15 +1,13 @@
-import { useEffect, useState, useRef } from 'react';
-import './styles.css'
+import { useEffect, useRef, useState } from 'react';
+import './styles.css';
 
-import { InputText } from 'primereact/inputtext'
-import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
-import { Toolbar } from 'primereact/toolbar';
-import { Carousel } from 'primereact/carousel';
+import { InputText } from 'primereact/inputtext';
 import { Toast } from 'primereact/toast';
-import { Product } from '../../services/product/Models';
+import { Toolbar } from 'primereact/toolbar';
 import { ProductDialog } from '../../components/Dialogs/ProductDialog';
 import { Loading } from '../../components/Loading';
+import { Product } from '../../services/product/Models';
 import { ProductService } from '../../services/product/ProductService';
 
 export const Products = () => {
