@@ -40,19 +40,9 @@ export const Products = () => {
         buildProducts()
     }
 
-    const footer = (product: Product) => {
-        return (
-            <div className='card-footer'>
-                <Button
-                    icon="pi pi-pencil"
-                    className="p-button-rounded p-button-success mr-2"
-                    onClick={() => {
-                        setProductCurrent(product)
-                        setVisibleDialog(true)
-                    }}
-                />
-            </div>
-        );
+    const handleProductClick = (product: Product) => {
+        setProductCurrent(product)
+        setVisibleDialog(true)
     }
 
     const rightToolbar = () => {
@@ -82,25 +72,7 @@ export const Products = () => {
         )
     }
 
-    const header = <Toolbar className="mb-2" left={leftToolbar} right={rightToolbar}></Toolbar>
-
-    const responsiveOptions = [
-        {
-            breakpoint: '1024px',
-            numVisible: 3,
-            numScroll: 3
-        },
-        {
-            breakpoint: '850px',
-            numVisible: 2,
-            numScroll: 2
-        },
-        {
-            breakpoint: '600px',
-            numVisible: 1,
-            numScroll: 1
-        }
-    ];
+    const header = <Toolbar className="p-mb-2 p-px-5" left={leftToolbar} right={rightToolbar}></Toolbar>
 
 
     const showError = (sumary, detail: string) => {
@@ -112,11 +84,18 @@ export const Products = () => {
             <Loading visible={showSpinnerLoading} />
             <Toast ref={toast} />
             <ProductDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} product={productCurrent} />
+            <h1>Listagem de produtos</h1>
+            {header}
             <div className="products-list">
                 {products.map(product => (
                     <div className="product-card">
                         <div className="product-image">
                             <img src={product.image} alt={product.name} />
+                            <Button 
+                                className="p-button-rounded edit-button" 
+                                icon="pi pi-pencil" 
+                                onClick={() => handleProductClick(product)} 
+                            />
                         </div>
                         <div className="product-info">
                             <p className="product-category">{product.productCategory.name}</p>

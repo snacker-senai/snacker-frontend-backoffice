@@ -33,6 +33,7 @@ export const Orders = () => {
 
     return (
         <div className="container-orders">
+            <h1>Listagem de pedidos</h1>
             {orders.map(order => (
                 <OrderCard
                     buttonLabel="Finalizar"

@@ -35,6 +35,13 @@
     height: 230px;
     margin-bottom: 5px;
     overflow: hidden;
+    position: relative;
+}
+
+.product-image .edit-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 .product-image img {
@@ -110,6 +117,12 @@
     font-size: 0.95em;
 }
 
+.container-products h1 {
+    color: rgb(42, 41, 44);
+    margin-bottom: 5px;
+    margin-left: 30px;
+}
+
 @media only screen and (max-width: 950px) {
     .container-products {
         margin: 0;
@@ -150,6 +163,12 @@
     .container-products .p-input-icon-left,
     .container-products .p-input-icon-left input {
         width: 100%;
+    }
+}
+
+@media (max-width: 950px) {
+    .container-products h1 {
+        margin-top: 25px;
     }
 }
 
