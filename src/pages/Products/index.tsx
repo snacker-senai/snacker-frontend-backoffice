@@ -1,11 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useEffect, useState, useRef } from 'react';
-import './styles.css'
+import { useEffect, useRef, useState } from 'react';
+import './styles.css';
 
+import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
 import { Toast } from 'primereact/toast';
-import { Product } from '../../services/product/Models';
+import { Toolbar } from 'primereact/toolbar';
 import { ProductDialog } from '../../components/Dialogs/ProductDialog';
 import { Loading } from '../../components/Loading';
+import { Product } from '../../services/product/Models';
 import { ProductService } from '../../services/product/ProductService';
 
 export const Products = () => {
@@ -38,6 +40,41 @@ export const Products = () => {
         buildProducts()
     }
 
+    const handleProductClick = (product: Product) => {
+        setProductCurrent(product)
+        setVisibleDialog(true)
+    }
+
+    const rightToolbar = () => {
+        return (
+            <span className="p-input-icon-left">
+                <i className="pi pi-search" />
+                <InputText
+                    type="search"
+                    className="p-inputtext-sm block mb-2"
+                    placeholder="Pesquise..."
+                />
+            </span>
+        )
+    }
+
+    const leftToolbar = () => {
+        return (
+            <Button
+                label="Adicionar produto"
+                icon="pi pi-plus"
+                className="p-button-success mr-2"
+                onClick={() => {
+                    setProductCurrent(undefined)
+                    setVisibleDialog(true)
+                }}
+            />
+        )
+    }
+
+    const header = <Toolbar className="p-mb-2 p-px-5" left={leftToolbar} right={rightToolbar}></Toolbar>
+
+
     const showError = (sumary, detail: string) => {
         toast.current.show({ severity: 'error', summary: sumary, detail: detail, life: 3000 });
     }
@@ -47,11 +84,18 @@ export const Products = () => {
             <Loading visible={showSpinnerLoading} />
             <Toast ref={toast} />
             <ProductDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} product={productCurrent} />
+            <h1>Listagem de produtos</h1>
+            {header}
             <div className="products-list">
                 {products.map(product => (
                     <div className="product-card">
                         <div className="product-image">
                             <img src={product.image} alt={product.name} />
+                            <Button
+                                className="p-button-rounded edit-button"
+                                icon="pi pi-pencil"
+                                onClick={() => handleProductClick(product)}
+                            />
                         </div>
                         <div className="product-info">
                             <p className="product-category">{product.productCategory.name}</p>
