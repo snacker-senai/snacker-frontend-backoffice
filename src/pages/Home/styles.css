@@ -16,11 +16,11 @@
     justify-content: center;
     flex-direction: column;
     margin-bottom: 10em;
-    width: 50%;
+    width: 40%;
 }
 
-.principal-main svg {
-    width: 50%;
+.principal-main img {
+    width: 60%;
 }
 
 .principal-main .content .title {
@@ -36,7 +36,7 @@
     }
 
     .principal-main .content,
-    .principal-main svg {
+    .principal-main img {
         width: 100%;
         margin: 0;
         padding: 0;

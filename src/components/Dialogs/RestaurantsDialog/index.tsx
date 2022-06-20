@@ -64,6 +64,7 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
     }
 
     useEffect(() => {
+        setTabPanelCurrent(0)
         loadingRestaurantCategory()
     }, [])
 
@@ -117,7 +118,6 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
         setShowSpinnerLoading(true)
 
         try {
-            console.log(form.restaurantCategory)
             await RestaurantService.update({
                 name: form.name,
                 id: restaurant?.id,
@@ -161,8 +161,6 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
         if (restaurantCategory.length > 0)
             return restaurantCategory[0]
 
-        console.log(restaurantCategory)
-
         return null
     }
 
@@ -194,7 +192,6 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
         })
     } else {
         formik = useFormik({
-            enableReinitialize: true,
             initialValues: {
                 name: restaurant?.name ? restaurant.name : '',
                 description: restaurant?.description ? restaurant.description : '',
@@ -215,11 +212,6 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
             onSubmit: handleSubmitUpdate
         })
     }
-
-    console.log(restaurant?.restaurantCategory ? {
-        name: restaurant.restaurantCategory.name,
-        code: restaurant.restaurantCategoryId
-    } : getRestaurantCategoryDefault())
 
     const { isFormFieldValid } = useValidateInput(formik)
 
@@ -275,8 +267,6 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
     }
 
     const onChangeRestaurantCategory = (value: any) => {
-        console.log('onChangeRestaurantCategory')
-        console.log(value)
         formik.setFieldValue("restaurantCategory", value)
     }
 

@@ -43,6 +43,11 @@
     justify-content: center;
 }
 
+.container-restaurants .restaurants-action .p-inputswitch {
+    margin-left: 5px;
+    margin-bottom: 10px;
+} 
+
 @media only screen and (max-width: 950px) {
     .container-restaurants .p-datatable {
         width: 100%;

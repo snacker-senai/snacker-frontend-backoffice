@@ -1,0 +1,54 @@
+.content-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.content-box .form-box {
+    width: 70%;
+}
+
+.content-box .form-box h2 {
+    color: #32324f;
+    font-weight: 600;
+    font-size: 2em;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.field,
+.field-checkbox {
+    margin-bottom: 10px;
+}
+
+.field-checkbox {
+    float: right;
+    font-size: 0.9em;
+}
+
+.content-box .form-box .input-box,
+.content-box .form-box .input-box .input,
+.content-box .form-box .input-box .p-password,
+.content-box .form-box .input-box .p-password .p-inputtext,
+.button {
+    width: 100%;
+}
+
+@media (max-width:868px) {
+    .content-box {
+        width: 100%;
+    }
+
+    .content-box .form-box {
+        width: 100%;
+        padding: 40px;
+        margin: 50px;
+    }
+
+    .content-box .form-box h3 {
+        margin: 30px 0 10px;
+    }
+}

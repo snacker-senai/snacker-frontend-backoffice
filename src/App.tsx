@@ -15,6 +15,7 @@ import { PrivateRoute } from "./components/PrivateRoute";
 import { MenuProvider } from "./context/MenuContext";
 import { Login } from "./pages/Login";
 import { Restaurants } from "./pages/Restaurants";
+import { ChangePassword } from "./pages/ChangePassword";
 
 export default function App() {
   const ComponentDefault = () => {
@@ -39,6 +40,7 @@ export default function App() {
             <Route exact path="/configurations"><PrivateRoute menu={7} children={<ComponentDefault />} /></Route>
             <Route exact path="/restaurants"><PrivateRoute menu={8} children={<Restaurants />} /></Route>
             <Route exact path="/login" component={Login} />
+            <Route exact path="/change-password" component={ChangePassword} />
             <Route path="/"><Redirect to="/login" /></Route>
           </Switch>
         </Router>

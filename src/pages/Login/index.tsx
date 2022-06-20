@@ -4,7 +4,7 @@ import { Image } from 'primereact/image';
 import "./styles.css"
 
 const Login = () => {
-    const logo = require('../../assets/home.png')
+    const logo = require('../../assets/login.png')
 
     return (
         <main className="login-main">
