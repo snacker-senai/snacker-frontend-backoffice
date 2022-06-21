@@ -10,9 +10,10 @@ export interface UserAuth {
 
 export class AuthService {
     static async login(formLogin: FormLogin): Promise<boolean> {
-        const { data, status } = await Requester.post<string>(Endpoints.LOGIN, formLogin)
+        const { data, status } = await Requester.post<{ token: string }>(Endpoints.LOGIN, formLogin)
+
         if (status === 200) {
-            localStorage.setItem(KeyTokenLocalStorage, data)
+            localStorage.setItem(KeyTokenLocalStorage, data.token)
             return true
         }
         return false

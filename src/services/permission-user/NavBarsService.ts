@@ -48,6 +48,12 @@ export class NavBarsService {
                         linkTo: '/perfil'
                     },
                     {
+                        id: 9,
+                        icon: 'pi-table',
+                        label: 'Mesas',
+                        linkTo: '/mesas'
+                    },
+                    {
                         id: 7,
                         icon: 'pi-cog',
                         label: 'Configurações',
