@@ -1,26 +1,27 @@
-.login-main {
+.change-password-container {
     position: relative;
     width: 100%;
     height: 100vh;
     display: flex;
 }
 
-.img-box {
+.change-password-container .img-box {
     width: 60%;
     height: 100%;
     background-color: var(--primary-500);
+    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.img-box img {
+.change-password-container .img-box img {
     width: 100%;
     height: 100%;
 }
 
 @media (max-width:868px) {
-    main .img-box {
+    .change-password-container .img-box {
         display: none;
     }
 }

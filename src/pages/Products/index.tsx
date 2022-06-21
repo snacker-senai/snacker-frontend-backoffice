@@ -19,7 +19,7 @@ export const Products = () => {
 
     useEffect(() => {
         buildProducts()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const buildProducts = async () => {
@@ -91,10 +91,10 @@ export const Products = () => {
                     <div className="product-card">
                         <div className="product-image">
                             <img src={product.image} alt={product.name} />
-                            <Button 
-                                className="p-button-rounded edit-button" 
-                                icon="pi pi-pencil" 
-                                onClick={() => handleProductClick(product)} 
+                            <Button
+                                className="p-button-rounded edit-button"
+                                icon="pi pi-pencil"
+                                onClick={() => handleProductClick(product)}
                             />
                         </div>
                         <div className="product-info">
@@ -102,10 +102,10 @@ export const Products = () => {
                             <p className="product-name">{product.name}</p>
                             <p className="product-description">{product.description}</p>
                             <div className="p-d-flex p-justify-between p-mt-4">
-                                <p className="product-price">R$ {product.price.toLocaleString('pt-br', {minimumFractionDigits: 2})}</p>
-                                {product.active 
-                                    ? <p className="product-active">Ativo</p> 
-                                    : <p className="product-inactive">Inativo</p>    
+                                <p className="product-price">R$ {product.price.toLocaleString('pt-br', { minimumFractionDigits: 2 })}</p>
+                                {product.active
+                                    ? <p className="product-active">Ativo</p>
+                                    : <p className="product-inactive">Inativo</p>
                                 }
                             </div>
                         </div>
