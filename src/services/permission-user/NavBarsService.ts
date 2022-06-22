@@ -43,21 +43,9 @@ export class NavBarsService {
                     },
                     {
                         id: 6,
-                        icon: 'pi-user',
-                        label: 'Perfil',
-                        linkTo: '/perfil'
-                    },
-                    {
-                        id: 9,
                         icon: 'pi-table',
                         label: 'Mesas',
                         linkTo: '/mesas'
-                    },
-                    {
-                        id: 7,
-                        icon: 'pi-cog',
-                        label: 'Configurações',
-                        linkTo: '/configurations'
                     },
                 ]
 
@@ -69,18 +57,6 @@ export class NavBarsService {
                         label: 'Restaurantes',
                         linkTo: '/restaurants'
                     },
-                    {
-                        id: 0,
-                        icon: 'pi-user',
-                        label: 'Perfil',
-                        linkTo: '/perfil'
-                    },
-                    {
-                        id: 0,
-                        icon: 'pi-cog',
-                        label: 'Configurações',
-                        linkTo: '/configurations'
-                    },
                 ]
             case "Cozinheiro":
                 return [
@@ -90,18 +66,6 @@ export class NavBarsService {
                         label: 'Preparo das comidas',
                         linkTo: '/foods'
                     },
-                    {
-                        id: 0,
-                        icon: 'pi-user',
-                        label: 'Perfil',
-                        linkTo: '/perfil'
-                    },
-                    {
-                        id: 0,
-                        icon: 'pi-cog',
-                        label: 'Configurações',
-                        linkTo: '/configurations'
-                    }
                 ]
             case "Garçom":
                 return [
@@ -111,18 +75,6 @@ export class NavBarsService {
                         label: 'Entregas',
                         linkTo: '/deliveries'
                     },
-                    {
-                        id: 0,
-                        icon: 'pi-user',
-                        label: 'Perfil',
-                        linkTo: '/perfil'
-                    },
-                    {
-                        id: 0,
-                        icon: 'pi-cog',
-                        label: 'Configurações',
-                        linkTo: '/configurations'
-                    }
                 ]
 
             default:
