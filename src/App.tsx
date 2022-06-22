@@ -37,10 +37,8 @@ export default function App() {
             <Route exact path="/categories"><PrivateRoute menu={3} children={<Categories />} /></Route>
             <Route exact path="/foods"><PrivateRoute menu={4} children={<Orders />} /></Route>
             <Route exact path="/deliveries"><PrivateRoute menu={5} children={<Deliveries />} /></Route>
-            <Route exact path="/perfil"><PrivateRoute menu={6} children={<ComponentDefault />} /></Route>
-            <Route exact path="/configurations"><PrivateRoute menu={7} children={<ComponentDefault />} /></Route>
-            <Route exact path="/restaurants"><PrivateRoute menu={8} children={<Restaurants />} /></Route>
-            <Route exact path="/mesas"><PrivateRoute menu={9} children={<Tables />} /></Route>
+            <Route exact path="/restaurants"><PrivateRoute menu={6} children={<Restaurants />} /></Route>
+            <Route exact path="/mesas"><PrivateRoute menu={7} children={<Tables />} /></Route>
             <Route exact path="/login" component={Login} />
             <Route exact path="/change-password" component={ChangePassword} />
             <Route path="/"><Redirect to="/login" /></Route>
