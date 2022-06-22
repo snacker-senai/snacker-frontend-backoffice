@@ -3,16 +3,16 @@ import { useEffect, useState, useRef } from 'react';
 import './styles.css'
 
 import { InputText } from 'primereact/inputtext'
-import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { Toolbar } from 'primereact/toolbar';
-import { Carousel } from 'primereact/carousel';
 import { Toast } from 'primereact/toast';
+import { DataTable } from 'primereact/datatable'
 
 import { EmployeesService } from '../../services/employee/EmployeesService';
 import { Employee } from '../../services/employee/Models';
 import { EmployeeDialog } from '../../components/Dialogs/EmployeeDialog';
 import { Loading } from '../../components/Loading';
+import { Column } from 'primereact/column';
 
 const Employees = () => {
     const [employees, setEmployees] = useState<Employee[]>([])
@@ -43,9 +43,9 @@ const Employees = () => {
         buildEmployees()
     }
 
-    const footer = (employee: Employee) => {
+    const columnActions = (employee: Employee) => {
         return (
-            <div className='card-footer'>
+            <>
                 <Button
                     icon="pi pi-pencil"
                     className="p-button-rounded p-button-success mr-2"
@@ -73,7 +73,7 @@ const Employees = () => {
                         setShowSpinnerLoading(false)
                     }}
                 />
-            </div>
+            </>
         );
     }
 
@@ -103,45 +103,7 @@ const Employees = () => {
                 }}
             />
         )
-    }
-
-    const header = <Toolbar className="mb-2" left={leftToolbar} right={rightToolbar}></Toolbar>
-
-    const responsiveOptions = [
-        {
-            breakpoint: '1024px',
-            numVisible: 3,
-            numScroll: 3
-        },
-        {
-            breakpoint: '850px',
-            numVisible: 2,
-            numScroll: 2
-        },
-        {
-            breakpoint: '600px',
-            numVisible: 1,
-            numScroll: 1
-        }
-    ];
-
-    const employeeTemplate = (employee: Employee) => {
-        return (
-            <Card
-                key={employee.personId}
-                title={employee.person.name}
-                subTitle={employee.person.document}
-                style={{ width: '17em', height: '100%' }}
-                footer={footer(employee)}
-            >
-                <p><strong>Data de nascimento:</strong> {employee.person.birthDate?.toString()}</p>
-                <p><strong>Tipo de usuário:</strong> {employee.userType?.name}</p>
-                <p><strong>Telefone:</strong> {employee.person.phone}</p>
-                <p><strong>CPF:</strong> {employee.person.document}</p>
-                <p><strong>E-mail:</strong> {employee.email}</p>
-            </Card>
-        );
-    }
+    };
 
     const showSuccess = (sumary, detail: string) => {
         toast.current.show({ severity: 'success', summary: sumary, detail: detail, life: 3000 });
@@ -156,9 +118,42 @@ const Employees = () => {
             <Loading visible={showSpinnerLoading} />
             <Toast ref={toast} />
             <EmployeeDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} employee={employeeCurrent} />
-            <div className="card">
-                <Carousel value={employees} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions}
-                    itemTemplate={employeeTemplate} header={header} />
+            <Toolbar className="mb-2" left={leftToolbar} right={rightToolbar}></Toolbar>
+            <div className='panel'>
+                <DataTable value={employees} >
+                    <Column
+                        field='person.name'
+                        header='Nome'
+                    />
+                    <Column
+                        field='person.document'
+                        header='CPF'
+                    />
+                    <Column
+                        field='person.birthDate'
+                        header='Data de nascimento'
+                    />
+                    <Column
+                        field='userType.name'
+                        header='Tipo'
+                    />
+                    <Column
+                        field='person.phone'
+                        header='Telefone'
+                    />
+                    <Column
+                        field='email'
+                        header='E-mail'
+                    />
+                    <Column
+                        style={{ width: '8rem' }}
+                        field=""
+                        header=""
+                        body={columnActions}
+                        exportable={false}
+                        className='employees-action'
+                    />
+                </DataTable>
             </div>
         </div >
     )

@@ -10,66 +10,110 @@
 .container-employees .p-toolbar {
     background-color: var(--primary-100);
     width: 100%;
+    margin-bottom: 20px;
 }
 
-.container-employees .p-card {
-    margin: 0.313rem 0.625rem 0.313rem;
-    font-size: 0.938rem;
+.container-employees .panel {
+    border-radius: 8px;
+    width: 100%;
+    box-shadow: 1px 5px 8px -1.4px rgba(0, 0, 0, 0.065);
 }
 
-.container-employees .p-button-rounded {
-    margin-right: 0.625rem;
+.container-employees .page-title {
+    font-weight: 500;
+    color: rgb(63, 70, 77);
+    margin-bottom: 18px;
+    font-size: 1.45em;
 }
 
-.p-carousel .p-carousel-indicators .p-carousel-indicator button {
-    background-color: var(--primary-400);
+.container-employees .datatable-crud-demo .product-image {
+    width: 100px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
-.container-employees .p-carousel-header {
-    margin-right: 3.1rem;
-    margin-left: 3rem;
+.container-employees .datatable-crud-demo .p-dialog .product-image {
+    width: 150px;
+    margin: 0 auto 2rem auto;
+    display: block;
+}
+
+.container-employees .datatable-crud-demo .confirmation-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media only screen and (max-width: 950px) {
+    .container-employees .p-datatable {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .container-employees .datatable-crud-demo .p-toolbar {
+        flex-wrap: wrap;
+    }
+
+    .container-employees .datatable-crud-demo .table-header {
+        flex-direction: column;
+    }
+
+    .container-employees .datatable-crud-demo .table-header .p-input-icon-left,
+    .container-employees .datatable-crud-demo .table-header input {
+        width: 100%;
+    }
+
     .container-employees {
         margin: 0;
         padding: 0;
         height: 100vh;
     }
 
-    .container-employees .p-card {
+    .container-employees .panel {
         width: 100%;
-        margin: 0.625rem;
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    .container-employees {
-        margin: 0;
-        padding: 0;
-        height: 100vh;
     }
 
-    .container-employees .p-card {
-        width: 100%;
-        margin: 0.625rem;
+    .container-employees .categories-action {
+        flex-direction: row;
+        justify-content: end !important;
+        align-items: flex-end !important;
     }
 }
 
 @media only screen and (max-width: 560px) {
-    .container-employees .p-toolbar-group-left {
-        margin-bottom: 10px;
+    .container-employees {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
     }
 
-    .container-employees .p-carousel-header .p-toolbar-group-left,
-    .container-employees .p-carousel-header .p-toolbar-group-left button {
+    .container-employees .panel {
         width: 100%;
+    }
+
+    .container-employees .p-datatable {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .container-employees .panel {
+        width: 100%;
+    }
+
+    .container-employees .p-toolbar-group-right {
+        margin-top: 10px;
     }
 
     .container-employees .p-toolbar-group-right,
     .container-employees .p-input-icon-left,
-    .container-employees .p-input-icon-left input {
+    .container-employees .p-input-icon-left input,
+    .container-employees .p-toolbar-group-left,
+    .container-employees .p-toolbar-group-left button {
         width: 100%;
     }
 
+    .container-employees .employees-action {
+        flex-direction: row;
+        justify-content: end !important;
+        align-items: flex-end !important;
+    }
 }
