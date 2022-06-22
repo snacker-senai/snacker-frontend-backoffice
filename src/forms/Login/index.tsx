@@ -1,11 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-restricted-globals */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useHistory } from 'react-router';
 
 import "./styles.css"
 import { LoginSchema } from './schema'
 import { useValidateInput } from '../../hooks/useValidateInput'
 import { FormLogin } from '../../services/auth/Model';
-import { AuthService } from '../../services/auth/AuthService';
+import { AuthService, StatusOfLogin } from '../../services/auth/AuthService';
 
 import { useFormik } from 'formik'
 
@@ -17,18 +19,28 @@ import { Toast } from 'primereact/toast';
 import { Password } from 'primereact/password';
 
 import { Loading } from '../../components/Loading';
+import { ChangePasswordService } from '../../services/change-password/ChangePasswordService';
 
 export const LoginForm = () => {
     const [checked, setChecked] = useState(false);
     const [showSpinnerLoading, setShowSpinnerLoading] = useState(false)
     const toast = useRef<any>(null);
+    const history = useHistory()
+
+    useEffect(() => {
+        if (AuthService.userIsLogged())
+            history.push('/home')
+    }, [])
 
     const handleSubmit = async (data: FormLogin) => {
         setShowSpinnerLoading(true)
         try {
-            await AuthService.login(data).then((authenticade) => {
-                if (authenticade) {
-                    location.href = './home'
+            await AuthService.login(data).then((statusOfLogin) => {
+                if (statusOfLogin === StatusOfLogin.SUCCESS) {
+                    history.push('/home')
+                } else if (statusOfLogin === StatusOfLogin.CHANGE_PASSWORD) {
+                    ChangePasswordService.saveLocalUserChangePassword(data.email, data.password)
+                    history.push('/change-password')
                 } else {
                     showError("E-mail ou senha incorretos!", "Tente novamente!")
                 }

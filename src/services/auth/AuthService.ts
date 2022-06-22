@@ -8,14 +8,36 @@ export interface UserAuth {
     restaurantId: number
 }
 
+export interface AuthLogin {
+    token: string
+    changePassword: boolean
+}
+
+export enum StatusOfLogin {
+    SUCCESS,
+    CHANGE_PASSWORD,
+    INVALID
+}
+
 export class AuthService {
-    static async login(formLogin: FormLogin): Promise<boolean> {
-        const { data, status } = await Requester.post<string>(Endpoints.LOGIN, formLogin)
+    static async login(formLogin: FormLogin): Promise<StatusOfLogin> {
+        let statusLogin = StatusOfLogin.INVALID
+
+        const { data, status } = await Requester.post<AuthLogin>(Endpoints.LOGIN, formLogin)
         if (status === 200) {
-            localStorage.setItem(KeyTokenLocalStorage, data)
-            return true
+            if (data.changePassword) {
+                statusLogin = StatusOfLogin.CHANGE_PASSWORD
+            } else {
+                statusLogin = StatusOfLogin.SUCCESS
+                this.setTokenInLocal(data.token)
+            }
         }
-        return false
+
+        return new Promise((resolve) => resolve(statusLogin))
+    }
+
+    static setTokenInLocal(token: string) {
+        localStorage.setItem(KeyTokenLocalStorage, token)
     }
 
     static async getInfoUserLogged(): Promise<UserAuth | undefined> {
@@ -27,5 +49,10 @@ export class AuthService {
         }
 
         return undefined
+    }
+
+    static userIsLogged(): boolean {
+        const token = localStorage.getItem(KeyTokenLocalStorage)
+        return token !== null
     }
 }

@@ -1,6 +1,8 @@
+/* eslint-disable no-restricted-globals */
 import axios, { AxiosRequestConfig } from 'axios'
 
 export const KeyTokenLocalStorage = "accessToken"
+export const KeyInfoUserChangePasswordLocalStorage = "change-password-user"
 
 export const Requester = axios.create({
     baseURL: 'https://senai-snacker-backend.herokuapp.com/api'
@@ -21,7 +23,6 @@ Requester.interceptors.response.use(response => {
     return response
 }, error => {
     if (error.response.status === 401) {
-        // eslint-disable-next-line no-restricted-globals
         location.href = '/login'
         localStorage.removeItem(KeyTokenLocalStorage)
     }
@@ -39,6 +40,7 @@ export const Endpoints = {
     PRODUCT_CATEGORY: '/productcategory',
     AUTH_CLAIMS: '/auth/tokenclaims',
     RESTAURANT: '/restaurant',
-    RESTAURANT_CATEGORY: '/restaurantcategory'
+    RESTAURANT_CATEGORY: '/restaurantcategory',
+    CHANGE_PASSWORD: '/auth/changepassword'
 }
 

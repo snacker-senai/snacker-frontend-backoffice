@@ -13,9 +13,10 @@ export class RestaurantService {
         }
     }
 
-    static async insert(data: InsertRestaurant) {
+    static async insert(payload: InsertRestaurant) {
         try {
-            await Requester.post(Endpoints.RESTAURANT, data)
+            const { data } = await Requester.post(Endpoints.RESTAURANT, payload)
+            console.log(data)
         } catch (error: any) {
             console.log(error)
             throw error(error)

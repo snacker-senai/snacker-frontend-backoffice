@@ -14,24 +14,39 @@ import { Toast } from 'primereact/toast';
 import { Password } from 'primereact/password';
 
 import { Loading } from '../../components/Loading';
+import { InputText } from 'primereact/inputtext';
+import { ChangePasswordService } from '../../services/change-password/ChangePasswordService';
+import { useHistory } from 'react-router';
+import { AuthService } from '../../services/auth/AuthService';
 
-export const ChangePasswordForm = () => {
+export interface ChangePasswordFormProps {
+    emailProps?: string, oldPasswordProps?: string
+}
+
+export const ChangePasswordForm = ({ emailProps, oldPasswordProps }: ChangePasswordFormProps) => {
     const [checked, setChecked] = useState(false);
     const [showSpinnerLoading, setShowSpinnerLoading] = useState(false)
     const toast = useRef<any>(null);
+    const history = useHistory()
 
-    const handleSubmit = async (data: { password: string, confirmPassword: string }) => {
+    const handleSubmit = async (data: { oldPassword: string, newPassword: string }) => {
         setShowSpinnerLoading(true)
         try {
-            // await AuthService.login(data).then((authenticade) => {
-            //     if (authenticade) {
-            //         location.href = './home'
-            //     } else {
-            //         showError("E-mail ou senha incorretos!", "Tente novamente!")
-            //     }
-            // })
+            if (oldPasswordProps !== data.oldPassword) {
+                showError('Ops!', 'As informações inseridas não estão coesas com a do sistema!')
+            } else {
+                const token = await ChangePasswordService.changePasswordAndGetTokenSession({
+                    email: emailProps ?? "",
+                    oldPassword: data.oldPassword,
+                    newPassword: data.newPassword,
+                })
+
+                AuthService.setTokenInLocal(token)
+                ChangePasswordService.removeLocalInfoUserIsChangePassword()
+                history.push('/home')
+            }
         } catch (error: any) {
-            showError('Erro ao realizar o login!', 'Erro: ' + error.message)
+            showError('Erro ao trocar a senha!', 'Erro: ' + error.message)
         }
 
         setShowSpinnerLoading(false)
@@ -39,8 +54,8 @@ export const ChangePasswordForm = () => {
 
     const formik = useFormik({
         initialValues: {
-            password: '',
-            confirmPassword: ''
+            oldPassword: '',
+            newPassword: ''
         },
         validationSchema: ChangePasswordSchema,
         onSubmit: handleSubmit
@@ -49,7 +64,7 @@ export const ChangePasswordForm = () => {
     const { isFormFieldValid, getFormErrorMessage } = useValidateInput(formik)
 
     const showError = (sumary, detail: string) => {
-        toast.current.show({ severity: 'error', summary: sumary, detail: detail, life: 3000 });
+        toast.current.show({ severity: 'error', summary: sumary, detail: detail, life: 7000 });
     }
 
     return (
@@ -61,33 +76,46 @@ export const ChangePasswordForm = () => {
                 <form onSubmit={formik.handleSubmit}>
                     <div className="field">
                         <div className="input-box p-float-label">
-                            <Password
-                                id="password"
+                            <InputText
+                                id="email"
                                 autoComplete='off'
-                                value={formik.values.password}
-                                name="password"
-                                onChange={formik.handleChange}
-                                className={classNames({ 'p-invalid': isFormFieldValid('password') }, 'input p-inputtext-sm block mb-2')}
-                                feedback={false}
+                                value={emailProps}
+                                name="email"
+                                className='input p-inputtext-sm block mb-2'
+                                disabled={true}
                             />
-                            <label htmlFor="password">Senha</label>
+                            <label htmlFor="email">E-mail</label>
                         </div>
-                        <small className="p-error">{getFormErrorMessage('password')}</small>
                     </div>
                     <div className="field">
                         <div className="input-box p-float-label">
                             <Password
-                                id="confirmPassword"
+                                id="oldPassword"
                                 autoComplete='off'
-                                value={formik.values.confirmPassword}
-                                name="confirmPassword"
+                                value={formik.values.oldPassword}
+                                name="oldPassword"
                                 onChange={formik.handleChange}
-                                className={classNames({ 'p-invalid': isFormFieldValid('confirmPassword') }, 'input p-inputtext-sm block mb-2')}
+                                className={classNames({ 'p-invalid': isFormFieldValid('oldPassword') }, 'input p-inputtext-sm block mb-2')}
                                 feedback={false}
                             />
-                            <label htmlFor="confirmPassword">Confirmar senha</label>
+                            <label htmlFor="oldPassword">Senha antiga</label>
                         </div>
-                        <small className="p-error">{getFormErrorMessage('password')}</small>
+                        <small className="p-error">{getFormErrorMessage('oldPassword')}</small>
+                    </div>
+                    <div className="field">
+                        <div className="input-box p-float-label">
+                            <Password
+                                id="newPassword"
+                                autoComplete='off'
+                                value={formik.values.newPassword}
+                                name="newPassword"
+                                onChange={formik.handleChange}
+                                className={classNames({ 'p-invalid': isFormFieldValid('newPassword') }, 'input p-inputtext-sm block mb-2')}
+                                feedback={false}
+                            />
+                            <label htmlFor="newPassword">Nova senha</label>
+                        </div>
+                        <small className="p-error">{getFormErrorMessage('newPassword')}</small>
                     </div>
 
                     <div className="field-checkbox">
@@ -96,7 +124,7 @@ export const ChangePasswordForm = () => {
                     </div>
 
                     <div className="input-box">
-                        <Button label="Entrar" className="p-button-outlined button" />
+                        <Button label="Desbloquear" className="p-button-outlined button" />
                     </div>
                 </form>
             </div>
