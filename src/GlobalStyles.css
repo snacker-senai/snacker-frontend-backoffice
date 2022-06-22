@@ -23,8 +23,24 @@
     color: var(--primary-50);
 }
 
+.p-datatable .p-datatable-thead > tr > th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.p-datatable .p-datatable-thead > tr > th:last-child {
+    border-top-right-radius: 8px;
+}
+
 .p-datatable .p-datatable-tbody > tr {
-    background-color: var(--primary-200);
+    background-color: white;
+}
+
+.p-datatable .p-datatable-tbody > .p-row-odd {
+    background-color: rgb(245, 245, 245) !important;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+    border: 0px;
 }
 
 /* Small screens */

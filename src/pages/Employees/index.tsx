@@ -96,7 +96,7 @@ const Employees = () => {
             <Button
                 label="Adicionar funcionário"
                 icon="pi pi-plus"
-                className="p-button-success mr-2"
+                className="p-button-primary mr-2"
                 onClick={() => {
                     setEmployeeCurrent(undefined)
                     setVisibleDialog(true)

@@ -63,7 +63,7 @@ export const Products = () => {
             <Button
                 label="Adicionar produto"
                 icon="pi pi-plus"
-                className="p-button-success mr-2"
+                className="p-button-primary mr-2"
                 onClick={() => {
                     setProductCurrent(undefined)
                     setVisibleDialog(true)
