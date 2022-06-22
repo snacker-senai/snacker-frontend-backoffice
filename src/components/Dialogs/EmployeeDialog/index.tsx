@@ -178,6 +178,19 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
                                     />
                                     <label htmlFor="name">Nome completo</label>
                                 </span>
+                                <span className="p-float-label">
+                                    <Calendar
+                                        id="dateBirth"
+                                        value={formik.values.dateBirth}
+                                        name="dateBirth"
+                                        onChange={formik.handleChange}
+                                        className={classNames({ 'p-invalid': isFormFieldValid('dateBirth') }, 'input p-inputtext-sm block mb-2')}
+                                        dateFormat="dd/mm/yy"
+                                        showIcon
+                                        onMonthChange={(e) => console.log(e)}
+                                    />
+                                    <label htmlFor="dateBirth">Data de nascimento</label>
+                                </span>
                             </div>
 
                             <div className="employee-dialog-group">
@@ -202,19 +215,6 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
                                         className={classNames({ 'p-invalid': isFormFieldValid('cellphone') }, 'input p-inputtext-sm block mb-2')}
                                     />
                                     <label htmlFor="cellphone">Telefone</label>
-                                </span>
-                                <span className="p-float-label">
-                                    <Calendar
-                                        id="dateBirth"
-                                        value={formik.values.dateBirth}
-                                        name="dateBirth"
-                                        onChange={formik.handleChange}
-                                        className={classNames({ 'p-invalid': isFormFieldValid('dateBirth') }, 'input p-inputtext-sm block mb-2')}
-                                        dateFormat="dd/mm/yy"
-                                        showIcon
-                                        onMonthChange={(e) => console.log(e)}
-                                    />
-                                    <label htmlFor="dateBirth">Data de nascimento</label>
                                 </span>
                             </div>
 
@@ -244,7 +244,7 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
                                 <label htmlFor="password">Senha</label>
                             </span>
                         </div>
-                        <div className="employee-dialog-group user-type">
+                        <div className="employee-dialog-group">
                             <span className="p-float-label">
                                 <Dropdown
                                     value={formik.values.userType || usersType[0]}

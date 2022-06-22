@@ -20,18 +20,30 @@
 .employee-dialog-group .p-float-label,
 .employee-dialog-group .p-float-label input,
 .employee-dialog-group .p-float-label .p-password,
-.employee-dialog-group .p-float-label .p-dropdown  {
+.employee-dialog-group .p-float-label .p-dropdown,
+.employee-dialog-group .p-float-label .p-calendar {
     width: 100%;
 }
 
-.group-street > :first-child {
+.group-street> :first-child {
     width: 80%;
 }
 
-.group-street > :last-child {
+.group-street> :last-child {
     width: 20%;
 }
 
-.user-type {
-    width: 50%;
+@media only screen and (max-width: 950px) {
+    .employee-dialog-group {
+        flex-wrap: wrap;
+        margin: 0;
+    }
+
+    div.group-street * {
+        width: 100% !important;
+    }
+
+    .employee-dialog-group>* {
+        margin: 5px;
+    }
 }
