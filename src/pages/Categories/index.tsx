@@ -37,7 +37,7 @@ export const Categories = () => {
             <Button
                 label="Adicionar categoria"
                 icon="pi pi-plus"
-                className="p-button-info mr-2"
+                className="p-button-primary mr-2"
                 onClick={() => {
                     setProductCategoryCurrent(undefined)
                     setVisibleDialog(true)
@@ -60,14 +60,14 @@ export const Categories = () => {
             <React.Fragment>
                 <Button
                     icon="pi pi-pencil"
-                    className="p-button-rounded p-button-success p-mx-2"
+                    className="p-button-rounded p-button-info p-mx-2"
                     onClick={() => {
                         setProductCategoryCurrent(row)
                         setVisibleDialog(true)
                     }} />
                 <Button
                     icon="pi pi-trash"
-                    className="p-button-rounded p-button-warning p-mx-2"
+                    className="p-button-rounded p-button-primary p-mx-2"
                     onClick={async () => {
                         setShowSpinnerLoading(true)
 

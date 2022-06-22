@@ -44,7 +44,7 @@ export const Tables = () => {
             <Button
                 label="Adicionar mesa"
                 icon="pi pi-plus"
-                className="p-button-info mr-2"
+                className="p-button-primary mr-2"
                 onClick={() => {
                     // setProductCategoryCurrent(undefined)
                     setIsTableModalOpen(true)
