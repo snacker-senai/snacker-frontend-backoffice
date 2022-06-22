@@ -26,4 +26,5 @@ export interface Product {
 export interface ProductCategory {
     name: string
     id: number
+    active: boolean
 }

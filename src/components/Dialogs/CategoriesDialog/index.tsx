@@ -32,9 +32,12 @@ export const ProductsCategoryDialog = (props: ProspProductsCategroyDialog) => {
         setShowSpinnerLoading(true)
 
         try {
+            const active = props.productCategory?.active ?? true
+
             await ProductCategoryService.set({
                 id: props.productCategory?.id,
                 name: form.name,
+                active: active
             })
             showSuccess(`Categoria ${props.productCategory?.id ? "alterado" : "cadastrado"} com sucesso!`,
                 `Categoria ${form.name} ${props.productCategory?.id ? "alterado" : "cadastrado"} com sucesso no sistema!`)

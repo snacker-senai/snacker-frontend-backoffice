@@ -2,16 +2,20 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import './styles.css'
 
+import { ProductCategory } from '../../services/product/Models';
+import { ProductsCategoryDialog } from '../../components/Dialogs/CategoriesDialog';
+import { ProductCategoryService } from '../../services/product-category/ProductCategoryService';
+
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { Button } from 'primereact/button'
 import { InputText } from 'primereact/inputtext'
 import { Toast } from 'primereact/toast'
 import { Toolbar } from 'primereact/toolbar';
-import { ProductCategory } from '../../services/product/Models';
-import { ProductCategoryService } from '../../services/product-category/ProductCategoryService';
-import { ProductsCategoryDialog } from '../../components/Dialogs/CategoriesDialog';
 import { Loading } from '../../components/Loading';
+import { Fieldset } from 'primereact/fieldset';
+import { Tag } from 'primereact/tag';
+import { InputSwitch } from 'primereact/inputswitch';
 
 export const Categories = () => {
     const [productsCategory, setProductsCategory] = useState<ProductCategory[]>()
@@ -55,6 +59,23 @@ export const Categories = () => {
         )
     }
 
+    const updateStatus = async (category: ProductCategory) => {
+        setShowSpinnerLoading(true)
+        try {
+            await ProductCategoryService.set({
+                id: category.id,
+                name: category.name,
+                active: !category.active,
+            })
+            showSuccess('Atualizado com sucesso!', 'Status da categoria alterado para com sucesso!')
+            buildProductsCategory()
+        } catch (error: any) {
+            showError('Erro ao atualizar status', 'Erro: ' + error.message)
+        }
+
+        setShowSpinnerLoading(false)
+    }
+
     const actionBodyTemplate = (row: ProductCategory) => {
         return (
             <React.Fragment>
@@ -65,24 +86,9 @@ export const Categories = () => {
                         setProductCategoryCurrent(row)
                         setVisibleDialog(true)
                     }} />
-                <Button
-                    icon="pi pi-trash"
-                    className="p-button-rounded p-button-primary p-mx-2"
-                    onClick={async () => {
-                        setShowSpinnerLoading(true)
-
-                        try {
-                            await ProductCategoryService.del(row.id)
-                            showSuccess("Categoria excluído com sucesso!",
-                                `Categoria ${row.name} removido do sistema!`
-                            )
-                            buildProductsCategory()
-                        } catch (error: any) {
-                            showError("Erro ao remover categoria!", `Erro ao remover: ${error.message}`)
-                        }
-
-                        setShowSpinnerLoading(false)
-                    }}
+                <InputSwitch
+                    checked={row.active}
+                    onChange={async () => await updateStatus(row)}
                 />
             </React.Fragment>
         )
@@ -101,6 +107,28 @@ export const Categories = () => {
         buildProductsCategory()
     }
 
+    const statusCategory = (row: ProductCategory) => {
+        if (row.active) {
+            return (
+                <Tag
+                    className="mr-2"
+                    icon="pi pi-check"
+                    severity="success"
+                    value="ATIVO"
+                />
+            )
+        }
+
+        return (
+            <Tag
+                className="mr-2"
+                icon="pi pi-exclamation-triangle"
+                severity="warning"
+                value="INATIVO"
+            />
+        )
+    }
+
     return (
         <div className="container-categories">
             <Toast ref={toast} />
@@ -108,7 +136,14 @@ export const Categories = () => {
             <ProductsCategoryDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} productCategory={productCategoryCurrent} />
             <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
             <div className='panel'>
+                <Fieldset legend="Aviso" toggleable>
+                    <p>Ao inativar uma categoria, todos os produtos respectivos ao mesmo serão invativados juntos!.</p>
+                </Fieldset>
                 <DataTable value={productsCategory} >
+                    <Column
+                        body={statusCategory}
+                        header='Status'
+                    />
                     <Column
                         field='name'
                         header='Nome'
