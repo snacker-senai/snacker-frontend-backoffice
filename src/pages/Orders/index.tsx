@@ -32,15 +32,19 @@ export const Orders = () => {
     }
 
     useEffect(() => {
-        setShowSpinnerLoading(true)
+        const getOrdersOnInit = async () => {
+            setShowSpinnerLoading(true)
+            await getOrders() 
+            setShowSpinnerLoading(false)
+        }
 
-        getOrders()
+        getOrdersOnInit()
 
-        setInterval(() => {
+        const interval = setInterval(() => {
             getOrders()
         }, 5000)
 
-        setShowSpinnerLoading(false)
+        return () => clearInterval(interval)
     }, [])
 
     const showSuccess = (sumary, detail: string) => {

@@ -94,12 +94,12 @@ export const Categories = () => {
         )
     }
 
-    const showSuccess = (sumary, detail: string) => {
-        toast.current.show({ severity: 'success', summary: sumary, detail: detail, life: 3000 });
+    const showSuccess = (summary, detail: string) => {
+        toast.current.show({ severity: 'success', summary, detail, life: 3000 });
     }
 
-    const showError = (sumary, detail: string) => {
-        toast.current.show({ severity: 'error', summary: sumary, detail: detail, life: 3000 });
+    const showError = (summary, detail: string) => {
+        toast.current.show({ severity: 'error', summary, detail, life: 3000 });
     }
 
     const loadingAndSetVisibleDialog = (visible: boolean) => {
