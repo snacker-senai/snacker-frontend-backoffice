@@ -41,7 +41,7 @@ export const Restaurants = () => {
             <Button
                 label="Adicionar restaurante"
                 icon="pi pi-plus"
-                className="p-button-success mr-2"
+                className="p-button-primary mr-2"
                 onClick={() => {
                     setRestaurantCurrent(undefined)
                     setVisibleDialog(true)
@@ -96,7 +96,7 @@ export const Restaurants = () => {
             <div className='restaurants-action'>
                 <Button
                     icon="pi pi-pencil"
-                    className="p-button-rounded p-button-success mr-2"
+                    className="p-button-rounded p-button-info mr-2"
                     onClick={() => {
                         setRestaurantCurrent(row)
                         setVisibleDialog(true)
