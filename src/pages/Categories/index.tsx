@@ -139,7 +139,13 @@ export const Categories = () => {
                 <Fieldset legend="Aviso" toggleable>
                     <p>Ao inativar uma categoria, todos os produtos respectivos ao mesmo serão invativados juntos!.</p>
                 </Fieldset>
-                <DataTable value={productsCategory} >
+                <DataTable 
+                    value={productsCategory}
+                    stripedRows
+                    paginator
+                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink" 
+                    rows={15}
+                >
                     <Column
                         body={statusCategory}
                         header='Status'
