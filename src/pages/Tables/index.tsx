@@ -7,6 +7,7 @@ import { InputText } from 'primereact/inputtext'
 import { Toolbar } from 'primereact/toolbar'
 import { useEffect, useState } from 'react'
 import QRCode from 'react-qr-code'
+import { TablesDialog } from '../../components/Dialogs/TablesDialog'
 import { Loading } from '../../components/Loading'
 import { Table } from '../../services/table/Models'
 import { TableService } from '../../services/table/TableService'
@@ -18,10 +19,11 @@ export const Tables = () => {
     const [isTableModalOpen, setIsTableModalOpen] = useState(false)
     const [qrCodeUrl, setQrCodeUrl] = useState('')
     const [isLoading, setIsLoading] = useState(false)
+    const [currentTable, setCurrentTable] = useState<Table>()
 
-    const TableActions = (data: any) => (
+    const TableActions = (data: Table) => (
         <div className="p-d-flex p-jc-end">
-            <Button icon="pi pi-pencil" className="p-button-rounded p-button-info p-mx-2" />
+            <Button icon="pi pi-pencil" className="p-button-rounded p-button-info p-mx-2" onClick={() => handleEditTable(data)} />
             <Button icon="pi pi-qrcode" className="p-button-rounded p-mx-2" onClick={() => getQrCode(data.id)} />
         </div>
     )
@@ -34,9 +36,18 @@ export const Tables = () => {
         setIsQrCodeModalOpen(true)
     }
 
+    const handleEditTable = (table: Table) => {
+        setCurrentTable(table)
+        setIsTableModalOpen(true)
+    }
+
     const getTables = async () => {
         const tables = await TableService.getAll()
         setTables(tables)
+    }
+
+    const onCreateTable = async (table: Table) => {
+        setTables([...tables, table])
     }
 
     const leftToolbarTemplate = () => {
@@ -46,7 +57,7 @@ export const Tables = () => {
                 icon="pi pi-plus"
                 className="p-button-primary mr-2"
                 onClick={() => {
-                    // setProductCategoryCurrent(undefined)
+                    setCurrentTable(undefined)
                     setIsTableModalOpen(true)
                 }}
             />
@@ -85,12 +96,7 @@ export const Tables = () => {
             >
                 <QRCode value={qrCodeUrl} size={290} max="100%" />
             </Dialog>
-            <Dialog
-                visible={isTableModalOpen}
-                onHide={() => setIsTableModalOpen(false)}
-            >
-                teste
-            </Dialog>
+            <TablesDialog visible={isTableModalOpen} onHide={() => setIsTableModalOpen(false)} table={currentTable} onCreate={onCreateTable} />
             <Loading visible={isLoading} />
         </div>
     )

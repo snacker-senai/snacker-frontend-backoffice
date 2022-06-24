@@ -1,5 +1,5 @@
 import { Requester } from "../configuration-proxy/ConfigurationProxy"
-import { Table } from "./Models"
+import { CreateOrUpdateDTO, Table } from "./Models"
 
 export class TableService {
     static async getAll () {
@@ -16,5 +16,22 @@ export class TableService {
         } catch (error) {
             throw error
         }
+    }
+
+    static async createOrUpdate (table: CreateOrUpdateDTO): Promise<Table> {
+        if (table.id) {
+            const { data } = await Requester.put('table/FromRestaurant', {
+                ...table
+            })
+
+            return data
+        }
+
+        const { data } = await Requester.post('table/FromRestaurant', {
+            number: table.number,
+            active: true
+        })
+
+        return data
     }
 }
