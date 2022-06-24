@@ -13,6 +13,7 @@ import { Employee } from '../../services/employee/Models';
 import { EmployeeDialog } from '../../components/Dialogs/EmployeeDialog';
 import { Loading } from '../../components/Loading';
 import { Column } from 'primereact/column';
+import moment from 'moment';
 
 const Employees = () => {
     const [employees, setEmployees] = useState<Employee[]>([])
@@ -132,6 +133,7 @@ const Employees = () => {
                     <Column
                         field='person.birthDate'
                         header='Data de nascimento'
+                        body={(data) => moment(data.person.birthDate).format('DD/MM/yyyy')}
                     />
                     <Column
                         field='userType.name'
