@@ -121,7 +121,13 @@ const Employees = () => {
             <EmployeeDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} employee={employeeCurrent} />
             <Toolbar className="mb-2" left={leftToolbar} right={rightToolbar}></Toolbar>
             <div className='panel'>
-                <DataTable value={employees} >
+                <DataTable 
+                    value={employees}
+                    stripedRows
+                    paginator
+                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink" 
+                    rows={15}
+                >
                     <Column
                         field='person.name'
                         header='Nome'
