@@ -32,7 +32,7 @@ const Navbar = (props: PropsNavBar) => {
                         </Link>
                     </li>
                 ))}
-                <li className="nav-item">
+                <li className="nav-item" style={{ cursor: 'pointer' }}>
                     <span className="nav-link" onClick={logout}>
                         <i className="pi pi-power-off"></i>
                         <span className="link-text">Sair</span>
