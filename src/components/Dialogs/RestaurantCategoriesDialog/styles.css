@@ -1,0 +1,23 @@
+.products-category-dialog-groups {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.products-category-dialog-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 5px;
+}
+
+.products-category-dialog-group>* {
+    margin: 10px;
+}
+
+.products-category-dialog-group .p-float-label,
+.products-category-dialog-group .p-float-label input {
+    width: 100%;
+}
