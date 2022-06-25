@@ -151,7 +151,13 @@ export const Restaurants = () => {
             <RestaurantsDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} restaurant={restaurantCurrent} />
             <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
             <div className='panel'>
-                <DataTable value={restaurants}>
+                <DataTable
+                    value={restaurants}
+                    stripedRows
+                    paginator
+                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink" 
+                    rows={15}
+                >
                     <Column
                         field=""
                         header="Status"
