@@ -60,23 +60,6 @@ export const RestaurantCategories = () => {
       )
     }
 
-    const changeStatus = async (data: RestaurantCategory) => {
-        setShowSpinnerLoading(true)
-
-        try {
-            await RestaurantCategoryService.createOrUpdate({
-              id: data.id,
-              name: data.name,
-              active: !data.active
-            })
-            showSuccess('Categoria atualizada com sucesso!', '')
-            buildCategories()
-        } catch (error: any) {
-            showError("Erro ao alterar o status do restaurante!", `Erro ao alterar: ${error.message}`)
-        }
-        setShowSpinnerLoading(false)
-    }
-
     const actionBodyTemplate = (data: RestaurantCategory) => {
         return (
             <div className='restaurants-action'>
@@ -87,10 +70,6 @@ export const RestaurantCategories = () => {
                         setCurrentCategory(data)
                         setVisibleDialog(true)
                     }} />
-                <InputSwitch
-                    checked={data.active}
-                    onChange={async () => changeStatus(data)}
-                />
             </div>
         )
     }
