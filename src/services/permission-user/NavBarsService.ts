@@ -42,26 +42,32 @@ export class NavBarsService {
                         linkTo: '/deliveries'
                     },
                     {
-                        id: 6,
+                        id: 7,
                         icon: 'pi-table',
                         label: 'Mesas',
                         linkTo: '/mesas'
-                    },
+                    }
                 ]
 
             case "Admin":
                 return [
                     {
-                        id: 0,
+                        id: 6,
                         icon: 'pi-sitemap',
                         label: 'Restaurantes',
                         linkTo: '/restaurants'
+                    },
+                    {
+                        id: 8,
+                        icon: 'pi-table',
+                        label: 'Categorias de restaurante',
+                        linkTo: '/categorias-restaurante'
                     },
                 ]
             case "Cozinheiro":
                 return [
                     {
-                        id: 0,
+                        id: 4,
                         icon: 'pi-shopping-cart',
                         label: 'Preparo das comidas',
                         linkTo: '/foods'
@@ -70,7 +76,7 @@ export class NavBarsService {
             case "Garçom":
                 return [
                     {
-                        id: 0,
+                        id: 5,
                         icon: 'pi-wallet',
                         label: 'Entregas',
                         linkTo: '/deliveries'

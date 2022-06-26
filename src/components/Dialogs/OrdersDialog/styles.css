@@ -1,0 +1,60 @@
+.order-card {
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: rgb(244, 244, 244);
+    border-radius: 3px;
+}
+
+.order-card .product-info {
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+
+.order-card .product-info .product-name {
+  font-size: 1.05em;
+  margin-right: 8px;
+  color: rgb(60, 60, 60);
+  font-weight: bold;
+}
+
+.order-card .product-price {
+  font-size: 0.95em;
+  color: rgb(70, 70, 70);
+}
+
+.order-card .order-status {
+  font-weight: bold;
+}
+
+.order-card .status-1 {
+  color: blue;
+}
+
+.order-card .status-2 {
+  color: orange;
+}
+
+.order-card  .status-3 {
+  color: green;
+}
+
+.order-card .subtotal {
+  font-weight: bold;
+}
+
+.totalPrice {
+  padding: 10px;
+  padding-top: 21px;
+  padding-bottom: 16px;
+  text-align: end;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}

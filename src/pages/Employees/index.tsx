@@ -13,6 +13,7 @@ import { Employee } from '../../services/employee/Models';
 import { EmployeeDialog } from '../../components/Dialogs/EmployeeDialog';
 import { Loading } from '../../components/Loading';
 import { Column } from 'primereact/column';
+import moment from 'moment';
 
 const Employees = () => {
     const [employees, setEmployees] = useState<Employee[]>([])
@@ -48,7 +49,7 @@ const Employees = () => {
             <>
                 <Button
                     icon="pi pi-pencil"
-                    className="p-button-rounded p-button-success mr-2"
+                    className="p-button-rounded p-button-info"
                     onClick={() => {
                         setEmployeeCurrent(employee)
                         setVisibleDialog(true)
@@ -56,7 +57,7 @@ const Employees = () => {
                 />
                 <Button
                     icon="pi pi-trash"
-                    className="p-button-rounded p-button-warning"
+                    className="p-button-rounded p-button-primary"
                     onClick={async () => {
                         setShowSpinnerLoading(true)
 
@@ -120,7 +121,13 @@ const Employees = () => {
             <EmployeeDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} employee={employeeCurrent} />
             <Toolbar className="mb-2" left={leftToolbar} right={rightToolbar}></Toolbar>
             <div className='panel'>
-                <DataTable value={employees} >
+                <DataTable 
+                    value={employees}
+                    stripedRows
+                    paginator
+                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink" 
+                    rows={15}
+                >
                     <Column
                         field='person.name'
                         header='Nome'
@@ -132,6 +139,7 @@ const Employees = () => {
                     <Column
                         field='person.birthDate'
                         header='Data de nascimento'
+                        body={(data) => moment(data.person.birthDate).format('DD/MM/yyyy')}
                     />
                     <Column
                         field='userType.name'

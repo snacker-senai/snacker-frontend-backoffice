@@ -94,12 +94,12 @@ export const Categories = () => {
         )
     }
 
-    const showSuccess = (sumary, detail: string) => {
-        toast.current.show({ severity: 'success', summary: sumary, detail: detail, life: 3000 });
+    const showSuccess = (summary, detail: string) => {
+        toast.current.show({ severity: 'success', summary, detail, life: 3000 });
     }
 
-    const showError = (sumary, detail: string) => {
-        toast.current.show({ severity: 'error', summary: sumary, detail: detail, life: 3000 });
+    const showError = (summary, detail: string) => {
+        toast.current.show({ severity: 'error', summary, detail, life: 3000 });
     }
 
     const loadingAndSetVisibleDialog = (visible: boolean) => {
@@ -139,7 +139,13 @@ export const Categories = () => {
                 <Fieldset legend="Aviso" toggleable>
                     <p>Ao inativar uma categoria, todos os produtos respectivos ao mesmo serão invativados juntos!.</p>
                 </Fieldset>
-                <DataTable value={productsCategory} >
+                <DataTable 
+                    value={productsCategory}
+                    stripedRows
+                    paginator
+                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink" 
+                    rows={15}
+                >
                     <Column
                         body={statusCategory}
                         header='Status'

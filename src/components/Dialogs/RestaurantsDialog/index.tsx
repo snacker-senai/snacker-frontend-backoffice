@@ -221,14 +221,14 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
                 case 0:
                     return (
                         <Button
-                            label='próximo'
+                            label='Próximo'
                             onClick={() => nextTabPanel(1)}
                         />
                     )
                 case 1:
                     return (
                         <div>
-                            <Button label='voltar' onClick={() => nextTabPanel(1)}></Button>
+                            <Button label='Voltar' onClick={() => nextTabPanel(1)}></Button>
                             <Button type='submit' label={labelMain} onClick={() => formik.handleSubmit()}></Button>
                         </div>
                     )
@@ -238,7 +238,7 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
                 case 0:
                     return (
                         <Button
-                            label='próximo'
+                            label='Próximo'
                             onClick={() => nextTabPanel(1)}
                         />
                     )
@@ -246,11 +246,11 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
                     return (
                         <div>
                             <Button
-                                label='voltar'
+                                label='Voltar'
                                 onClick={() => nextTabPanel(0)}
                             />
                             <Button
-                                label='próximo'
+                                label='Próximo'
                                 onClick={() => nextTabPanel(2)}
                             />
                         </div>
@@ -258,7 +258,7 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
                 case 2:
                     return (
                         <div>
-                            <Button label='voltar' onClick={() => nextTabPanel(1)}></Button>
+                            <Button label='Voltar' onClick={() => nextTabPanel(1)}></Button>
                             <Button type='submit' label={labelMain} onClick={() => formik.handleSubmit()}></Button>
                         </div>
                     )

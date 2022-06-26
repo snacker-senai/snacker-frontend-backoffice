@@ -11,6 +11,11 @@ const Navbar = (props: PropsNavBar) => {
         if (menuId === selectedMenu) return 'nav-active'
     }
 
+    const logout = () => {
+        localStorage.removeItem("accessToken")
+        window.location.href = "/login"
+    }
+
     return (
         <nav className="navbar">
             <ul className="navbar-nav">
@@ -27,6 +32,12 @@ const Navbar = (props: PropsNavBar) => {
                         </Link>
                     </li>
                 ))}
+                <li className="nav-item" style={{ cursor: 'pointer' }}>
+                    <span className="nav-link" onClick={logout}>
+                        <i className="pi pi-power-off"></i>
+                        <span className="link-text">Sair</span>
+                    </span>
+                </li>
             </ul>
         </nav>
     )

@@ -41,7 +41,7 @@ export const Restaurants = () => {
             <Button
                 label="Adicionar restaurante"
                 icon="pi pi-plus"
-                className="p-button-success mr-2"
+                className="p-button-primary mr-2"
                 onClick={() => {
                     setRestaurantCurrent(undefined)
                     setVisibleDialog(true)
@@ -96,7 +96,7 @@ export const Restaurants = () => {
             <div className='restaurants-action'>
                 <Button
                     icon="pi pi-pencil"
-                    className="p-button-rounded p-button-success mr-2"
+                    className="p-button-rounded p-button-info mr-2"
                     onClick={() => {
                         setRestaurantCurrent(row)
                         setVisibleDialog(true)
@@ -151,7 +151,13 @@ export const Restaurants = () => {
             <RestaurantsDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} restaurant={restaurantCurrent} />
             <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
             <div className='panel'>
-                <DataTable value={restaurants}>
+                <DataTable
+                    value={restaurants}
+                    stripedRows
+                    paginator
+                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink" 
+                    rows={15}
+                >
                     <Column
                         field=""
                         header="Status"

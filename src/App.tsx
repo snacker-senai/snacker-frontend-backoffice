@@ -17,6 +17,7 @@ import { Login } from "./pages/Login";
 import { Restaurants } from "./pages/Restaurants";
 import { Tables } from "./pages/Tables";
 import { ChangePassword } from "./pages/ChangePassword";
+import { RestaurantCategories } from "./pages/RestaurantCategories";
 import { Dashboards } from "./pages/Dashboards";
 
 export default function App() {
@@ -34,6 +35,7 @@ export default function App() {
             <Route exact path="/deliveries"><PrivateRoute menu={5} children={<Deliveries />} /></Route>
             <Route exact path="/restaurants"><PrivateRoute menu={6} children={<Restaurants />} /></Route>
             <Route exact path="/mesas"><PrivateRoute menu={7} children={<Tables />} /></Route>
+            <Route exact path="/categorias-restaurante"><PrivateRoute menu={8} children={<RestaurantCategories />} /></Route>
             <Route exact path="/login" component={Login} />
             <Route exact path="/change-password" component={ChangePassword} />
             <Route path="/"><Redirect to="/login" /></Route>
