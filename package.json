@@ -15,6 +15,7 @@
     "@types/react-router": "^5.1.18",
     "@types/react-router-dom": "^5.3.1",
     "@types/yup": "^0.29.13",
+    "chart.js": "^3.8.0",
     "formik": "^2.2.9",
     "formik-yup": "0.0.5",
     "moment": "^2.29.3",

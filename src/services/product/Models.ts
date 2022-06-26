@@ -28,3 +28,9 @@ export interface ProductCategory {
     id: number
     active: boolean
 }
+
+export interface ProductsFilterDashboard {
+    id: number
+    name: string
+    quantity: number
+}

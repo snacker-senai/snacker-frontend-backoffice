@@ -187,7 +187,7 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
                                         className={classNames({ 'p-invalid': isFormFieldValid('dateBirth') }, 'input p-inputtext-sm block mb-2')}
                                         dateFormat="dd/mm/yy"
                                         showIcon
-                                        onMonthChange={(e) => console.log(e)}
+                                        onMonthChange={() => { }}
                                     />
                                     <label htmlFor="dateBirth">Data de nascimento</label>
                                 </span>

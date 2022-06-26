@@ -17,21 +17,16 @@ import { Login } from "./pages/Login";
 import { Restaurants } from "./pages/Restaurants";
 import { Tables } from "./pages/Tables";
 import { ChangePassword } from "./pages/ChangePassword";
+import { Dashboards } from "./pages/Dashboards";
 
 export default function App() {
-  const ComponentDefault = () => {
-    return (
-      <h1>teste</h1>
-    )
-  }
-
   return (
     <div className="principal-container">
       <MenuProvider>
         <Router>
           <Switch>
             <Route exact path="/home"><PrivateRoute menu={-1} children={<Home />} /></Route>
-            <Route exact path="/dashboard"><PrivateRoute menu={0} children={<ComponentDefault />} /></Route>
+            <Route exact path="/dashboard"><PrivateRoute menu={0} children={<Dashboards />} /></Route>
             <Route exact path="/employees"><PrivateRoute menu={1} children={<Employees />} /></Route>
             <Route exact path="/products"><PrivateRoute menu={2} children={<Products />} /></Route>
             <Route exact path="/categories"><PrivateRoute menu={3} children={<Categories />} /></Route>
