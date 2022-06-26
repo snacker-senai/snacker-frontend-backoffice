@@ -13,7 +13,6 @@ import { useFormik } from 'formik'
 
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
-import { Checkbox } from 'primereact/checkbox';
 import { classNames } from 'primereact/utils'
 import { Toast } from 'primereact/toast';
 import { Password } from 'primereact/password';
@@ -22,7 +21,6 @@ import { Loading } from '../../components/Loading';
 import { ChangePasswordService } from '../../services/change-password/ChangePasswordService';
 
 export const LoginForm = () => {
-    const [checked, setChecked] = useState(false);
     const [showSpinnerLoading, setShowSpinnerLoading] = useState(false)
     const toast = useRef<any>(null);
     const history = useHistory()
@@ -102,11 +100,6 @@ export const LoginForm = () => {
                             <label htmlFor="password">Senha</label>
                         </div>
                         <small className="p-error">{getFormErrorMessage('password')}</small>
-                    </div>
-
-                    <div className="field-checkbox">
-                        <Checkbox inputId="binary" checked={checked} onChange={e => setChecked(e.checked)} />
-                        <label htmlFor="binary"> Lembrar-me</label>
                     </div>
 
                     <div className="input-box">

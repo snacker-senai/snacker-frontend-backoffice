@@ -8,7 +8,6 @@ import { useValidateInput } from '../../hooks/useValidateInput'
 import { useFormik } from 'formik'
 
 import { Button } from 'primereact/button';
-import { Checkbox } from 'primereact/checkbox';
 import { classNames } from 'primereact/utils'
 import { Toast } from 'primereact/toast';
 import { Password } from 'primereact/password';
@@ -24,7 +23,6 @@ export interface ChangePasswordFormProps {
 }
 
 export const ChangePasswordForm = ({ emailProps, oldPasswordProps }: ChangePasswordFormProps) => {
-    const [checked, setChecked] = useState(false);
     const [showSpinnerLoading, setShowSpinnerLoading] = useState(false)
     const toast = useRef<any>(null);
     const history = useHistory()
@@ -116,11 +114,6 @@ export const ChangePasswordForm = ({ emailProps, oldPasswordProps }: ChangePassw
                             <label htmlFor="newPassword">Nova senha</label>
                         </div>
                         <small className="p-error">{getFormErrorMessage('newPassword')}</small>
-                    </div>
-
-                    <div className="field-checkbox">
-                        <Checkbox inputId="binary" checked={checked} onChange={e => setChecked(e.checked)} />
-                        <label htmlFor="binary"> Lembrar-me</label>
                     </div>
 
                     <div className="input-box">
