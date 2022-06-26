@@ -5,7 +5,6 @@ import './styles.css'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { Button } from 'primereact/button'
-import { InputText } from 'primereact/inputtext'
 import { Toast } from 'primereact/toast'
 import { Toolbar } from 'primereact/toolbar';
 import { InputSwitch } from 'primereact/inputswitch';
@@ -47,15 +46,6 @@ export const Restaurants = () => {
                     setVisibleDialog(true)
                 }}
             />
-        )
-    }
-
-    const rightToolbarTemplate = () => {
-        return (
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText type="search" />
-            </span>
         )
     }
 
@@ -149,13 +139,13 @@ export const Restaurants = () => {
             <Toast ref={toast} />
             <Loading visible={showSpinnerLoading} />
             <RestaurantsDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} restaurant={restaurantCurrent} />
-            <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+            <Toolbar className="mb-4" left={leftToolbarTemplate}></Toolbar>
             <div className='panel'>
                 <DataTable
                     value={restaurants}
                     stripedRows
                     paginator
-                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink" 
+                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
                     rows={15}
                 >
                     <Column

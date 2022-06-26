@@ -2,7 +2,6 @@
 import { useEffect, useState, useRef } from 'react';
 import './styles.css'
 
-import { InputText } from 'primereact/inputtext'
 import { Button } from 'primereact/button';
 import { Toolbar } from 'primereact/toolbar';
 import { Toast } from 'primereact/toast';
@@ -14,6 +13,7 @@ import { EmployeeDialog } from '../../components/Dialogs/EmployeeDialog';
 import { Loading } from '../../components/Loading';
 import { Column } from 'primereact/column';
 import moment from 'moment';
+import { AuthService } from '../../services/auth/AuthService';
 
 const Employees = () => {
     const [employees, setEmployees] = useState<Employee[]>([])
@@ -30,7 +30,17 @@ const Employees = () => {
         setShowSpinnerLoading(true)
 
         try {
-            await EmployeesService.get().then((data: Employee[]) => setEmployees(data))
+            const data = await EmployeesService.get()
+            const infoUserLogged = await AuthService.getInfoUserLogged()
+
+            for (let i = 0; i < data.length; i++) {
+                if ((data[i].email === infoUserLogged?.email && data[i].userType?.name === infoUserLogged?.role)
+                    || data[i].userType?.name === 'Admin') {
+                    data.splice(i, 1)
+                }
+            }
+
+            setEmployees(data)
         } catch (error: any) {
             console.log(error)
             showError("Erro ao buscar os usuários!", `Erro: ${error.message}`)
@@ -78,20 +88,6 @@ const Employees = () => {
         );
     }
 
-    const rightToolbar = () => {
-        return (
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText
-                    type="search"
-                    className="p-inputtext-sm block mb-2"
-                    placeholder="Pesquise..."
-
-                />
-            </span>
-        )
-    }
-
     const leftToolbar = () => {
         return (
             <Button
@@ -119,13 +115,13 @@ const Employees = () => {
             <Loading visible={showSpinnerLoading} />
             <Toast ref={toast} />
             <EmployeeDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} employee={employeeCurrent} />
-            <Toolbar className="mb-2" left={leftToolbar} right={rightToolbar}></Toolbar>
+            <Toolbar className="mb-2" left={leftToolbar}></Toolbar>
             <div className='panel'>
-                <DataTable 
+                <DataTable
                     value={employees}
                     stripedRows
                     paginator
-                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink" 
+                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
                     rows={15}
                 >
                     <Column

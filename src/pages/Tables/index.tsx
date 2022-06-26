@@ -3,7 +3,6 @@ import { Button } from 'primereact/button'
 import { Column } from 'primereact/column'
 import { DataTable } from 'primereact/datatable'
 import { Dialog } from 'primereact/dialog'
-import { InputText } from 'primereact/inputtext'
 import { Toolbar } from 'primereact/toolbar'
 import { useEffect, useState } from 'react'
 import QRCode from 'react-qr-code'
@@ -42,11 +41,15 @@ export const Tables = () => {
     }
 
     const getAuth = async () => {
+        setIsLoading(true)
+
         const user = await AuthService.getInfoUserLogged()
-        
+
         if (user?.role === 'Garçom') {
             setIsWaiter(true)
         }
+
+        setIsLoading(false)
     }
 
     const handleEditTable = (table: Table) => {
@@ -55,8 +58,12 @@ export const Tables = () => {
     }
 
     const getTables = async () => {
+        setIsLoading(true)
+
         const tables = await TableService.getAll()
         setTables(tables)
+
+        setIsLoading(false)
     }
 
     const onCreateTable = async (table: Table) => {
@@ -77,15 +84,6 @@ export const Tables = () => {
         )
     }
 
-    const rightToolbarTemplate = () => {
-        return (
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText type="search" placeholder="Pesquise a mesa..." />
-            </span>
-        )
-    }
-
     const onHideOrdersModal = () => {
         setIsOrdersModalOpen(false)
         setCurrentTable(undefined)
@@ -96,14 +94,19 @@ export const Tables = () => {
         getAuth()
     }, [])
 
+    const onHideTable = async () => {
+        setIsTableModalOpen(false)
+        await getTables()
+    }
+
     return (
         <div className="container-tables">
-            <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
-            <DataTable 
+            <Toolbar className="mb-4" left={leftToolbarTemplate}></Toolbar>
+            <DataTable
                 value={tables}
                 stripedRows
                 paginator
-                paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink" 
+                paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
                 rows={15}
             >
                 <Column field="number" header="Número"></Column>
@@ -116,7 +119,7 @@ export const Tables = () => {
                 <QRCode value={qrCodeUrl} size={290} max="100%" />
             </Dialog>
             <OrdersDialog visible={isOrdersModalOpen} onHide={onHideOrdersModal} tableId={currentTable?.id} />
-            <TablesDialog visible={isTableModalOpen} onHide={() => setIsTableModalOpen(false)} table={currentTable} onCreate={onCreateTable} />
+            <TablesDialog visible={isTableModalOpen} onHide={async () => await onHideTable()} table={currentTable} onCreate={onCreateTable} />
             <Loading visible={isLoading} />
         </div>
     )

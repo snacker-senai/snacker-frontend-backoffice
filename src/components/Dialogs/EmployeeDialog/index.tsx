@@ -41,10 +41,12 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
         UserTypeService.get().then((types: UserType[]) => {
             const usersType: any[] = []
             types.forEach(type => {
-                usersType.push({
-                    'name': type.name,
-                    'code': type.id,
-                })
+                if (type.name !== 'Admin') {
+                    usersType.push({
+                        'name': type.name,
+                        'code': type.id,
+                    })
+                }
             })
 
             setUsersType(usersType)
@@ -88,6 +90,7 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
                 error.message)
         }
 
+        setTabPanelCurrent(0)
         setShowSpinnerLoading(false)
     }
 

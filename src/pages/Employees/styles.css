@@ -72,7 +72,7 @@
         width: 100%;
     }
 
-    .container-employees .categories-action {
+    .container-employees .employees-action {
         flex-direction: row;
         justify-content: end !important;
         align-items: flex-end !important;
@@ -99,11 +99,6 @@
         width: 100%;
     }
 
-    .container-employees .p-toolbar-group-right {
-        margin-top: 10px;
-    }
-
-    .container-employees .p-toolbar-group-right,
     .container-employees .p-input-icon-left,
     .container-employees .p-input-icon-left input,
     .container-employees .p-toolbar-group-left,

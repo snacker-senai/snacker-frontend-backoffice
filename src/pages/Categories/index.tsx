@@ -9,7 +9,6 @@ import { ProductCategoryService } from '../../services/product-category/ProductC
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { Button } from 'primereact/button'
-import { InputText } from 'primereact/inputtext'
 import { Toast } from 'primereact/toast'
 import { Toolbar } from 'primereact/toolbar';
 import { Loading } from '../../components/Loading';
@@ -50,15 +49,6 @@ export const Categories = () => {
         )
     }
 
-    const rightToolbarTemplate = () => {
-        return (
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText type="search" />
-            </span>
-        )
-    }
-
     const updateStatus = async (category: ProductCategory) => {
         setShowSpinnerLoading(true)
         try {
@@ -68,7 +58,7 @@ export const Categories = () => {
                 active: !category.active,
             })
             showSuccess('Atualizado com sucesso!', 'Status da categoria alterado para com sucesso!')
-            buildProductsCategory()
+            await buildProductsCategory()
         } catch (error: any) {
             showError('Erro ao atualizar status', 'Erro: ' + error.message)
         }
@@ -134,16 +124,16 @@ export const Categories = () => {
             <Toast ref={toast} />
             <Loading visible={showSpinnerLoading} />
             <ProductsCategoryDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} productCategory={productCategoryCurrent} />
-            <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+            <Toolbar className="mb-4" left={leftToolbarTemplate}></Toolbar>
             <div className='panel'>
                 <Fieldset legend="Aviso" toggleable>
                     <p>Ao inativar uma categoria, todos os produtos respectivos ao mesmo serão invativados juntos!.</p>
                 </Fieldset>
-                <DataTable 
+                <DataTable
                     value={productsCategory}
                     stripedRows
                     paginator
-                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink" 
+                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
                     rows={15}
                 >
                     <Column

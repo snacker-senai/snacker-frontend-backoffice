@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import './styles.css';
 
 import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
 import { Toast } from 'primereact/toast';
 import { Toolbar } from 'primereact/toolbar';
 import { ProductDialog } from '../../components/Dialogs/ProductDialog';
@@ -45,19 +44,6 @@ export const Products = () => {
         setVisibleDialog(true)
     }
 
-    const rightToolbar = () => {
-        return (
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText
-                    type="search"
-                    className="p-inputtext-sm block mb-2"
-                    placeholder="Pesquise..."
-                />
-            </span>
-        )
-    }
-
     const leftToolbar = () => {
         return (
             <Button
@@ -72,7 +58,7 @@ export const Products = () => {
         )
     }
 
-    const header = <Toolbar className="p-mb-2 p-px-5" left={leftToolbar} right={rightToolbar}></Toolbar>
+    const header = <Toolbar className="p-mb-2 p-px-5" left={leftToolbar}></Toolbar>
 
 
     const showError = (sumary, detail: string) => {
@@ -84,7 +70,6 @@ export const Products = () => {
             <Loading visible={showSpinnerLoading} />
             <Toast ref={toast} />
             <ProductDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} product={productCurrent} />
-            <h1>Listagem de produtos</h1>
             {header}
             <div className="products-list">
                 {products.map(product => (

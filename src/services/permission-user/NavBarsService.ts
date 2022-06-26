@@ -8,7 +8,7 @@ export class NavBarsService {
                     {
                         id: 0,
                         icon: 'pi-chart-bar',
-                        label: 'Dashboard',
+                        label: 'Dashboards',
                         linkTo: '/dashboard'
                     },
                     {
@@ -26,7 +26,7 @@ export class NavBarsService {
                     {
                         id: 3,
                         icon: 'pi-clone',
-                        label: 'Categoria',
+                        label: 'Categorias',
                         linkTo: '/categories'
                     },
                     {
@@ -86,6 +86,5 @@ export class NavBarsService {
             default:
                 return []
         }
-
     }
 }

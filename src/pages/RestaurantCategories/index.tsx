@@ -5,7 +5,6 @@ import './styles.css';
 import { Button } from 'primereact/button';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
-import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
 import { Toast } from 'primereact/toast';
 import { Toolbar } from 'primereact/toolbar';
@@ -47,15 +46,6 @@ export const RestaurantCategories = () => {
           setVisibleDialog(true)
         }}
       />
-    )
-  }
-
-  const rightToolbarTemplate = () => {
-    return (
-      <span className="p-input-icon-left">
-        <i className="pi pi-search" />
-        <InputText type="search" />
-      </span>
     )
   }
 
@@ -109,7 +99,7 @@ export const RestaurantCategories = () => {
         visible={visibleDialog}
         category={currentCategory}
       />
-      <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+      <Toolbar className="mb-4" left={leftToolbarTemplate}></Toolbar>
       <div className='panel'>
         <DataTable
           value={categories}

@@ -24,3 +24,54 @@
         padding: 2rem 2.1rem 1rem;
     }
 }
+
+@media only screen and (max-width: 950px) {
+    .container-tables .p-datatable {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .container-tables .datatable-crud-demo .p-toolbar {
+        flex-wrap: wrap;
+    }
+
+    .container-tables .datatable-crud-demo .table-header {
+        flex-direction: column;
+    }
+
+    .container-tables .datatable-crud-demo .table-header .p-input-icon-left,
+    .container-tables .datatable-crud-demo .table-header input {
+        width: 100%;
+    }
+
+    .container-tables {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+    }
+}
+
+@media only screen and (max-width: 560px) {
+    .container-tables {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+    }
+
+    .container-tables .p-datatable {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .container-tables .p-toolbar-group-right {
+        margin-top: 10px;
+    }
+
+    .container-tables .p-toolbar-group-right,
+    .container-tables .p-input-icon-left,
+    .container-tables .p-input-icon-left input,
+    .container-tables .p-toolbar-group-left,
+    .container-tables .p-toolbar-group-left button {
+        width: 100%;
+    }
+}

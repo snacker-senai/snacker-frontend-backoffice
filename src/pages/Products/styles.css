@@ -154,12 +154,11 @@
         margin-bottom: 10px;
     }
 
-    .container-products .p-carousel-header .p-toolbar-group-left,
-    .container-products .p-carousel-header .p-toolbar-group-left button {
+    .container-products .p-toolbar-group-left,
+    .container-products .p-toolbar-group-left .p-button {
         width: 100%;
     }
-
-    .container-products .p-toolbar-group-right,
+    
     .container-products .p-input-icon-left,
     .container-products .p-input-icon-left input {
         width: 100%;

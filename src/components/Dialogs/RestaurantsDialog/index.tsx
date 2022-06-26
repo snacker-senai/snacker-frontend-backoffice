@@ -111,6 +111,7 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
                 error.message)
         }
 
+        setTabPanelCurrent(0)
         setShowSpinnerLoading(false)
     }
 
@@ -146,7 +147,7 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
             showError(`Falha ao alterar o restaurante no sistema!`,
                 error.message)
         }
-
+        setTabPanelCurrent(0)
         setShowSpinnerLoading(false)
     }
 
@@ -228,7 +229,7 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
                 case 1:
                     return (
                         <div>
-                            <Button label='Voltar' onClick={() => nextTabPanel(1)}></Button>
+                            <Button label='Voltar' onClick={() => nextTabPanel(0)}></Button>
                             <Button type='submit' label={labelMain} onClick={() => formik.handleSubmit()}></Button>
                         </div>
                     )
@@ -259,7 +260,7 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
                     return (
                         <div>
                             <Button label='Voltar' onClick={() => nextTabPanel(1)}></Button>
-                            <Button type='submit' label={labelMain} onClick={() => formik.handleSubmit()}></Button>
+                            <Button type='submit' label={labelMain} onClick={async () => await formik.handleSubmit()}></Button>
                         </div>
                     )
             }
