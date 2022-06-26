@@ -31,4 +31,12 @@ export class OrderService {
             throw error
         }
     }
+
+    static async closeBillByTableId (tableId: number) {
+        try {
+            await Requester.put(`/Order/CloseBill/${tableId}`)
+        } catch (error) {
+            throw error
+        }
+    }
 }

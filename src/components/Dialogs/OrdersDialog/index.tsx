@@ -2,9 +2,9 @@
 import { Button } from "primereact/button"
 import { Dialog } from "primereact/dialog"
 import { useEffect, useState } from "react"
+import { Circles, TailSpin } from "react-loader-spinner"
 import { OrderWithProducts } from "../../../services/order/Models"
 import { OrderService } from "../../../services/order/OrderService"
-import { Loading } from "../../Loading"
 import './styles.css'
 
 interface IProductWithQuantity {
@@ -20,22 +20,26 @@ interface IOrderStatus {
 }
 
 interface OrdersDialogProps {
-  tableId: number
+  tableId?: number
   visible: boolean
   onHide(): void
 }
 
 export const OrdersDialog = ({ tableId, visible, onHide }: OrdersDialogProps) => {
   const [orders, setOrders] = useState<OrderWithProducts[]>([])
+  const [isLoading, setIsLoading] = useState(false)
 
   const getOrders = async () => {
-    const orders = await OrderService.getOrdersByTableId(tableId)
-    console.log(orders)
+    setIsLoading(true)
+    const orders = await OrderService.getOrdersByTableId(tableId!)
     setOrders(orders)
+    setIsLoading(false)
   }
 
   useEffect(() => {
-    getOrders()
+    if (tableId) {
+      getOrders()
+    }
   }, [tableId])
 
   const getTotalPrice = () => {
@@ -69,26 +73,39 @@ export const OrdersDialog = ({ tableId, visible, onHide }: OrdersDialogProps) =>
     )
   }
 
+  const closeBill = async () => {
+    await OrderService.closeBillByTableId(tableId!)
+    onHide()
+  }
+
   return (
-    <Dialog visible={visible} onHide={onHide} style={{ width: '60%' }}>
-      <div className="content">
-        {!!orders.length && (
-          <>
-            {orders.map(order => renderBillProducts(order.productsWithQuantity, order.orderStatus))}
-          </>
-        )}
-        {!orders.length && (
-          <Loading visible={true} />
-        )}
-      </div>
-      {!!orders.length && (
-        <div className="totalPrice">
-          Total: R$ {(getTotalPrice())}
+    <Dialog visible={visible} onHide={onHide} style={{ width: '60%' }} header="Lista de pedidos">
+      {isLoading ? (
+        <div className="loading">
+          <Circles color="#00BFFF" height={80} width={80} />
         </div>
+      ) : (
+        <>
+          {!!orders.length && (
+            <>
+              <div className="content">
+                  {orders.map(order => renderBillProducts(order.productsWithQuantity, order.orderStatus))}
+              </div>
+              <div className="totalPrice">
+                Total: R$ {(getTotalPrice())}
+              </div>
+              <div className="p-d-flex p-jc-end p-mt-3">
+                <Button label="Fechar conta" onClick={closeBill} />
+              </div>
+            </>
+          )}
+          {!orders.length && (
+            <div className="p-d-flex p-jc-center p-my-6">
+              <span style={{ fontSize: '1.15em' }}>Nenhum pedido realizado</span>
+            </div>
+          )}
+        </>
       )}
-      <div className="p-d-flex p-jc-end p-mt-3">
-        <Button label="Fechar conta" />
-      </div>
     </Dialog>
   )
 }

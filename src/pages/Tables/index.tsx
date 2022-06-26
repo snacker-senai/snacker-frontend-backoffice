@@ -86,6 +86,11 @@ export const Tables = () => {
         )
     }
 
+    const onHideOrdersModal = () => {
+        setIsOrdersModalOpen(false)
+        setCurrentTable(undefined)
+    }
+
     useEffect(() => {
         getTables()
         getAuth()
@@ -110,7 +115,7 @@ export const Tables = () => {
             >
                 <QRCode value={qrCodeUrl} size={290} max="100%" />
             </Dialog>
-            <OrdersDialog visible={isOrdersModalOpen} onHide={() => setIsOrdersModalOpen(false)} tableId={14} />
+            <OrdersDialog visible={isOrdersModalOpen} onHide={onHideOrdersModal} tableId={currentTable?.id} />
             <TablesDialog visible={isTableModalOpen} onHide={() => setIsTableModalOpen(false)} table={currentTable} onCreate={onCreateTable} />
             <Loading visible={isLoading} />
         </div>
