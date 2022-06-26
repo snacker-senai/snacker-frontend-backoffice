@@ -7,8 +7,10 @@ import { InputText } from 'primereact/inputtext'
 import { Toolbar } from 'primereact/toolbar'
 import { useEffect, useState } from 'react'
 import QRCode from 'react-qr-code'
+import { OrdersDialog } from '../../components/Dialogs/OrdersDialog'
 import { TablesDialog } from '../../components/Dialogs/TablesDialog'
 import { Loading } from '../../components/Loading'
+import { AuthService } from '../../services/auth/AuthService'
 import { Table } from '../../services/table/Models'
 import { TableService } from '../../services/table/TableService'
 import './styles.css'
@@ -17,14 +19,17 @@ export const Tables = () => {
     const [tables, setTables] = useState<Table[]>([])
     const [isQrCodeModalOpen, setIsQrCodeModalOpen] = useState(false)
     const [isTableModalOpen, setIsTableModalOpen] = useState(false)
+    const [isOrdersModalOpen, setIsOrdersModalOpen] = useState(false)
     const [qrCodeUrl, setQrCodeUrl] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [currentTable, setCurrentTable] = useState<Table>()
+    const [isWaiter, setIsWaiter] = useState(false)
 
     const TableActions = (data: Table) => (
         <div className="p-d-flex p-jc-end">
-            <Button icon="pi pi-pencil" className="p-button-rounded p-button-info p-mx-2" onClick={() => handleEditTable(data)} />
+            {!isWaiter && <Button icon="pi pi-pencil" className="p-button-rounded p-button-info p-mx-2" onClick={() => handleEditTable(data)} />}
             <Button icon="pi pi-qrcode" className="p-button-rounded p-mx-2" onClick={() => getQrCode(data.id)} />
+            <Button icon="pi pi-list" className="p-button-rounded p-mx-2" onClick={() => { setCurrentTable(data); setIsOrdersModalOpen(true) }} />
         </div>
     )
 
@@ -34,6 +39,14 @@ export const Tables = () => {
         setQrCodeUrl(qrCodeUrl)
         setIsLoading(false)
         setIsQrCodeModalOpen(true)
+    }
+
+    const getAuth = async () => {
+        const user = await AuthService.getInfoUserLogged()
+        
+        if (user?.role === 'Garçom') {
+            setIsWaiter(true)
+        }
     }
 
     const handleEditTable = (table: Table) => {
@@ -75,6 +88,7 @@ export const Tables = () => {
 
     useEffect(() => {
         getTables()
+        getAuth()
     }, [])
 
     return (
@@ -96,6 +110,7 @@ export const Tables = () => {
             >
                 <QRCode value={qrCodeUrl} size={290} max="100%" />
             </Dialog>
+            <OrdersDialog visible={isOrdersModalOpen} onHide={() => setIsOrdersModalOpen(false)} tableId={14} />
             <TablesDialog visible={isTableModalOpen} onHide={() => setIsTableModalOpen(false)} table={currentTable} onCreate={onCreateTable} />
             <Loading visible={isLoading} />
         </div>

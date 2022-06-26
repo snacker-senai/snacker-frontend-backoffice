@@ -21,4 +21,14 @@ export class OrderService {
             throw error
         }
     }
+
+    static async getOrdersByTableId (tableId: number): Promise<OrderWithProducts[]> {
+        try {
+            const { data } = await Requester.get(`/Order/ByTable/${tableId}`)
+
+            return data
+        } catch (error) {
+            throw error
+        }
+    }
 }
