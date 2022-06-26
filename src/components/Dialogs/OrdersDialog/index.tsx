@@ -2,7 +2,7 @@
 import { Button } from "primereact/button"
 import { Dialog } from "primereact/dialog"
 import { useEffect, useState } from "react"
-import { Circles, TailSpin } from "react-loader-spinner"
+import { Circles } from "react-loader-spinner"
 import { OrderWithProducts } from "../../../services/order/Models"
 import { OrderService } from "../../../services/order/OrderService"
 import './styles.css'
@@ -89,7 +89,7 @@ export const OrdersDialog = ({ tableId, visible, onHide }: OrdersDialogProps) =>
           {!!orders.length && (
             <>
               <div className="content">
-                  {orders.map(order => renderBillProducts(order.productsWithQuantity, order.orderStatus))}
+                {orders.map(order => renderBillProducts(order.productsWithQuantity, order.orderStatus))}
               </div>
               <div className="totalPrice">
                 Total: R$ {(getTotalPrice())}
