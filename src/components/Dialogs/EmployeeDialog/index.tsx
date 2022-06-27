@@ -83,6 +83,7 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
             })
             showSuccess(`Usuário ${props.employee?.id ? "alterado" : "cadastrado"} com sucesso!`,
                 `Usuário ${form.name} ${props.employee?.id ? "alterado" : "cadastrado"} com sucesso no sistema!`)
+            formik.resetForm()
             props.onHide()
         } catch (error: any) {
             console.log(error)

@@ -75,6 +75,7 @@ export const ProductDialog = (props: PropsProductDialog) => {
             })
             showSuccess(`Produto ${props.product?.id ? "alterado" : "cadastrado"} com sucesso!`,
                 `Produto ${form.name} ${props.product?.id ? "alterado" : "cadastrado"} com sucesso no sistema!`)
+            formik.resetForm()
             props.onHide()
         } catch (error: any) {
             console.log(error)
