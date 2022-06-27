@@ -41,6 +41,7 @@ export const ProductsCategoryDialog = (props: ProspProductsCategroyDialog) => {
             })
             showSuccess(`Categoria ${props.productCategory?.id ? "alterado" : "cadastrado"} com sucesso!`,
                 `Categoria ${form.name} ${props.productCategory?.id ? "alterado" : "cadastrado"} com sucesso no sistema!`)
+            formik.resetForm()
             props.onHide()
         } catch (error: any) {
             console.log(error)

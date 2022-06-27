@@ -44,8 +44,9 @@ export const TablesDialog = (props: PropsTablesDialog) => {
             if (!props.table?.id) {
                 props.onCreate(createdTable)
             }
-            
+
             showSuccess('Mesa salva com sucesso!', 'Mesa salva com sucesso!')
+            formik.resetForm()
             props.onHide()
         } catch (error: any) {
             console.log(error)

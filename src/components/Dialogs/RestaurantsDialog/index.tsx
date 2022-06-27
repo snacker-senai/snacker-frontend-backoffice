@@ -143,6 +143,7 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
 
             showSuccess('Restaurante cadastrado com sucesso!',
                 `Restaurante ${form.name} cadastrado com sucesso no sistema!`)
+            formik.resetForm()
             onHide()
 
         } catch (error: any) {
@@ -180,6 +181,7 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
 
             showSuccess('Restaurante alterado com sucesso!',
                 `Restaurante ${form.name} alterado com sucesso no sistema!`)
+            formik.resetForm()
             onHide()
 
         } catch (error: any) {

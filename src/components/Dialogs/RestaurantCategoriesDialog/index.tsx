@@ -42,6 +42,7 @@ export const RestaurantCategoriesDialog = (props: PropsRestaurantCategoriesDialo
             })
             
             showSuccess('Categoria salva com sucesso!', 'Categoria salva com sucesso!')
+            formik.resetForm()
             props.onHide()
         } catch (error: any) {
             console.log(error)
