@@ -12,7 +12,7 @@ export class TableService {
         try {
             const { data } = await Requester.post<string>(`auth/GenerateClientToken/${tableId}`)
 
-            return `https://snacker-frontend-client.vercel.app/authorize/${data}`
+            return `https://snacker-frontend-client-five.vercel.app//authorize/${data}`
         } catch (error) {
             throw error
         }
