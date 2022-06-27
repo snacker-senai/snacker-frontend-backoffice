@@ -121,7 +121,7 @@ export const RestaurantCategories = () => {
           <Column
             style={{ width: '10rem' }}
             field=""
-            header="Editar/Status"
+            header="Editar"
             body={actionBodyTemplate}
             exportable={false}
           />
