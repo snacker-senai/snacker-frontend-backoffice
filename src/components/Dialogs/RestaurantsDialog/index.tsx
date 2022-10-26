@@ -68,6 +68,46 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
         loadingRestaurantCategory()
     }, [])
 
+    useEffect(() => {
+        if (restaurant) {
+            formik.setValues({
+                name: restaurant.name,
+                description: restaurant.description,
+                restaurantCategory: restaurant.restaurantCategory ? {
+                    name: restaurant.restaurantCategory.name,
+                    code: restaurant.restaurantCategoryId
+                } : getRestaurantCategoryDefault(),
+                active: restaurant.active,
+                cep: restaurant.address.cep,
+                street: restaurant.address.street,
+                district: restaurant.address.district,
+                city: restaurant.address.city,
+                number: restaurant.address.number,
+                country: restaurant.address.country,
+                state: restaurant.address.state
+            })
+        } else {
+            formik.setValues({
+                name: '',
+                description: '',
+                restaurantCategory: getRestaurantCategoryDefault(),
+                active: true,
+                cep: '',
+                street: '',
+                district: '',
+                city: '',
+                number: '',
+                country: '',
+                state: '',
+                namePerson: '',
+                birthDatePerson: undefined,
+                phone: '',
+                document: '',
+                email: '',
+            })
+        }
+    }, [restaurant])
+
     const nextTabPanel = (index: number) => {
         setTabPanelCurrent(index)
     }
