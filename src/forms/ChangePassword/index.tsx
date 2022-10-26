@@ -41,7 +41,7 @@ export const ChangePasswordForm = ({ emailProps, oldPasswordProps }: ChangePassw
 
                 AuthService.setTokenInLocal(token)
                 ChangePasswordService.removeLocalInfoUserIsChangePassword()
-                history.push('/home')
+                history.push('/dashboard')
             }
         } catch (error: any) {
             showError('Erro ao trocar a senha!', 'Erro: ' + error.message)

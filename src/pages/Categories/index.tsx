@@ -12,7 +12,6 @@ import { Button } from 'primereact/button'
 import { Toast } from 'primereact/toast'
 import { Toolbar } from 'primereact/toolbar';
 import { Loading } from '../../components/Loading';
-import { Fieldset } from 'primereact/fieldset';
 import { Tag } from 'primereact/tag';
 import { InputSwitch } from 'primereact/inputswitch';
 
@@ -124,11 +123,11 @@ export const Categories = () => {
             <Toast ref={toast} />
             <Loading visible={showSpinnerLoading} />
             <ProductsCategoryDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} productCategory={productCategoryCurrent} />
-            <Toolbar className="mb-4" left={leftToolbarTemplate}></Toolbar>
+            <Toolbar className="mb-4" right={leftToolbarTemplate}></Toolbar>
             <div className='panel'>
-                <Fieldset legend="Aviso" toggleable>
+                {/* <Fieldset legend="Aviso" toggleable>
                     <p>Ao inativar uma categoria, todos os produtos respectivos ao mesmo serão invativados juntos!.</p>
-                </Fieldset>
+                </Fieldset> */}
                 <DataTable
                     value={productsCategory}
                     stripedRows

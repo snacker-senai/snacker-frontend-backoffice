@@ -55,4 +55,8 @@ export class AuthService {
         const token = localStorage.getItem(KeyTokenLocalStorage)
         return token !== null
     }
+
+    static logoutUser = () => {
+        localStorage.removeItem(KeyTokenLocalStorage)
+    }
 }

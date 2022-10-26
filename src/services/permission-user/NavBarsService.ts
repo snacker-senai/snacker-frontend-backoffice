@@ -1,4 +1,4 @@
-import { NavItem } from "../../components/Navbar/Models";
+import { NavItem } from "../../components/NavbarV2/Models";
 
 export class NavBarsService {
     static getNavigationBarsByTypeUser(typeUser: string): NavItem[] {
@@ -7,45 +7,51 @@ export class NavBarsService {
                 return [
                     {
                         id: 0,
-                        icon: 'pi-chart-bar',
+                        icon: 'fa-solid fa-chart-pie',
                         label: 'Dashboards',
                         linkTo: '/dashboard'
                     },
                     {
                         id: 1,
-                        icon: 'pi-users',
+                        icon: 'fa-solid fa-user-tie',
                         label: 'Funcionários',
                         linkTo: '/employees'
                     },
                     {
                         id: 2,
-                        icon: 'pi-money-bill',
+                        icon: 'fa-solid fa-burger',
                         label: 'Produtos',
                         linkTo: '/products'
                     },
                     {
                         id: 3,
-                        icon: 'pi-clone',
+                        icon: 'fa-solid fa-folder-tree',
                         label: 'Categorias',
                         linkTo: '/categories'
                     },
                     {
                         id: 4,
-                        icon: 'pi-shopping-cart',
+                        icon: 'fa-solid fa-kitchen-set',
                         label: 'Preparo das comidas',
                         linkTo: '/foods'
                     },
                     {
                         id: 5,
-                        icon: 'pi-wallet',
+                        icon: 'fa-solid fa-truck-fast',
                         label: 'Entregas',
                         linkTo: '/deliveries'
                     },
                     {
                         id: 7,
-                        icon: 'pi-table',
+                        icon: 'fa-solid fa-table',
                         label: 'Mesas',
                         linkTo: '/mesas'
+                    },
+                    {
+                        id: 8,
+                        icon: 'fa-solid fa-users-gear',
+                        label: 'Grupo de Usuários',
+                        linkTo: '/grupo-usuarios'
                     }
                 ]
 
@@ -53,13 +59,13 @@ export class NavBarsService {
                 return [
                     {
                         id: 6,
-                        icon: 'pi-sitemap',
+                        icon: 'fa-solid fa-store',
                         label: 'Restaurantes',
                         linkTo: '/restaurants'
                     },
                     {
                         id: 8,
-                        icon: 'pi-table',
+                        icon: 'fa-solid fa-folder-tree',
                         label: 'Categorias de restaurante',
                         linkTo: '/categorias-restaurante'
                     },
@@ -68,7 +74,7 @@ export class NavBarsService {
                 return [
                     {
                         id: 4,
-                        icon: 'pi-shopping-cart',
+                        icon: 'fa-solid fa-kitchen-set',
                         label: 'Preparo das comidas',
                         linkTo: '/foods'
                     },
@@ -77,7 +83,7 @@ export class NavBarsService {
                 return [
                     {
                         id: 5,
-                        icon: 'pi-wallet',
+                        icon: 'fa-solid fa-truck-fast',
                         label: 'Entregas',
                         linkTo: '/deliveries'
                     },

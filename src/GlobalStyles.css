@@ -1,69 +1,77 @@
+:root {
+  --default-padding: 3.75rem 7rem 3.75rem;
+  --default-height: 100vh;
+  --default-width: 100%;
+  --default-overflow: auto;
+  --default-background-color: #fafafa; 
+}
+
 * {
-    margin: 0px;
-    border: 0px;
-    font-family: 'Roboto', sans-serif;
-    box-sizing: border-box;
+  margin: 0px;
+  border: 0px;
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
 }
 
 .principal-container {
-    font-size: 16px;
-    font-family: 'Open Sans';
-    --transition-speed: 600ms;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    max-height: 100vh;
-    height: 100%;
-    overflow: auto;
+  font-size: 16px;
+  font-family: 'Open Sans';
+  --transition-speed: 600ms;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  max-height: 100vh;
+  height: 100%;
+  overflow: auto;
 }
 
 .p-datatable .p-datatable-thead > tr > th {
-    background-color: var(--primary-600);
-    color: var(--primary-50);
+  background-color: var(--primary-600);
+  color: var(--primary-50);
 }
 
 .p-datatable .p-datatable-thead > tr > th:first-child {
-    border-top-left-radius: 8px;
+  border-top-left-radius: 8px;
 }
 
 .p-datatable .p-datatable-thead > tr > th:last-child {
-    border-top-right-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 .p-datatable .p-datatable-tbody > tr {
-    background-color: white;
+  background-color: white;
 }
 
 .p-datatable .p-datatable-tbody > .p-row-odd {
-    background-color: rgb(245, 245, 245) !important;
+  background-color: rgb(245, 245, 245) !important;
 }
 
 .p-datatable .p-datatable-tbody > tr > td {
-    border: 0px;
+  border: 0px;
 }
 
 /* Small screens */
 @media only screen and (max-width: 950px) {
-    .principal-container {
-        flex-direction: column;
-        width: 100%;
-        height: 100%;
-    }
+  .principal-container {
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 ::-webkit-scrollbar {
-    width: 5px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+  background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #999;
+  background: #999;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+  background: #555;
 }

@@ -58,7 +58,7 @@ export const Products = () => {
         )
     }
 
-    const header = <Toolbar className="p-mb-2 p-px-5" left={leftToolbar}></Toolbar>
+    const header = <Toolbar className="p-mb-2 p-px-5" right={leftToolbar}></Toolbar>
 
 
     const showError = (sumary, detail: string) => {

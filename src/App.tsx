@@ -5,7 +5,6 @@ import "./GlobalStyles.css"
 
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
-import { Home } from "./pages/Home";
 import { Employees } from "./pages/Employees";
 import { Products } from "./pages/Products";
 import { Categories } from "./pages/Categories";
@@ -26,7 +25,6 @@ export default function App() {
       <MenuProvider>
         <Router>
           <Switch>
-            <Route exact path="/home"><PrivateRoute menu={-1} children={<Home />} /></Route>
             <Route exact path="/dashboard"><PrivateRoute menu={0} children={<Dashboards />} /></Route>
             <Route exact path="/employees"><PrivateRoute menu={1} children={<Employees />} /></Route>
             <Route exact path="/products"><PrivateRoute menu={2} children={<Products />} /></Route>

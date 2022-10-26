@@ -27,7 +27,7 @@ export const LoginForm = () => {
 
     useEffect(() => {
         if (AuthService.userIsLogged())
-            history.push('/home')
+            history.push('/dashboard')
     }, [])
 
     const handleSubmit = async (data: FormLogin) => {
@@ -35,7 +35,7 @@ export const LoginForm = () => {
         try {
             await AuthService.login(data).then((statusOfLogin) => {
                 if (statusOfLogin === StatusOfLogin.SUCCESS) {
-                    history.push('/home')
+                    history.push('/dashboard')
                 } else if (statusOfLogin === StatusOfLogin.CHANGE_PASSWORD) {
                     ChangePasswordService.saveLocalUserChangePassword(data.email, data.password)
                     history.push('/change-password')

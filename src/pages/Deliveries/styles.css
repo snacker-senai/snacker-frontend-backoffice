@@ -1,25 +1,24 @@
 .container-deliveries {
-    width: 100%;
-    height: 100vh;
-    padding: 2rem 7rem 1rem;
-    background-color: var(--primary-100);
-    margin-left: 16rem;
-    overflow: auto;
+  width: var(--default-width);
+  background-color: var(--default-background-color);
+  overflow: var(--default-overflow);
+  padding: var(--default-padding);
+  height: var(--default-height);
 }
 
 .container-deliveries h1 {
-    color: rgb(42, 41, 44);
-    margin-bottom: 20px;
+  color: rgb(42, 41, 44);
+  margin-bottom: 20px;
 }
 
 @media only screen and (max-width: 950px) {
-    .container-deliveries {
-        margin: 0;
-        padding: 10px;
-        height: 100vh;
-    }
+  .container-deliveries {
+    margin: 0;
+    padding: 10px;
+    height: 100vh;
+  }
 
-    .container-deliveries .order-component {
-        width: 100%;
-    }
+  .container-deliveries .order-component {
+    width: 100%;
+  }
 }

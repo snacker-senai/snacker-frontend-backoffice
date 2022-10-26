@@ -1,83 +1,81 @@
 .container-dashboards {
-    width: 100%;
-    height: 100vh;
-    padding: 2rem 7rem 1rem;
-    background-color: var(--primary-100);
-    margin-left: 16rem;
-    overflow: auto;
+  width: var(--default-width);
+  padding-top: var(--default-top);
+  background-color: var(--default-background-color);
+  overflow: var(--default-overflow);
+  height: var(--default-height);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .container-dashboards .p-calendar {
-    width: 50%;
+  width: 50%;
 }
 
 .container-dashboards h1 {
-    margin-bottom: 20px;
+  text-align: center;
 }
 
 .dashboards-content {
-    margin-top: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  width: 80%;
 }
 
 .dashboards-content .p-chart {
-    width: 50%;
+  width: 45%;
 }
 
 @media only screen and (max-width: 950px) {
-    .container-dashboards {
-        margin: 0;
-        padding: 10px;
-        height: 100vh;
-    }
+  .container-dashboards {
+    padding: 10px;
+    height: 100vh;
+  }
 
-    .container-dashboards .p-calendar {
-        width: 50%;
-    }
+  .container-dashboards .p-calendar {
+    width: 50%;
+  }
 }
 
 @media only screen and (max-width: 750px) {
-    .container-dashboards {
-        margin: 0;
-        padding: 10px;
-        height: 100vh;
-    }
+  .container-dashboards {
+    padding: 10px;
+    height: 100vh;
+  }
 
-    .container-dashboards .p-calendar {
-        width: 80%;
-    }
+  .container-dashboards .p-calendar {
+    width: 80%;
+  }
 
-    .dashboards-content {
-        margin: 0;
-        width: 100%;
-    }
+  .dashboards-content {
+    margin: 0;
+    width: 100%;
+  }
 
-    .dashboards-content .p-chart {
-        width: 80%;
-    }
+  .dashboards-content .p-chart {
+    width: 80%;
+  }
 }
 
 @media only screen and (max-width: 500px) {
-    .container-dashboards {
-        margin: 0;
-        padding: 10px;
-        height: 100vh;
-    }
+  .container-dashboards {
+    padding: 10px;
+    height: 100vh;
+  }
 
-    .container-dashboards .p-calendar {
-        width: 100%;
-    }
+  .container-dashboards .p-calendar {
+    width: 100%;
+  }
 
-    .dashboards-content {
-        margin: 0;
-        width: 100%;
-    }
+  .dashboards-content {
+    margin: 0;
+    width: 100%;
+  }
 
-    .dashboards-content .p-chart {
-        width: 100%;
-    }
+  .dashboards-content .p-chart {
+    width: 100%;
+  }
 }
