@@ -2,10 +2,21 @@ import { FormLogin } from "./Model";
 
 import { Requester, Endpoints, KeyTokenLocalStorage } from '../configuration-proxy/ConfigurationProxy'
 
+export interface Theme {
+    color: string
+    secondaryColor: string
+    fontColor: string
+    secondaryFontColor: string
+    tertiaryFontColor: string
+    icon?: string
+}
+
 export interface UserAuth {
     role: string
     email: string
     restaurantId: number
+    themeId: number
+    theme: Theme
 }
 
 export interface AuthLogin {
@@ -45,6 +56,9 @@ export class AuthService {
 
         if (token !== null && token !== undefined) {
             const { data } = await Requester.get<UserAuth>(Endpoints.AUTH_CLAIMS)
+
+            localStorage.setItem('theme', JSON.stringify(data.theme))
+
             return data
         }
 

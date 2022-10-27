@@ -123,7 +123,7 @@ export const Categories = () => {
             <Toast ref={toast} />
             <Loading visible={showSpinnerLoading} />
             <ProductsCategoryDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} productCategory={productCategoryCurrent} />
-            <Toolbar className="mb-4" right={leftToolbarTemplate}></Toolbar>
+            <Toolbar className="mb-4" left="Categorias" right={leftToolbarTemplate}></Toolbar>
             <div className='panel'>
                 {/* <Fieldset legend="Aviso" toggleable>
                     <p>Ao inativar uma categoria, todos os produtos respectivos ao mesmo serão invativados juntos!.</p>

@@ -6,6 +6,7 @@ import { NavBarsService } from '../../services/permission-user/NavBarsService'
 import { Loading } from '../Loading'
 import { NavItem } from '../NavbarV2/Models'
 import { NavbarV2 } from '../NavbarV2'
+import { useTheme } from '../../context/ThemeContext'
 
 interface IPrivateRouteProps {
   children: JSX.Element
@@ -15,11 +16,13 @@ interface IPrivateRouteProps {
 export const PrivateRoute = ({ children, menu }: IPrivateRouteProps) => {
   const [navItens, setNavItens] = useState<NavItem[] | null>(null)
   const { setSelectedMenu } = useMenu()
+  const { setTheme } = useTheme()
 
   const getCurrentUser = async () => {
     const data = await AuthService.getInfoUserLogged()
 
     if (data) {
+      setTheme(data.theme)
       setNavItens(NavBarsService.getNavigationBarsByTypeUser(data.role))
     }
   }

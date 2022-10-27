@@ -1,6 +1,6 @@
 .container-dashboards {
   width: var(--default-width);
-  padding-top: var(--default-top);
+  padding: var(--default-padding);
   background-color: var(--default-background-color);
   overflow: var(--default-overflow);
   height: var(--default-height);

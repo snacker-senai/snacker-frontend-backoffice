@@ -1,5 +1,5 @@
 .navbar-items {
-  background-color: #525252;
+  background-color: var(--theme-color);
   box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.25);
   width: 100%;
   height: 50px;
@@ -16,10 +16,14 @@
   color: #ffff;
   justify-self: start;
   cursor: pointer;
+  font-size: 1.286rem;
+  color: var(--theme-fontColor);
 }
 
 .navbar-logo i {
   padding-right: 7px;
+  font-size: 1.286rem;
+  color: var(--theme-fontColor);
 }
 
 .fa-react {
@@ -36,7 +40,8 @@
   align-items: center;
   text-align: center;
   justify-content: flex-end;
-  background-color: #525252;
+  background-color: var(--theme-color);
+  color: var(--theme-fontColor);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   display: flex;
@@ -71,12 +76,10 @@
 }
 
 .nav-links:hover {
-  background-color: rgb(80, 80, 238);
+  background-color: var(--theme-secondaryColor);
+  color: var(--theme-secondaryFontColor);
   border-radius: 4px;
   transition: all 0.2s ease-in-out;
-  background: rgba(255, 255, 255, 0.25) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   border-radius: 0;
   transition: none;
 }
@@ -104,8 +107,12 @@
   display: block;
   position: absolute;
   right: 30px;
-  font-size: 1.5rem;
   cursor: pointer;
+}
+
+.menu-icons i {
+  font-size: 1.5rem;
+  color: var(--theme-fontColor);
 }
 
 .nav-menu.active {
