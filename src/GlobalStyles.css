@@ -5,7 +5,7 @@
   --default-height: 100vh;
   --default-width: 100%;
   --default-overflow: auto;
-  --default-background-color: #fafafa; 
+  --default-background-color: #fafafa;
 
   --primary-color: #fff;
 
@@ -112,4 +112,12 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.p-inputswitch-slider {
+  background-color: var(--theme-secondaryColor) !important;
+}
+
+.p-inputswitch-slider::before {
+  background-color: var(--theme-color) !important;
 }

@@ -1,16 +1,19 @@
 .spinner-loading {
-    width: 100vw;
-    height: 100vh;
-    background-color: rgb(255, 255, 255, 0.33);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(255, 255, 255, 0.33);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
 }
 
-.spinner-loading div svg {
-    fill: var(--primary-900);
+.loading-gif {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 20px;
+  width: 200x;
+  height: 200px;
 }
