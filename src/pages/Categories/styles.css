@@ -55,6 +55,23 @@
   margin-bottom: 10px;
 }
 
+.container-categories .tag {
+  font-weight: 500;
+  border-radius: 16px;
+  text-align: center;
+  padding: 4px;
+}
+
+.container-categories .active-tag {
+  background-color: rgb(219, 241, 220);
+  color: rgb(99, 133, 99);
+}
+
+.container-categories .inactive-tag {
+  background-color: rgb(250, 242, 195);
+  color: rgb(134, 125, 92);
+}
+
 @media only screen and (max-width: 950px) {
   .container-categories .panel .p-fieldset {
     margin: 10px;

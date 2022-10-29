@@ -17,7 +17,13 @@ export class EmployeesService {
         }
 
         await Requester
-            .post(Endpoints.EMPLOYEE_FROM_RESTAURANT, employee)
+            .post(Endpoints.EMPLOYEE_FROM_RESTAURANT, {
+                ...employee,
+                person: {
+                    ...employee.person,
+                    profileImage: `https://icotar.com/initials/${employee.person.name}.png`
+                }
+            })
             .catch((error) => {
                 console.log(error)
                 throw error

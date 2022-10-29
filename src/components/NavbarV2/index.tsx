@@ -18,10 +18,10 @@ export const NavbarV2 = ({ navigationBars }: Props) => {
     return (
         <nav className="navbar-items">
             <h1 className="navbar-logo">
-
                 <i className="fa fa-utensils"></i> Snacker
             </h1>
             <div className="menu-icons" onClick={handleClick}>
+                <span></span>
                 <i
                     className={clicked ? "fas fa-times" : "fas fa-bars"}
                 ></i>

@@ -88,7 +88,7 @@ const Employees = () => {
         );
     }
 
-    const leftToolbar = () => {
+    const rightToolbar = () => {
         return (
             <Button
                 label="Adicionar funcionário"
@@ -115,7 +115,7 @@ const Employees = () => {
             <Loading visible={showSpinnerLoading} />
             <Toast ref={toast} />
             <EmployeeDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} employee={employeeCurrent} />
-            <Toolbar className="mb-2" left={leftToolbar}></Toolbar>
+            <Toolbar className="mb-2" left="Funcionários" right={rightToolbar}></Toolbar>
             <div className='panel'>
                 <DataTable
                     value={employees}

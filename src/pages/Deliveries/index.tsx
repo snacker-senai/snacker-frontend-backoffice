@@ -1,4 +1,5 @@
 import { Toast } from 'primereact/toast'
+import { Toolbar } from 'primereact/toolbar'
 import React, { useEffect, useRef, useState } from 'react'
 import { Loading } from '../../components/Loading'
 import { OrderCard } from '../../components/OrderCard'
@@ -60,7 +61,7 @@ export const Deliveries = () => {
         <div className="container-deliveries">
             <Loading visible={showSpinnerLoading} />
             <Toast ref={toast} />
-            <h1>Listagem de entregas</h1>
+            <Toolbar left="Listagem de entregas" className="mb-4" style={{ background: 'var(--default-background-color)' }} />
             {orders.map(order => (
                 <OrderCard
                     key={order.id}

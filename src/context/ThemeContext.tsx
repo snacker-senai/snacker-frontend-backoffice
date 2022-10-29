@@ -14,7 +14,7 @@ interface IMenuContextProps {
 const defaultTheme = localStorage.getItem('theme') ? JSON.parse(localStorage.getItem('theme')!) : {
     color: '#525252',
     fontColor: '#fff',
-    secondaryColor: '#fff',
+    secondaryColor: '#525252',
     secondaryFontColor: '#fff',
     tertiaryFontColor: '#fff'
 }

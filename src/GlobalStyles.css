@@ -56,11 +56,13 @@
 }
 
 .p-datatable .p-datatable-tbody > tr > td {
-  padding: 12px;
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
+  font-size: 13px !important;
 }
 
-.p-datatable .p-datatable-tbody > .p-row-odd {
-  background-color: rgb(245, 245, 245) !important;
+.p-datatable .p-datatable-tbody .p-row-odd {
+  background-color: rgb(253, 253, 253) !important;
 }
 
 .p-datatable .p-datatable-tbody > tr > td {
@@ -81,6 +83,7 @@
 .p-toolbar {
   padding: 0;
   padding-top: 10px;
+  padding-bottom: 15px;
 }
 
 .p-toolbar-group-left {
