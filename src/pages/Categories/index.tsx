@@ -99,22 +99,12 @@ export const Categories = () => {
     const statusCategory = (row: ProductCategory) => {
         if (row.active) {
             return (
-                <Tag
-                    className="mr-2"
-                    icon="pi pi-check"
-                    severity="success"
-                    value="ATIVO"
-                />
+                <div className="tag active-tag">Ativo</div>
             )
         }
 
         return (
-            <Tag
-                className="mr-2"
-                icon="pi pi-exclamation-triangle"
-                severity="warning"
-                value="INATIVO"
-            />
+            <div className="tag inactive-tag">Inativo</div>
         )
     }
 
@@ -138,6 +128,7 @@ export const Categories = () => {
                     <Column
                         body={statusCategory}
                         header='Status'
+                        style={{ width: '100px' }}
                     />
                     <Column
                         field='name'

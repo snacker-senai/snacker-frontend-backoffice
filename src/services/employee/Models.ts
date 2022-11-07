@@ -20,6 +20,7 @@ export interface Person {
     phone: string
     document: string
     restaurantId?: number
+    profileImage?: string
 }
 
 export interface Restaurant {

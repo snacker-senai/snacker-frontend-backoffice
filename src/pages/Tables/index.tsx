@@ -70,7 +70,7 @@ export const Tables = () => {
         setTables([...tables, table])
     }
 
-    const leftToolbarTemplate = () => {
+    const rightToolbarTemplates = () => {
         return (
             <Button
                 label="Adicionar mesa"
@@ -101,7 +101,7 @@ export const Tables = () => {
 
     return (
         <div className="container-tables">
-            <Toolbar className="mb-4" left={leftToolbarTemplate}></Toolbar>
+            <Toolbar className="mb-4" left="Mesas" right={rightToolbarTemplates}></Toolbar>
             <DataTable
                 value={tables}
                 stripedRows

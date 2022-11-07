@@ -44,7 +44,7 @@ export const Products = () => {
         setVisibleDialog(true)
     }
 
-    const leftToolbar = () => {
+    const rightToolbar = () => {
         return (
             <Button
                 label="Adicionar produto"
@@ -58,7 +58,7 @@ export const Products = () => {
         )
     }
 
-    const header = <Toolbar className="p-mb-2 p-px-5" right={leftToolbar}></Toolbar>
+    const header = <Toolbar className="p-mb-2 p-px-5" left="Produtos" right={rightToolbar}></Toolbar>
 
 
     const showError = (sumary, detail: string) => {
