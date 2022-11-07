@@ -1,0 +1,125 @@
+import './styles.css'
+
+import Modal from 'react-modal'
+import { Button } from 'primereact/button'
+
+import { useMedia } from 'react-use-media';
+import { ProductsWithQuantity } from '../../services/order/Models';
+import { getPriceFormat } from '../../util/price';
+import { Dropdown } from 'primereact/dropdown';
+import { Table } from '../../services/table/Models';
+import { useMemo, useState } from 'react';
+
+
+interface Props {
+    isVisible: boolean
+    tables: Table[]
+    products: ProductsWithQuantity[]
+    onClickBack: () => void
+    onClickSubmit: (tableId: number) => void
+    onClickExclued: (product: ProductsWithQuantity) => void
+}
+
+const Cart = ({ tables, onClickSubmit, isVisible, products, onClickBack, onClickExclued }: Props) => {
+    const [tableSelected, setTableSelected] = useState<number>(tables.length > 0 ? tables[0].id : 0)
+    const isTablet = useMedia('(max-width: 1015px)')
+
+    const customStyles = {
+        overlay: {
+            background: "rgba(0, 0, 0, 0.25)",
+            zIndex: 100000
+        },
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            maxWidth: '100vw',
+            maxHeight: isTablet ? '100%' : '90%',
+            zIndex: 1000,
+            background: 'rgb(246, 246, 246)',
+            width: isTablet ? '100%' : '60%',
+            borderRadius: '3px',
+            height: '100%',
+        }
+    }
+
+    const optionsTables = useMemo(() => {
+        let optionsTables: any[] = []
+
+        tables.filter((table: Table) => (table.active)).forEach((table: Table) => {
+            optionsTables.push({
+                'name': table.number,
+                'code': table.id,
+            })
+        })
+
+        return optionsTables
+    }, [tables])
+
+    console.log(optionsTables)
+
+    const isEmpty = useMemo(() => products.length === 0, [products])
+
+    return (
+        <Modal ariaHideApp={false} style={customStyles} isOpen={isVisible}>
+            <div className="cart-header">
+                <i className="fa-solid fa-left-long" onClick={onClickBack}></i>
+                <h1 className='cart-header-title'>Pedidos</h1>
+                <hr />
+            </div>
+
+            {!isEmpty && (
+                <div className="cart-table">
+                    <label htmlFor="table">Número da mesa</label>
+                    <Dropdown
+                        value={optionsTables[0]}
+                        options={optionsTables}
+                        onChange={(e) => setTableSelected(e.target.value)}
+                        name="table"
+                        className='cart-combobox'
+                        optionLabel="name"
+                    />
+                </div>
+            )}
+            <div className="cart-items">
+                {products.length > 0 ? (
+                    <>
+                        {products?.map((product: ProductsWithQuantity, index: number) => (
+                            <div key={`product-${index}`} className={`cart-item ${index === 0 ? 'cart-item-margin' : ''}`}>
+                                <div className="cart-information">
+                                    <p className='cart-title'>{product.productName}</p>
+                                    <p className='cart-description'>{product.details}</p>
+                                </div>
+
+                                <div className="cart-footer">
+                                    <div className="cart-quantity">
+                                        <p>{product.quantity}</p>
+                                    </div>
+
+                                    <div className="cart-price">{getPriceFormat(product.price * product.quantity)}</div>
+                                    <i className="fa-solid fa-trash" onClick={() => onClickExclued(product)}></i>
+                                </div>
+
+                            </div>
+                        ))}
+                    </>
+                ) :
+                    (
+                        <h2 className='title-empty'>Nenhum produto selecionado!</h2>
+                    )
+                }
+                {!isEmpty && <Button disabled={!!tableSelected} type='submit' label='Fazer Pedido' onClick={() => onClickSubmit(tableSelected)}></Button>}
+            </div>
+        </Modal >
+    )
+
+}
+
+
+
+
+
+export default Cart

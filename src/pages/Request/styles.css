@@ -1,0 +1,160 @@
+.request-container {
+    width: var(--default-width);
+    background-color: var(--default-background-color);
+    overflow: var(--default-overflow);
+    padding: var(--default-padding);
+    height: var(--default-height);
+}
+
+.request-container .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.request-container .header svg {
+    font-size: 10px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.request-container .header .header-icon {
+    width: 20px;
+    height: 25px;
+    color: var(--theme-fontColor)
+}
+
+.request-container .header .header-cart {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: var(--theme-secondaryColor);
+    border-radius: 20px;
+    padding: 5px;
+    width: 120px;
+}
+
+.request-container .header .header-cart p {
+    font-size: small;
+    color: var(--theme-fontColor)
+}
+
+.request-container .header .input-container {
+    width: 100%;
+    position: relative;
+    z-index: 0;
+    margin-right: 30px;
+}
+
+.request-container .header .input-container input {
+    background-color: rgb(255, 255, 255);
+    padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 66px;
+    width: 100%;
+    padding-right: 48px;
+    outline: none;
+    box-shadow: 3px 3px 15px -8px rgba(0, 0, 0, 0.22);
+}
+
+.request-container .header .input-container svg {
+    position: absolute;
+    font-size: 23px;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgb(80, 80, 80);
+}
+
+
+.request-container .content {
+    padding: 1rem;
+    margin-top: 10px;
+    flex-grow: 1;
+}
+
+.request-container .content .group-products {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.request-container .content .product {
+    background-color: white;
+    border: 1px solid rgb(236, 236, 236);
+    border-radius: 4px;
+    padding: 14px;
+    width: 45%;
+    height: 175px;
+    margin-bottom: 14px;
+    margin-top: 14px;
+    display: flex;
+    cursor: pointer;
+    transition: all 0.25s ease 0s;
+    box-shadow: rgb(0 0 0 / 12%) 3px 3px 15px -8px;
+    margin: 10px 10px;
+}
+
+.request-container .content .product:hover {
+    border-color: rgb(195, 195, 195);
+}
+
+.request-container .content .product .content-left {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    padding-right: 8px;
+}
+
+.request-container .content .product .content-left .title {
+    font-size: 1.25em;
+}
+
+.request-container .content .product .content-left .description {
+    font-size: 0.9em;
+    color: rgb(100, 100, 100);
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-overflow: ellipsis;
+}
+
+.request-container .content .product .content-right {
+    width: 30%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.request-container .content .product .content-right img {
+    max-width: 95%;
+    max-height: 95%;
+    border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+    .request-container {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .request-container .content .product {
+        width: 100%;
+    }
+
+    .request-container .header,
+    .request-container .header .input-container {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+.request-container .header svg:hover {
+    opacity: 0.5;
+}
