@@ -3,7 +3,7 @@ import { NavItem } from '../../components/NavbarV2/Models'
 export class NavBarsService {
   static getNavigationBarsByTypeUser(typeUser: string): NavItem[] {
     switch (typeUser) {
-      case 'Gerente':
+      case 'Gestão':
         return [
           {
             id: 0,
@@ -76,7 +76,7 @@ export class NavBarsService {
             linkTo: '/categorias-restaurante',
           },
         ]
-      case 'Cozinheiro':
+      case 'Preparo':
         return [
           {
             id: 4,
@@ -85,7 +85,7 @@ export class NavBarsService {
             linkTo: '/foods',
           },
         ]
-      case 'Garçom':
+      case 'Entrega':
         return [
           {
             id: 5,

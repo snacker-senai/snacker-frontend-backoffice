@@ -45,7 +45,7 @@ export const Tables = () => {
 
         const user = await AuthService.getInfoUserLogged()
 
-        if (user?.role === 'Garçom') {
+        if (user?.role === 'Entrega') {
             setIsWaiter(true)
         }
 
