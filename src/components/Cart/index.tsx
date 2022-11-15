@@ -21,9 +21,8 @@ interface Props {
 }
 
 const Cart = ({ tables, onClickSubmit, isVisible, products, onClickBack, onClickExclued }: Props) => {
-    const [tableSelected, setTableSelected] = useState<number>(tables.length > 0 ? tables[0].id : 0)
+    const [tableSelected, setTableSelected] = useState<number>(0)
     const isTablet = useMedia('(max-width: 1015px)')
-
     const customStyles = {
         overlay: {
             background: "rgba(0, 0, 0, 0.25)",
@@ -49,6 +48,9 @@ const Cart = ({ tables, onClickSubmit, isVisible, products, onClickBack, onClick
     const optionsTables = useMemo(() => {
         let optionsTables: any[] = []
 
+        if (tables.length > 0)
+            setTableSelected(tables[0].id)
+
         tables.filter((table: Table) => (table.active)).forEach((table: Table) => {
             optionsTables.push({
                 'name': table.number,
@@ -58,8 +60,6 @@ const Cart = ({ tables, onClickSubmit, isVisible, products, onClickBack, onClick
 
         return optionsTables
     }, [tables])
-
-    console.log(optionsTables)
 
     const isEmpty = useMemo(() => products.length === 0, [products])
 
@@ -111,7 +111,7 @@ const Cart = ({ tables, onClickSubmit, isVisible, products, onClickBack, onClick
                         <h2 className='title-empty'>Nenhum produto selecionado!</h2>
                     )
                 }
-                {!isEmpty && <Button disabled={!!tableSelected} type='submit' label='Fazer Pedido' onClick={() => onClickSubmit(tableSelected)}></Button>}
+                {!isEmpty && <Button disabled={!tableSelected} type='submit' label='Fazer Pedido' onClick={() => onClickSubmit(tableSelected)}></Button>}
             </div>
         </Modal >
     )
