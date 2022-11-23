@@ -9,6 +9,12 @@
   flex-direction: column;
 }
 
+.container-dashboards .cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+}
+
 .container-dashboards .p-calendar {
   width: 50%;
 }
@@ -25,24 +31,41 @@
   width: 80%;
 }
 
+.container-dashboards .dashboards {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  width: 100%;
+}
+
+.container-dashboards .dashboard-c {
+  width: 95%;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .dashboards-content .p-chart {
-  width: 45%;
+  width: 100%;
 }
 
 @media only screen and (max-width: 950px) {
   .container-dashboards {
-    padding: 10px;
+    /* padding: 10px; */
     height: 100vh;
   }
 
   .container-dashboards .p-calendar {
     width: 50%;
   }
+
+  .container-dashboards .cards {
+    grid-template-columns: 50% 50%;
+  }
 }
 
 @media only screen and (max-width: 750px) {
   .container-dashboards {
-    padding: 10px;
+    /* padding: 10px; */
     height: 100vh;
   }
 
@@ -62,7 +85,7 @@
 
 @media only screen and (max-width: 500px) {
   .container-dashboards {
-    padding: 10px;
+    /* padding: 10px; */
     height: 100vh;
   }
 
