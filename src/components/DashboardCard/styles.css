@@ -1,0 +1,26 @@
+.dashboardcard {
+    background-color: blueviolet;
+    color: white;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-radius: 5px;
+    width: 95%;
+    height: 92%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    box-shadow: rgba(0, 0, 0, 0.10) 0px 3px 8px;
+}
+
+.dashboardcard-title {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.dashboardcard-value {
+    font-weight: 600;
+    font-size: 1.25rem;
+}

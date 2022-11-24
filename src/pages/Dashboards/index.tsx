@@ -8,6 +8,11 @@ import { ProductsFilterDashboard } from '../../services/product/Models';
 import { ProductService } from '../../services/product/ProductService';
 import { Loading } from '../../components/Loading';
 import { Toast } from 'primereact/toast';
+import { DashboardCard } from '../../components/DashboardCard';
+import { ImCancelCircle } from 'react-icons/im'
+import { MdOutlineDoneOutline } from 'react-icons/md'
+import { FiInbox } from 'react-icons/fi'
+
 
 interface informationCharData {
     labels: string[]
@@ -19,29 +24,19 @@ interface informationCharData {
 }
 
 const backgroundColorsDashboard = [
-    "#f078f0",
-    "#0000CD",
-    "#778899",
-    "#00CED1",
-    "#00FF7F",
-    "#00FF00",
-    "#7B68EE",
-    "#8B008B",
+    "#307C63",
+    "#355679",
+    "#BB8D48",
+    "#BB6F48",
+    "#7FB5A3",
+    "#8199B2",
+    "#FFE0B2",
+    "#FFCCB2",
     "#B0E0E6",
-    "#F0E68C",
-]
-
-const hoverBackgroundColorsDashboard = [
-    "#f078f0",
-    "#0000CD",
-    "#778899",
-    "#00CED1",
-    "#00FF7F",
-    "#00FF00",
-    "#7B68EE",
-    "#8B008B",
-    "#B0E0E6",
-    "#F0E68C",
+    "#156047",
+    "#1A3B5E",
+    "#90631F",
+    "#90451F"
 ]
 
 export const Dashboards = () => {
@@ -97,27 +92,17 @@ export const Dashboards = () => {
         return backgroundColorsFilter
     }
 
-    const filterHouverBackgroundColors = () => {
-        let houveBackgroundColorsFilter: string[] = []
-        for (let i = 0; i < productsDashboard.length; i++) {
-            houveBackgroundColorsFilter.push(hoverBackgroundColorsDashboard[i])
-        }
-
-        return houveBackgroundColorsFilter
-    }
-
     const buildDashboard = () => {
         const labels = getLabels()
         const data = getData()
         const backgroundColors = filtersBackgroundColors()
-        const houverbackgroundColors = filterHouverBackgroundColors()
 
         setInformationCharData({
             labels: labels,
             datasets: [{
                 backgroundColor: backgroundColors,
                 data: data,
-                hoverBackgroundColor: houverbackgroundColors
+                hoverBackgroundColor: backgroundColorsDashboard
             }]
         })
     }
@@ -158,7 +143,6 @@ export const Dashboards = () => {
         <div className="container-dashboards">
             <Loading visible={showSpinnerLoading} />
             <Toast ref={toast} />
-            <h1>Dashboards - Produtos vendidos</h1>
             <Calendar
                 id="range"
                 value={rangeFilters}
@@ -175,8 +159,41 @@ export const Dashboards = () => {
                 showIcon
             />
             <br />
-            <div className="dashboards-content">
-                <Chart type="doughnut" data={informationCharData} options={lightOptions} />
+            <div className="cards">
+                <DashboardCard 
+                    title="Pedidos cancelados" 
+                    value="56" 
+                    icon={<ImCancelCircle />}
+                    backgroundColor="#618044"
+                />
+                <DashboardCard 
+                    title="Pedidos concluídos" 
+                    value="432" 
+                    icon={<MdOutlineDoneOutline />}
+                    backgroundColor="#49683b"
+                />
+                <DashboardCard 
+                    title="Pedidos cancelados (%)" 
+                    value="12%" 
+                    icon={<ImCancelCircle />}
+                    backgroundColor="#34623f"
+                />
+                <DashboardCard 
+                    title="Quantidade de produtos" 
+                    value="89" 
+                    icon={<FiInbox />}
+                    backgroundColor="#27412a"
+                />
+            </div>
+            <div className="dashboards">
+                <div className="dashboard-c">
+                    <h1 style={{ marginTop: '50px' }}>Produtos mais vendidos</h1>
+                    <Chart type="pie" data={informationCharData} options={lightOptions} />
+                </div>
+                <div className="dashboard-c">
+                    <h1 style={{ marginTop: '50px' }}>Categorias mais vendidas</h1>
+                    <Chart type="pie" data={informationCharData} options={lightOptions} />
+                </div>
             </div>
         </div >
     )
