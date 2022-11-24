@@ -3,6 +3,10 @@
     background-color: rgb(246, 246, 246);
     border-radius: 20px;
     cursor: pointer;
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 10px;
 }
 
 .modal-requester-product .product-header i:hover {

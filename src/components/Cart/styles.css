@@ -7,9 +7,14 @@
     align-items: center;
     border-bottom: var(--border-bottom);
     padding-bottom: 10px;
+    width: 100%;
+    position: relative;
 }
 
 .cart-header i {
+    position: fixed;
+    right: 0;
+    padding-right: 20px;
     font-size: 20px;
     cursor: pointer;
 }

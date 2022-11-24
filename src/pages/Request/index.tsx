@@ -17,6 +17,7 @@ import { Table } from '../../services/table/Models'
 import { TableService } from '../../services/table/TableService'
 
 const Request = () => {
+    const [isFilteringProducts, setIsFilteringProducts] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [requesterProductsSelected, setRequesterProductsSelected] = useState<ProductsWithQuantity[]>([])
     const [tables, setTables] = useState<Table[]>([])
@@ -24,6 +25,7 @@ const Request = () => {
     const [visibleCart, setVisibleCart] = useState(false)
     const [visibleModalProduct, setVisibleModalProduct] = useState(false)
     const [categoryWithPrducts, setCategoryWithPrducts] = useState<CategoryWithProducts[]>([])
+    const [categoryWithProductsFiltered, setCategoryWithProductsFiltered] = useState<CategoryWithProducts[]>([])
     const toast = useRef<any>(null);
 
     useEffect(() => {
@@ -34,6 +36,13 @@ const Request = () => {
 
         setIsLoading(false)
     }, [])
+
+    const productsFiltered = useMemo(() =>
+        (isFilteringProducts && categoryWithProductsFiltered) || categoryWithPrducts,
+        [isFilteringProducts, categoryWithPrducts, categoryWithProductsFiltered])
+
+    const productsAll = useMemo(() =>
+        productsFiltered?.filter((category) => category.products.length > 0), [productsFiltered])
 
 
     const getPriceBuy = useMemo(() => {
@@ -94,6 +103,24 @@ const Request = () => {
         showSuccess('Excluído do carrinho com sucesso!', '')
     }
 
+    const filterProducts = (text: string) => {
+        if (!text) {
+            setIsFilteringProducts(false)
+            setCategoryWithProductsFiltered([])
+        } else {
+            setIsFilteringProducts(true)
+
+            const regex = new RegExp(text.toLowerCase())
+            const categoriesMapped = categoryWithPrducts.map((category) => ({
+                id: category.id,
+                name: category.name,
+                products: category.products?.filter((product) => regex.test(product.name.toLowerCase()))
+            }))
+
+            setCategoryWithProductsFiltered(categoriesMapped)
+        }
+    }
+
     return (
         <>
             <Toast ref={toast} />
@@ -103,22 +130,25 @@ const Request = () => {
             <div className="request-container">
                 <div className="header">
                     <div className="input-container">
-                        <input type="text" placeholder="Busque pelo produto" onChange={(e) => console.log(e.target.value)} />
+                        <input type="text" placeholder="Busque pelo produto" onChange={(e) => filterProducts(e.target.value)} />
                         <FiSearch />
                     </div>
-                    <div className="header-cart">
-                        <BsCartCheck className='header-icon' onClick={() => setVisibleCart(true)} />
+                    <div className="header-cart" onClick={() => setVisibleCart(true)}>
+                        <BsCartCheck className='header-icon' />
                         <p>{getPriceFormat(getPriceBuy)}</p>
                     </div>
                 </div>
 
                 <div className="content">
-                    {categoryWithPrducts?.map((category: CategoryWithProducts, index: number) => (
+                    {productsAll?.map((category: CategoryWithProducts, index: number) => (
                         <div key={`category-id-${category?.id}-index-${index + 1}`}>
                             <h2>{category?.name}</h2>
                             <div className='group-products' >
-                                {category?.products?.map((product) => (
-                                    <div onClick={() => onClickProduct(product)} className="product" key={`products-id-${product?.id}-${index}`}>
+                                {category?.products?.map((product, index) => (
+
+                                    <div onClick={() => onClickProduct(product)}
+                                        className='product'
+                                        key={`products-id-${product?.id}-${index}`}>
                                         <div className="content-left">
                                             <p className='title'>{product.name}</p>
                                             <p className="description">{product.description}</p>

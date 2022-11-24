@@ -65,7 +65,7 @@ const ModalRequesterProduct = ({ visible, product, onClickBuy, onClose }: Props)
         <Modal ariaHideApp={false} style={customStyles} isOpen={visible}>
             <div className="modal-requester-product">
                 <div className="product-header">
-                    <i onClick={onBack} className="fa-solid fa-left-long"></i>
+                    <i onClick={onBack} className="fa-solid fa-xmark"></i>
                 </div>
 
                 <div className="requester-product-content">

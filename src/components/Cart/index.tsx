@@ -66,8 +66,8 @@ const Cart = ({ tables, onClickSubmit, isVisible, products, onClickBack, onClick
     return (
         <Modal ariaHideApp={false} style={customStyles} isOpen={isVisible}>
             <div className="cart-header">
-                <i className="fa-solid fa-left-long" onClick={onClickBack}></i>
                 <h1 className='cart-header-title'>Pedidos</h1>
+                <i className="fa-solid fa-xmark" onClick={onClickBack}></i>
                 <hr />
             </div>
 

@@ -33,6 +33,7 @@
     border-radius: 20px;
     padding: 5px;
     width: 120px;
+    cursor: pointer;
 }
 
 .request-container .header .header-cart p {
@@ -80,6 +81,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    gap: 10px;
 }
 
 .request-container .content .product {
@@ -95,7 +97,7 @@
     cursor: pointer;
     transition: all 0.25s ease 0s;
     box-shadow: rgb(0 0 0 / 12%) 3px 3px 15px -8px;
-    margin: 10px 10px;
+    margin: 10px 0;
 }
 
 .request-container .content .product:hover {
@@ -155,6 +157,7 @@
     }
 }
 
-.request-container .header svg:hover {
+.request-container .header .input-container svg:hover,
+.request-container .header .header-cart:hover {
     opacity: 0.5;
 }
