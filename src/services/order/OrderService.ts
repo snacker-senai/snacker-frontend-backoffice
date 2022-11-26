@@ -40,6 +40,16 @@ export class OrderService {
     }
   }
 
+  static async setOrderItemStatusByOrderId(orderHasProductId: number, statusId: number) {
+    try {
+      const { data } = await Requester.put(`/order/changeItemStatus/${orderHasProductId}/${statusId}`,)
+
+      return data
+    } catch (error) {
+      throw error
+    }
+  }
+
   static async getOrdersByTableId(
     tableId: number,
   ): Promise<OrderWithProducts[]> {

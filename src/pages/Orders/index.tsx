@@ -32,6 +32,20 @@ export const Orders = () => {
         setShowSpinnerLoading(false)
     }
 
+    const finishSingleOrder = async (orderId: number) => {
+        setShowSpinnerLoading(true)
+
+        try {
+            await OrderService.setOrderItemStatusByOrderId(orderId, 2)
+            const filteredOrders = orders.filter(order => order.id !== orderId)
+            setOrders(filteredOrders)
+            showSuccess('Atualizado pedido com sucesso', '')
+        } catch (error: any) {
+            showError('Erro ao atualizar pedido!', 'Erro: ' + error.message)
+        }
+        setShowSpinnerLoading(false)
+    }
+
     useEffect(() => {
         const getOrdersOnInit = async () => {
             setShowSpinnerLoading(true)
@@ -63,8 +77,10 @@ export const Orders = () => {
             <Toolbar left="Listagem de pedidos" className="mb-4" style={{ background: 'var(--default-background-color)' }} />
             {orders.map(order => (
                 <OrderCard
-                    buttonLabel="Finalizar"
+                    buttonLabel="Finalizar tudo"
+                    altButtonLabel="Finalizar"
                     handleButtonClick={() => finishOrder(order.id)}
+                    handleAltButtonClick={finishSingleOrder}
                     table={order.table}
                     time={order.createdAt}
                     products={order.productsWithQuantity}

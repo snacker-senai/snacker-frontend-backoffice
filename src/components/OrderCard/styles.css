@@ -35,7 +35,17 @@
 .order-component .item-info {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    gap: 6px;
+    align-items: flex-start;
+    padding-top: 2px;
+}
+
+.order-component .item-info .p-button {
+    padding: 7px !important;
+}
+
+.order-component .item-info .p-button span {
+    font-size: 12px !important;
 }
 
 .order-component .order-item .item-name {
@@ -46,13 +56,13 @@
 
 .order-component .order-item .item-quantity {
     font-size: 0.86em;
-    background-color: rgb(177, 177, 208);
-    color: rgb(61, 63, 96);
+    background-color: var(--theme-color);
+    color: var(--theme-fontColor);
     font-weight: bolder;
     border-radius: 4px;
-    padding: 4px;
-    padding-left: 7px;
-    padding-right: 7px;
+    padding: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 .order-component .order-item .item-observation {

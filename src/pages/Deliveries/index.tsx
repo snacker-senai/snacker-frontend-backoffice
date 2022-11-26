@@ -33,6 +33,21 @@ export const Deliveries = () => {
         setShowSpinnerLoading(false)
     }
 
+    const deliverSingleOrder = async (orderId: number) => {
+        setShowSpinnerLoading(true)
+
+        try {
+            await OrderService.setOrderItemStatusByOrderId(orderId, 3)
+            const filteredOrders = orders.filter(order => order.productsWithQuantity.filter(product => product.orderHasProductId !== orderId))
+            setOrders(filteredOrders)
+            showSuccess('Atualizado a entrega com sucesso', '')
+        } catch (error: any) {
+            showError('Erro ao atualizar entrega!', 'Erro: ' + error.message)
+        }
+
+        setShowSpinnerLoading(false)
+    }
+
     useEffect(() => {
         const getOrdersOnInit = async () => {
             setShowSpinnerLoading(true)
@@ -65,8 +80,10 @@ export const Deliveries = () => {
             {orders.map(order => (
                 <OrderCard
                     key={order.id}
-                    buttonLabel="Entregar"
+                    buttonLabel="Entregar tudo"
+                    altButtonLabel="Entregar"
                     handleButtonClick={() => deliverOrder(order.id)}
+                    handleAltButtonClick={deliverSingleOrder}
                     table={order.table}
                     time={order.createdAt}
                     products={order.productsWithQuantity}
