@@ -48,5 +48,5 @@ export const Endpoints = {
   CHANGE_PASSWORD: '/auth/changepassword',
   CATEGORY_WITH_PRODUCTS: '/ProductCategory/WithProducts',
   ORDER: '/Order',
-  THEME: '/Theme'
+  THEME: '/Theme/FromRestaurant'
 }

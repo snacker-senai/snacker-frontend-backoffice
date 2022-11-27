@@ -8,10 +8,15 @@ export class ThemesService {
     try {
       const infoUserLogged = await AuthService.getInfoUserLogged().finally()
 
-      await Requester.post<Themes>(Endpoints.THEME, {
-        ...colors,
+      await Requester.put<Themes>(Endpoints.THEME, {
+        color: colors.primaryBackgroundColor,
+        secondaryColor: colors.secondaryBackgroundColor,
+        fontColor: colors.primaryFontColor,
+        secondaryFontColor: colors.secondaryFontColor,
+        tertiaryFontColor: colors.thirdFontColor,
         icon,
         restaurantId: infoUserLogged?.restaurantId,
+        id: infoUserLogged?.themeId,
       })
     } catch (error) {
       throw error
