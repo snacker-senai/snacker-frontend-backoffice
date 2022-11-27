@@ -37,7 +37,12 @@ export const Orders = () => {
 
         try {
             await OrderService.setOrderItemStatusByOrderId(orderId, 2)
-            const filteredOrders = orders.filter(order => order.id !== orderId)
+            
+            const filteredOrders = orders.map(order => ({
+                ...order,
+                productsWithQuantity: order.productsWithQuantity.filter(product => product.orderHasProductId !== orderId)
+            }))
+
             setOrders(filteredOrders)
             showSuccess('Atualizado pedido com sucesso', '')
         } catch (error: any) {
