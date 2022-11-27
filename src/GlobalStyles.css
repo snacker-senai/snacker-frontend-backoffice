@@ -14,7 +14,7 @@
   --theme-fontColor: #fff;
   --theme-secondaryColor: #555555;
   --theme-secondaryFontColor: #fff;
-  /* --theme-tertiaryFontColor: string; */
+  --theme-tertiaryFontColor: rgb(202, 210, 197);
 }
 
 * {

@@ -20,6 +20,7 @@ import { RestaurantCategories } from "./pages/RestaurantCategories";
 import { Dashboards } from "./pages/Dashboards";
 import { ThemeProvider } from "./context/ThemeContext";
 import Request from "./pages/Request";
+import Themes from "./pages/Themes";
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
               <Route exact path="/mesas"><PrivateRoute menu={7} children={<Tables />} /></Route>
               <Route exact path="/categorias-restaurante"><PrivateRoute menu={8} children={<RestaurantCategories />} /></Route>
               <Route exact path="/pedidos"><PrivateRoute menu={10} children={<Request />} /></Route>
+              <Route exact path="/tema"><PrivateRoute menu={11} children={<Themes />} /></Route>
               <Route exact path="/login" component={Login} />
               <Route exact path="/change-password" component={ChangePassword} />
               <Route path="/"><Redirect to="/login" /></Route>

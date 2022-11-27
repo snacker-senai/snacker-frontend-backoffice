@@ -59,6 +59,12 @@ export class NavBarsService {
             label: 'Grupo de Usuários',
             linkTo: '/grupo-usuarios',
           },
+          {
+            id: 11,
+            icon: 'fa-solid fa-palette',
+            label: 'Tema',
+            linkTo: '/tema'
+          }
         ]
 
       case 'Admin':

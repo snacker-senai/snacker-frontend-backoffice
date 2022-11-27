@@ -3,7 +3,7 @@ import { Theme } from '../services/auth/AuthService'
 
 
 interface IAuthProviderProps {
-    children: React.ReactNode
+  children: React.ReactNode
 }
 
 interface IMenuContextProps {
@@ -12,11 +12,11 @@ interface IMenuContextProps {
 }
 
 const defaultTheme = localStorage.getItem('theme') ? JSON.parse(localStorage.getItem('theme')!) : {
-    color: '#525252',
-    fontColor: '#fff',
-    secondaryColor: '#525252',
-    secondaryFontColor: '#fff',
-    tertiaryFontColor: '#fff'
+  color: '#525252',
+  fontColor: '#fff',
+  secondaryColor: '#525252',
+  secondaryFontColor: '#fff',
+  tertiaryFontColor: '#fff'
 }
 
 export const ThemeContext = createContext({} as IMenuContextProps)
@@ -29,12 +29,13 @@ export const ThemeProvider = ({ children }: IAuthProviderProps) => {
     document.documentElement.style.setProperty('--theme-fontColor', theme.fontColor)
     document.documentElement.style.setProperty('--theme-secondaryColor', theme.secondaryColor)
     document.documentElement.style.setProperty('--theme-secondaryFontColor', theme.secondaryFontColor)
+    document.documentElement.style.setProperty('--theme-tertiaryFontColor', theme.tertiaryFontColor)
   }, [theme])
 
   return (
     <ThemeContext.Provider value={{
-        theme,
-        setTheme
+      theme,
+      setTheme
     }}>
       {children}
     </ThemeContext.Provider>
