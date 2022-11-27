@@ -8,6 +8,7 @@ export interface ProductSet {
     image: string
     active: boolean
     productCategoryId: number
+    preReady: boolean
 }
 
 export interface Product {
@@ -20,6 +21,7 @@ export interface Product {
     restaurant: Restaurant
     restaurantId: number
     active: boolean
+    preReady: boolean
     id?: number
 }
 

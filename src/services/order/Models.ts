@@ -15,4 +15,5 @@ export interface ProductsWithQuantity {
   quantity: number
   price: number
   details?: string
+  orderHasProductId?: number
 }

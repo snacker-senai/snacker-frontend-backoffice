@@ -11,9 +11,12 @@ interface IOrderCardProps {
         productName: string
         quantity: number
         details?: string
+        orderHasProductId?: number
     }[]
     buttonLabel: string
+    altButtonLabel: string
     handleButtonClick(): void
+    handleAltButtonClick(value: number): void
 }
 
 export const OrderCard = (props: IOrderCardProps) => {
@@ -26,8 +29,15 @@ export const OrderCard = (props: IOrderCardProps) => {
             {props.products.map((product) => (
                 <div className="order-item">
                     <div className="item-info">
-                        <div className="item-name">{product.productName}</div>
-                        <div className="item-quantity">{product.quantity}</div>
+                        <div className="p-d-flex p-ai-center" style={{ gap: '8px' }}>
+                            <div className="item-quantity">{product.quantity}</div>
+                            <div className="item-name">{product.productName}</div>
+                        </div>
+                        <Button
+                            label={props.altButtonLabel} 
+                            onClick={() => props.handleAltButtonClick(product.orderHasProductId!)} 
+                            icon="pi pi-check" 
+                        />
                     </div>
                     {product.details && (
                         <div className="item-observation">{product.details}</div>
