@@ -71,7 +71,8 @@ export const ProductDialog = (props: PropsProductDialog) => {
                 description: form.description,
                 image: form.image,
                 price: Number(form.price),
-                productCategoryId: form.productCategory.code
+                productCategoryId: form.productCategory.code,
+                preReady: form.preReady
             })
             showSuccess(`Produto ${props.product?.id ? "alterado" : "cadastrado"} com sucesso!`,
                 `Produto ${form.name} ${props.product?.id ? "alterado" : "cadastrado"} com sucesso no sistema!`)
@@ -105,6 +106,7 @@ export const ProductDialog = (props: PropsProductDialog) => {
         initialValues: {
             name: props.product?.name ? props.product.name : '',
             active: props.product?.active ? props.product.active : false,
+            preReady: props.product?.preReady ? props.product.preReady : false,
             description: props.product?.description ? props.product.description : '',
             image: props.product?.image ? props.product.image : '',
             price: props.product?.price ? props.product.price : 0,
@@ -197,6 +199,20 @@ export const ProductDialog = (props: PropsProductDialog) => {
                             />
                             <label htmlFor="productsCategory">Categoria</label>
                         </span>
+                    </div>
+                    <div className="product-dialog-group" style={{ justifyContent: 'right' }}>
+                        <div className="field-checkbox">
+                            <label htmlFor="preReady">Sem&nbsp;preparo</label>
+                            <Checkbox
+                                id='preReady'
+                                inputId="preReady"
+                                name='preReady'
+                                value={formik.values.preReady}
+                                checked={formik.values.preReady}
+                                onChange={formik.handleChange}
+                                className="gambgamb"
+                            />
+                        </div>
                         <div className="field-checkbox">
                             <label htmlFor="active">Ativo</label>
                             <Checkbox
