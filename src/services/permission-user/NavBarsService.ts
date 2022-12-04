@@ -1,6 +1,18 @@
 import { NavItem } from '../../components/NavbarV2/Models'
+import { AuthService } from '../auth/AuthService'
 
 export class NavBarsService {
+  static getFirstPageByTypeUser = async () => {
+    const user = await AuthService.getInfoUserLogged()
+
+    if (user?.role === 'Gestão') return '/dashboard'
+    if (user?.role === 'Admin') return '/restaurants'
+    if (user?.role === 'Preparo') return '/foods'
+    if (user?.role === 'Entrega') return '/deliveries'
+
+    return '/dashboard'
+  }
+
   static getNavigationBarsByTypeUser(typeUser: string): NavItem[] {
     switch (typeUser) {
       case 'Gestão':
@@ -63,8 +75,8 @@ export class NavBarsService {
             id: 11,
             icon: 'fa-solid fa-palette',
             label: 'Tema',
-            linkTo: '/tema'
-          }
+            linkTo: '/tema',
+          },
         ]
 
       case 'Admin':

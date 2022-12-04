@@ -19,6 +19,7 @@ import { Password } from 'primereact/password';
 
 import { Loading } from '../../components/Loading';
 import { ChangePasswordService } from '../../services/change-password/ChangePasswordService';
+import { NavBarsService } from '../../services/permission-user/NavBarsService';
 
 export const LoginForm = () => {
     const [showSpinnerLoading, setShowSpinnerLoading] = useState(false)
@@ -27,7 +28,7 @@ export const LoginForm = () => {
 
     useEffect(() => {
         if (AuthService.userIsLogged())
-            history.push('/dashboard')
+            NavBarsService.getFirstPageByTypeUser().then((firstPage) => history.push(firstPage))
     }, [])
 
     const handleSubmit = async (data: FormLogin) => {
@@ -35,7 +36,7 @@ export const LoginForm = () => {
         try {
             await AuthService.login(data).then((statusOfLogin) => {
                 if (statusOfLogin === StatusOfLogin.SUCCESS) {
-                    history.push('/dashboard')
+                    NavBarsService.getFirstPageByTypeUser().then((firstPage) => history.push(firstPage))
                 } else if (statusOfLogin === StatusOfLogin.CHANGE_PASSWORD) {
                     ChangePasswordService.saveLocalUserChangePassword(data.email, data.password)
                     history.push('/change-password')

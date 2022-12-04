@@ -17,6 +17,7 @@ import { InputText } from 'primereact/inputtext';
 import { ChangePasswordService } from '../../services/change-password/ChangePasswordService';
 import { useHistory } from 'react-router';
 import { AuthService } from '../../services/auth/AuthService';
+import { NavBarsService } from '../../services/permission-user/NavBarsService';
 
 export interface ChangePasswordFormProps {
     emailProps?: string, oldPasswordProps?: string
@@ -41,7 +42,7 @@ export const ChangePasswordForm = ({ emailProps, oldPasswordProps }: ChangePassw
 
                 AuthService.setTokenInLocal(token)
                 ChangePasswordService.removeLocalInfoUserIsChangePassword()
-                history.push('/dashboard')
+                NavBarsService.getFirstPageByTypeUser().then((firstPage) => history.push(firstPage))
             }
         } catch (error: any) {
             showError('Erro ao trocar a senha!', 'Erro: ' + error.message)

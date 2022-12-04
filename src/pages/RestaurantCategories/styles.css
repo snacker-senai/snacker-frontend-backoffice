@@ -53,6 +53,10 @@
     padding: 10px;
   }
 
+  .container-restaurants .p-toolbar {
+    margin-top: 70px;
+  }
+
   .container-restaurants .datatable-crud-demo .p-toolbar {
     flex-wrap: wrap;
   }
