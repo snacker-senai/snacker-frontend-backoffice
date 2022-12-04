@@ -129,6 +129,10 @@
     height: 100vh;
   }
 
+  .container-products .p-toolbar {
+    margin-top: 70px;
+  }
+
   .container-products .p-card {
     width: 100%;
     margin: 0.625rem;

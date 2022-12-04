@@ -30,6 +30,10 @@
     padding: 10px;
   }
 
+  .container-tables .p-toolbar {
+    margin-top: 70px;
+  }
+
   .container-tables .datatable-crud-demo .p-toolbar {
     flex-wrap: wrap;
   }

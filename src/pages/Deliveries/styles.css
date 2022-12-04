@@ -18,6 +18,10 @@
     height: 100vh;
   }
 
+  .container-deliveries .p-toolbar {
+    margin-top: 70px;
+  }
+
   .container-deliveries .order-component {
     width: 100%;
   }

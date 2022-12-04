@@ -43,6 +43,10 @@
 }
 
 @media only screen and (max-width: 950px) {
+  .container-employees .p-toolbar {
+    margin-top: 50px;
+  }
+
   .container-employees .p-datatable {
     width: 100%;
     padding: 10px;
@@ -83,6 +87,11 @@
     margin: 0;
     padding: 0;
     height: 100vh;
+    margin-top: 20px;
+  }
+
+  .container-employees .p-toolbar {
+    gap: 10px;
   }
 
   .container-employees .panel {
