@@ -1,33 +1,25 @@
+import { Theme } from '../../services/auth/AuthService'
 import './styles.css'
 
-interface Props {
-    primaryBackgroundColor?: string
-    secondaryBackgroundColor?: string
-    primaryFontColor?: string
-    secondaryFontColor?: string
-    thirdFontColor?: string
-    img?: string
-}
-
 const PreviewClient = ({
-    primaryBackgroundColor,
-    secondaryBackgroundColor,
-    primaryFontColor,
+    color,
+    secondaryColor,
+    fontColor,
     secondaryFontColor,
-    thirdFontColor,
-    img,
-}: Props) => (
+    tertiaryFontColor,
+    icon,
+}: Theme) => (
     <div className="preview-client">
         <div className="header">
-            <div className="header-principal" style={{ backgroundColor: `${primaryBackgroundColor}` }}>
-                {img && <img src={img} alt="Logo do restaurante" />}
-                <p className="title" style={{ color: `${primaryFontColor}` }}>Mesa 1</p>
+            <div className="header-principal" style={{ backgroundColor: `${color}` }}>
+                {icon !== '' && <img src={icon} alt="Logo do restaurante" />}
+                <p className="title" style={{ color: `${fontColor}` }}>Mesa 1</p>
                 <div className="header-principal__end"></div>
             </div>
-            <div className="subheader" style={{ backgroundColor: `${secondaryBackgroundColor}` }}>
+            <div className="subheader" style={{ backgroundColor: `${secondaryColor}` }}>
                 <p style={{ color: `${secondaryFontColor}` }}>Lanche</p>
-                <p style={{ color: `${thirdFontColor}` }} className='subheader__deactive'>Pizza</p>
-                <p style={{ color: `${thirdFontColor}` }} className='subheader__deactive'>Bebidas</p>
+                <p style={{ color: `${tertiaryFontColor}` }} className='subheader__deactive'>Pizza</p>
+                <p style={{ color: `${tertiaryFontColor}` }} className='subheader__deactive'>Bebidas</p>
             </div>
         </div>
 
