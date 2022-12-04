@@ -15,6 +15,7 @@ import { Toast } from 'primereact/toast'
 import { getPriceFormat } from '../../util/price'
 import { Table } from '../../services/table/Models'
 import { TableService } from '../../services/table/TableService'
+import LayoutEmpty from '../../components/LayoutEmpty'
 
 const Request = () => {
     const [isFilteringProducts, setIsFilteringProducts] = useState(false)
@@ -139,30 +140,32 @@ const Request = () => {
                     </div>
                 </div>
 
-                <div className="content">
-                    {productsAll?.map((category: CategoryWithProducts, index: number) => (
-                        <div key={`category-id-${category?.id}-index-${index + 1}`}>
-                            <h2>{category?.name}</h2>
-                            <div className='group-products' >
-                                {category?.products?.map((product, index) => (
+                {!isLoading && productsAll?.length === 0 ? <LayoutEmpty title='Não há produtos para seleção' /> : (
+                    <div className="content">
+                        {productsAll?.map((category: CategoryWithProducts, index: number) => (
+                            <div key={`category-id-${category?.id}-index-${index + 1}`}>
+                                <h2>{category?.name}</h2>
+                                <div className='group-products' >
+                                    {category?.products?.map((product, index) => (
 
-                                    <div onClick={() => onClickProduct(product)}
-                                        className='product'
-                                        key={`products-id-${product?.id}-${index}`}>
-                                        <div className="content-left">
-                                            <p className='title'>{product.name}</p>
-                                            <p className="description">{product.description}</p>
-                                            <p className="price">{getPriceFormat(product.price)}</p>
+                                        <div onClick={() => onClickProduct(product)}
+                                            className='product'
+                                            key={`products-id-${product?.id}-${index}`}>
+                                            <div className="content-left">
+                                                <p className='title'>{product.name}</p>
+                                                <p className="description">{product.description}</p>
+                                                <p className="price">{getPriceFormat(product.price)}</p>
+                                            </div>
+                                            <div className="content-right">
+                                                <img src={product.image} alt="" />
+                                            </div>
                                         </div>
-                                        <div className="content-right">
-                                            <img src={product.image} alt="" />
-                                        </div>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                )}
             </div>
         </>
     )

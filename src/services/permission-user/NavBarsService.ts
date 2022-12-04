@@ -66,12 +66,6 @@ export class NavBarsService {
             linkTo: '/pedidos',
           },
           {
-            id: 8,
-            icon: 'fa-solid fa-users-gear',
-            label: 'Grupo de Usuários',
-            linkTo: '/grupo-usuarios',
-          },
-          {
             id: 11,
             icon: 'fa-solid fa-palette',
             label: 'Tema',

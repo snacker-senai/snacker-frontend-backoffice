@@ -8,6 +8,7 @@ import { ProductDialog } from '../../components/Dialogs/ProductDialog';
 import { Loading } from '../../components/Loading';
 import { Product } from '../../services/product/Models';
 import { ProductService } from '../../services/product/ProductService';
+import LayoutEmpty from '../../components/LayoutEmpty';
 
 export const Products = () => {
     const [products, setProducts] = useState<Product[]>([])
@@ -71,32 +72,37 @@ export const Products = () => {
             <Toast ref={toast} />
             <ProductDialog onHide={() => loadingAndSetVisibleDialog(false)} visible={visibleDialog} product={productCurrent} />
             {header}
-            <div className="products-list">
-                {products.map(product => (
-                    <div className="product-card">
-                        <div className="product-image">
-                            <img src={product.image} alt={product.name} />
-                            <Button
-                                className="p-button-rounded edit-button"
-                                icon="pi pi-pencil"
-                                onClick={() => handleProductClick(product)}
-                            />
-                        </div>
-                        <div className="product-info">
-                            <p className="product-category">{product.productCategory.name}</p>
-                            <p className="product-name">{product.name}</p>
-                            <p className="product-description">{product.description}</p>
-                            <div className="p-d-flex p-justify-between p-mt-4">
-                                <p className="product-price">R$ {product.price.toLocaleString('pt-br', { minimumFractionDigits: 2 })}</p>
-                                {product.active
-                                    ? <p className="product-active">Ativo</p>
-                                    : <p className="product-inactive">Inativo</p>
-                                }
+
+            {!showSpinnerLoading && products.length === 0 ? (
+                <LayoutEmpty title='Não há produtos cadastrados' />
+            ) :
+                (<div className="products-list">
+                    {products.map(product => (
+                        <div className="product-card">
+                            <div className="product-image">
+                                <img src={product.image} alt={product.name} />
+                                <Button
+                                    className="p-button-rounded edit-button"
+                                    icon="pi pi-pencil"
+                                    onClick={() => handleProductClick(product)}
+                                />
+                            </div>
+                            <div className="product-info">
+                                <p className="product-category">{product.productCategory.name}</p>
+                                <p className="product-name">{product.name}</p>
+                                <p className="product-description">{product.description}</p>
+                                <div className="p-d-flex p-justify-between p-mt-4">
+                                    <p className="product-price">R$ {product.price.toLocaleString('pt-br', { minimumFractionDigits: 2 })}</p>
+                                    {product.active
+                                        ? <p className="product-active">Ativo</p>
+                                        : <p className="product-inactive">Inativo</p>
+                                    }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+                )}
         </div >
     )
 }

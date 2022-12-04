@@ -12,6 +12,7 @@ import { DashboardCard } from '../../components/DashboardCard';
 import { ImCancelCircle } from 'react-icons/im'
 import { MdOutlineDoneOutline } from 'react-icons/md'
 import { FiInbox } from 'react-icons/fi'
+import LayoutEmpty from '../../components/LayoutEmpty';
 
 
 interface informationCharData {
@@ -143,6 +144,9 @@ export const Dashboards = () => {
         <div className="container-dashboards">
             <Loading visible={showSpinnerLoading} />
             <Toast ref={toast} />
+
+
+
             <Calendar
                 id="range"
                 value={rangeFilters}
@@ -159,42 +163,49 @@ export const Dashboards = () => {
                 showIcon
             />
             <br />
-            <div className="cards">
-                <DashboardCard 
-                    title="Pedidos cancelados" 
-                    value="56" 
-                    icon={<ImCancelCircle />}
-                    backgroundColor="#618044"
-                />
-                <DashboardCard 
-                    title="Pedidos concluídos" 
-                    value="432" 
-                    icon={<MdOutlineDoneOutline />}
-                    backgroundColor="#49683b"
-                />
-                <DashboardCard 
-                    title="Pedidos cancelados (%)" 
-                    value="12%" 
-                    icon={<ImCancelCircle />}
-                    backgroundColor="#34623f"
-                />
-                <DashboardCard 
-                    title="Quantidade de produtos" 
-                    value="89" 
-                    icon={<FiInbox />}
-                    backgroundColor="#27412a"
-                />
-            </div>
-            <div className="dashboards">
-                <div className="dashboard-c">
-                    <h1 style={{ marginTop: '50px' }}>Produtos mais vendidos</h1>
-                    <Chart type="pie" data={informationCharData} options={lightOptions} />
-                </div>
-                <div className="dashboard-c">
-                    <h1 style={{ marginTop: '50px' }}>Categorias mais vendidas</h1>
-                    <Chart type="pie" data={informationCharData} options={lightOptions} />
-                </div>
-            </div>
+
+            {!showSpinnerLoading && productsDashboard.length === 0 ? (
+                <LayoutEmpty title='Não há dados a serem exibidos' />
+            ) :
+                <>
+                    <div className="cards">
+                        <DashboardCard
+                            title="Pedidos cancelados"
+                            value="56"
+                            icon={<ImCancelCircle />}
+                            backgroundColor="#618044"
+                        />
+                        <DashboardCard
+                            title="Pedidos concluídos"
+                            value="432"
+                            icon={<MdOutlineDoneOutline />}
+                            backgroundColor="#49683b"
+                        />
+                        <DashboardCard
+                            title="Pedidos cancelados (%)"
+                            value="12%"
+                            icon={<ImCancelCircle />}
+                            backgroundColor="#34623f"
+                        />
+                        <DashboardCard
+                            title="Quantidade de produtos"
+                            value="89"
+                            icon={<FiInbox />}
+                            backgroundColor="#27412a"
+                        />
+                    </div>
+                    <div className="dashboards">
+                        <div className="dashboard-c">
+                            <h1 style={{ marginTop: '50px' }}>Produtos mais vendidos</h1>
+                            <Chart type="pie" data={informationCharData} options={lightOptions} />
+                        </div>
+                        <div className="dashboard-c">
+                            <h1 style={{ marginTop: '50px' }}>Categorias mais vendidas</h1>
+                            <Chart type="pie" data={informationCharData} options={lightOptions} />
+                        </div>
+                    </div>
+                </>
+            }
         </div >
     )
 }
