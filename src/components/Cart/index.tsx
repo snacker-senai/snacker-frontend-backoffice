@@ -1,5 +1,7 @@
 import './styles.css'
 
+import { useEffect } from 'react'
+
 import Modal from 'react-modal'
 import { Button } from 'primereact/button'
 
@@ -23,6 +25,7 @@ interface Props {
 const Cart = ({ tables, onClickSubmit, isVisible, products, onClickBack, onClickExclued }: Props) => {
     const [tableSelected, setTableSelected] = useState<number>(0)
     const isTablet = useMedia('(max-width: 1015px)')
+    const [optionsTables, setOptionsTables] = useState<any[]>([])
     const customStyles = {
         overlay: {
             background: "rgba(0, 0, 0, 0.25)",
@@ -45,20 +48,22 @@ const Cart = ({ tables, onClickSubmit, isVisible, products, onClickBack, onClick
         }
     }
 
-    const optionsTables = useMemo(() => {
+    useEffect(() => {
         let optionsTables: any[] = []
 
         if (tables.length > 0)
             setTableSelected(tables[0].id)
 
-        tables.filter((table: Table) => (table.active)).forEach((table: Table) => {
+        const tablesFiltered = tables.filter((table: Table) => (table.active))
+
+        tablesFiltered.forEach((table: Table) => {
             optionsTables.push({
-                'name': table.number,
+                'name': table.number?.toString(),
                 'code': table.id,
             })
         })
 
-        return optionsTables
+        setOptionsTables(optionsTables)
     }, [tables])
 
     const isEmpty = useMemo(() => products.length === 0, [products])
@@ -77,7 +82,7 @@ const Cart = ({ tables, onClickSubmit, isVisible, products, onClickBack, onClick
                     <Dropdown
                         value={optionsTables[0]}
                         options={optionsTables}
-                        onChange={(e) => setTableSelected(e.target.value)}
+                        onChange={(e) => setTableSelected(e?.target?.value)}
                         name="table"
                         className='cart-combobox'
                         optionLabel="name"

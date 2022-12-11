@@ -17,6 +17,7 @@ import { Toast } from 'primereact/toast';
 import { ProductCategory } from "./../../../services/product/Models";
 import { Loading } from '../../Loading';
 import { ProductCategoryService } from '../../../services/product-category/ProductCategoryService';
+import { formIsValid, useResetForm } from '../../../util/form';
 
 interface ProspProductsCategroyDialog {
     productCategory?: ProductCategory
@@ -65,7 +66,7 @@ export const ProductsCategoryDialog = (props: ProspProductsCategroyDialog) => {
 
     const renderFooter = () => {
         return (
-            <Button type='submit' label={props.productCategory?.id ? 'Alterar' : 'Cadastrar'} onClick={() => formik.handleSubmit()}></Button>
+            <Button type='submit' disabled={!formIsValid(formik)} label={props.productCategory?.id ? 'Alterar' : 'Cadastrar'} onClick={() => formik.handleSubmit()}></Button>
         )
     }
 
@@ -76,6 +77,8 @@ export const ProductsCategoryDialog = (props: ProspProductsCategroyDialog) => {
     const showError = (sumary, detail: string) => {
         toast.current.show({ severity: 'error', summary: sumary, detail: detail, life: 3000 });
     }
+
+    useResetForm(props.visible, formik)
 
     return (
         <div>

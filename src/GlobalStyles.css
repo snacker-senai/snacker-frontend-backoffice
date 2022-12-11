@@ -128,3 +128,50 @@
 .p-toast {
   z-index: 999999999 !important;
 }
+
+.p-dropdown:not(.p-disabled):hover,
+.p-dropdown:not(.p-disabled).p-focus,
+.p-calendar-w-btn:not(.p-disabled).p-inputwrapper-focus,
+.p-calendar-w-btn:not(.p-disabled):hover,
+.p-inputtext:enabled:focus,
+.p-inputtext:enabled:hover {
+  border-color: var(--theme-color) !important;
+  box-shadow: none !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  color: var(--theme-color) !important;
+}
+
+.p-dropdown-item .p-ink {
+  background-color: var(--theme-color) !important;
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link,
+.p-tabview .p-tabview-nav-btn.p-link {
+  border-color: var(--theme-color) !important;
+  color: var(--theme-color) !important;
+  box-shadow: none !important;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link > .p-ink,
+.p-tabview .p-tabview-nav li .p-tabview-nav-link:focus {
+  background-color: var(--theme-color) !important;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+  box-shadow: none !important;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  border-color: none !important;
+  color: var(--theme-color) !important;
+}
+
+.p-tabview .p-tabview-nav-btn.p-link { 
+  box-shadow: none !important;
+}
+
+.p-float-label label {
+  color: black !important;
+}

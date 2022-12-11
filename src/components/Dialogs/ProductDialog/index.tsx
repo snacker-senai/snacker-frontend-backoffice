@@ -19,6 +19,7 @@ import { Product, ProductCategory } from "./../../../services/product/Models";
 import { Loading } from '../../Loading';
 import { ProductService } from '../../../services/product/ProductService';
 import { ProductCategoryService } from '../../../services/product-category/ProductCategoryService';
+import { formIsValid, useResetForm } from '../../../util/form';
 
 interface PropsProductDialog {
     product?: Product
@@ -120,7 +121,7 @@ export const ProductDialog = (props: PropsProductDialog) => {
 
     const renderFooter = () => {
         return (
-            <Button type='submit' label={props.product?.id ? 'Alterar' : 'Cadastrar'} onClick={() => formik.handleSubmit()}></Button>
+            <Button type='submit' disabled={!formIsValid(formik)} label={props.product?.id ? 'Alterar' : 'Cadastrar'} onClick={() => formik.handleSubmit()}></Button>
         )
     }
 
@@ -135,6 +136,8 @@ export const ProductDialog = (props: PropsProductDialog) => {
     const showError = (sumary, detail: string) => {
         toast.current.show({ severity: 'error', summary: sumary, detail: detail, life: 3000 });
     }
+
+    useResetForm(props.visible, formik)
 
     return (
         <div>

@@ -23,6 +23,7 @@ import { Loading } from '../../Loading';
 import { RestaurantCategoryService } from '../../../services/restaurant-category/RestaurantCategory';
 import { Restaurant, RestaurantCategory } from '../../../services/employee/Models'
 import { RestaurantService } from '../../../services/restaurant/RestaurantService';
+import { formIsValid, useResetForm } from '../../../util/form';
 
 
 interface RestaurantDialogProps {
@@ -272,7 +273,7 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
                     return (
                         <div>
                             <Button label='Voltar' onClick={() => nextTabPanel(0)}></Button>
-                            <Button type='submit' label={labelMain} onClick={() => formik.handleSubmit()}></Button>
+                            <Button type='submit' disabled={!formIsValid(formik)} label={labelMain} onClick={() => formik.handleSubmit()}></Button>
                         </div>
                     )
             }
@@ -302,7 +303,7 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
                     return (
                         <div>
                             <Button label='Voltar' onClick={() => nextTabPanel(1)}></Button>
-                            <Button type='submit' label={labelMain} onClick={async () => await formik.handleSubmit()}></Button>
+                            <Button type='submit' disabled={!formIsValid(formik)} label={labelMain} onClick={async () => await formik.handleSubmit()}></Button>
                         </div>
                     )
             }
@@ -320,6 +321,8 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
     const showError = (sumary, detail: string) => {
         toast.current.show({ severity: 'error', summary: sumary, detail: detail, life: 3000 });
     }
+
+    useResetForm(visible, formik)
 
     return (
         <div className='container-restaurants-dialog'>

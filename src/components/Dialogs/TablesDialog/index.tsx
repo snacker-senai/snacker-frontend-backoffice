@@ -17,6 +17,7 @@ import { classNames } from 'primereact/utils';
 import { Table } from '../../../services/table/Models';
 import { TableService } from '../../../services/table/TableService';
 import { Loading } from '../../Loading';
+import { formIsValid, useResetForm } from '../../../util/form';
 
 interface PropsTablesDialog {
     table?: Table
@@ -69,7 +70,7 @@ export const TablesDialog = (props: PropsTablesDialog) => {
 
     const renderFooter = () => {
         return (
-            <Button type='submit' label={props.table?.id ? 'Alterar' : 'Cadastrar'} onClick={() => formik.handleSubmit()}></Button>
+            <Button type='submit' disabled={!formIsValid(formik)} label={props.table?.id ? 'Alterar' : 'Cadastrar'} onClick={() => formik.handleSubmit()}></Button>
         )
     }
 
@@ -80,6 +81,8 @@ export const TablesDialog = (props: PropsTablesDialog) => {
     const showError = (sumary, detail: string) => {
         toast.current.show({ severity: 'error', summary: sumary, detail: detail, life: 3000 });
     }
+
+    useResetForm(props.visible, formik)
 
     return (
         <div>

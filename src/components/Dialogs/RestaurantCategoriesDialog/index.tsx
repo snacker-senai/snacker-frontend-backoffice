@@ -18,6 +18,7 @@ import { RestaurantCategory } from '../../../services/employee/Models';
 import { RestaurantCategoryService } from '../../../services/restaurant-category/RestaurantCategory';
 import { Loading } from '../../Loading';
 import { ProductsCategoryDialogSchema } from '../CategoriesDialog/schema';
+import { formIsValid, useResetForm } from '../../../util/form';
 
 interface PropsRestaurantCategoriesDialog {
     category?: RestaurantCategory
@@ -40,7 +41,7 @@ export const RestaurantCategoriesDialog = (props: PropsRestaurantCategoriesDialo
                 name: form.name,
                 active
             })
-            
+
             showSuccess('Categoria salva com sucesso!', 'Categoria salva com sucesso!')
             formik.resetForm()
             props.onHide()
@@ -65,7 +66,7 @@ export const RestaurantCategoriesDialog = (props: PropsRestaurantCategoriesDialo
 
     const renderFooter = () => {
         return (
-            <Button type='submit' label={props.category?.id ? 'Alterar' : 'Cadastrar'} onClick={() => formik.handleSubmit()}></Button>
+            <Button type='submit' disabled={!formIsValid(formik)} label={props.category?.id ? 'Alterar' : 'Cadastrar'} onClick={() => formik.handleSubmit()}></Button>
         )
     }
 
@@ -76,6 +77,8 @@ export const RestaurantCategoriesDialog = (props: PropsRestaurantCategoriesDialo
     const showError = (sumary, detail: string) => {
         toast.current.show({ severity: 'error', summary: sumary, detail: detail, life: 3000 });
     }
+
+    useResetForm(props.visible, formik)
 
     return (
         <div>

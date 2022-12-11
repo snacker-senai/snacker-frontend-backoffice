@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { FiSearch } from 'react-icons/fi'
 import { BsCartCheck } from 'react-icons/bs'
 import { useState, useEffect, useRef, useMemo } from 'react'
@@ -30,12 +31,14 @@ const Request = () => {
     const toast = useRef<any>(null);
 
     useEffect(() => {
-        setIsLoading(true)
+        const fetch = async () => {
+            setIsLoading(true)
 
-        RequestService.get().then(products => setCategoryWithPrducts(products))
-        TableService.getAll().then(tables => setTables(tables))
+            await RequestService.get().then(products => setCategoryWithPrducts(products))
+            await TableService.getAll().then(tables => setTables(tables))
+        }
 
-        setIsLoading(false)
+        fetch().then(() => setIsLoading(false))
     }, [])
 
     const productsFiltered = useMemo(() =>
