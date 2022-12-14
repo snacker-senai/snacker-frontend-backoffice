@@ -23,7 +23,7 @@ import { Loading } from '../../Loading';
 import { RestaurantCategoryService } from '../../../services/restaurant-category/RestaurantCategory';
 import { Restaurant, RestaurantCategory } from '../../../services/employee/Models'
 import { RestaurantService } from '../../../services/restaurant/RestaurantService';
-import { useFormIsValid, useResetForm } from '../../../util/form';
+import { useFormIsValid } from '../../../util/form';
 
 
 interface RestaurantDialogProps {
@@ -70,6 +70,8 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
     }, [])
 
     useEffect(() => {
+        formik.resetForm()
+
         if (restaurant) {
             formik.setValues({
                 name: restaurant.name,
@@ -107,7 +109,7 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
                 email: '',
             })
         }
-    }, [restaurant])
+    }, [restaurant, visible])
 
     const nextTabPanel = (index: number) => {
         setTabPanelCurrent(index)
@@ -323,8 +325,6 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
     const showError = (sumary, detail: string) => {
         toast.current.show({ severity: 'error', summary: sumary, detail: detail, life: 3000 });
     }
-
-    useResetForm(visible, formik)
 
     return (
         <div className='container-restaurants-dialog'>

@@ -71,9 +71,7 @@ export const Restaurants = () => {
                     id: row.address.id
                 }
             })
-            showSuccess("Alterado o status do restaurante com sucesso!",
-                ``
-            )
+            showSuccess("Alterado o status do restaurante com sucesso!", '')
             buildRestaurant()
         } catch (error: any) {
             showError("Erro ao alterar o status do restaurante!", `Erro ao alterar: ${error.message}`)
