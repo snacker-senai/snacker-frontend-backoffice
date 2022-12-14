@@ -8,7 +8,6 @@ import { Button } from 'primereact/button'
 import { useMedia } from 'react-use-media';
 import { ProductsWithQuantity } from '../../services/order/Models';
 import { getPriceFormat } from '../../util/price';
-import { Dropdown } from 'primereact/dropdown';
 import { Table } from '../../services/table/Models';
 import { useMemo, useState } from 'react';
 
@@ -63,11 +62,13 @@ const Cart = ({ tables, onClickSubmit, isVisible, products, onClickBack, onClick
             })
         })
 
+        console.log('optionsTables', optionsTables)
+
         setOptionsTables(optionsTables)
     }, [tables])
 
     const isEmpty = useMemo(() => products.length === 0, [products])
-
+    console.log(optionsTables)
     return (
         <Modal ariaHideApp={false} style={customStyles} isOpen={isVisible}>
             <div className="cart-header">
@@ -78,15 +79,12 @@ const Cart = ({ tables, onClickSubmit, isVisible, products, onClickBack, onClick
 
             {!isEmpty && (
                 <div className="cart-table">
-                    <label htmlFor="table">Número da mesa</label>
-                    <Dropdown
-                        value={optionsTables[0]}
-                        options={optionsTables}
-                        onChange={(e) => setTableSelected(e?.target?.value)}
-                        name="table"
-                        className='cart-combobox'
-                        optionLabel="name"
-                    />
+                    <label>Número da mesa</label>
+                    <select className="dropdown" value={tableSelected} onChange={(e) => setTableSelected(Number(e.target.value))}>
+                        {optionsTables.map(table => (
+                            <option value={table.code} selected={tableSelected === table.code}>{table.name}</option>
+                        ))}
+                    </select>
                 </div>
             )}
             <div className="cart-items">
