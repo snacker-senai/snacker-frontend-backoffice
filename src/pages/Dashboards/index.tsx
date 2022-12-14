@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import './styles.css'
 import { useEffect, useRef, useState } from 'react';
@@ -51,7 +52,7 @@ export const Dashboards = () => {
     const [showSpinnerLoading, setShowSpinnerLoading] = useState(false)
     const [usersCount, setUsersCount] = useState()
     const [finishedOrders, setFinishedOrders] = useState()
-    const [topSellingCategories, setTopSellingCategories] = useState([])
+    const [_topSellingCategories, setTopSellingCategories] = useState([])
     const [topSellingCategory, setTopSellingCategory] = useState("")
     const [activeProductsCount, setActiveProductsCount] = useState()
     const toast = useRef<any>(null)
