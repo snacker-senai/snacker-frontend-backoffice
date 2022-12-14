@@ -43,7 +43,8 @@
 
 @media only screen and (max-width: 700px) {
     .container-themes {
-        overflow: auto;
+        height: 110vh;
+        overflow: visible;
         margin: 0;
         padding: 0;
     }
@@ -63,15 +64,28 @@
     .container-themes .group-colors .group-color-picker {
         justify-content: flex-start;
     }
+
+    .theme__button {
+        margin: 5px;
+        height: 50px;
+    }
 }
 
 @media only screen and (max-width: 500px) {
     .container-themes {
+        height: 120vh;
+        overflow: visible;
         margin: 0;
         padding: 0;
     }
 
     .container-themes .themes__title {
         margin-top: 60px;
-    }   
+    }
+
+    .theme__button {
+        margin: 20px;
+        height: 70px;
+        width: 90%;
+    }
 }

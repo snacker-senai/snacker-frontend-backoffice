@@ -4,7 +4,6 @@
     border-color: rgb(195, 195, 195);
     border: 1px solid rgb(236, 236, 236);
     border-radius: 10px;
-    overflow: hidden;
     background-color: rgb(247, 247, 247);
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
@@ -25,10 +24,11 @@
 
 .preview-client .header .header-principal img {
     right: 0;
-    height: 100%;
-    padding: 12px;
-    overflow: hidden;
-    width: 20%;
+    height: 40px;
+    padding: 2px;
+    margin-left: 5px;
+    border-radius: 10px;
+    background-size: cover;
 }
 
 .preview-client .header .header-principal .header-principal__end {
@@ -59,10 +59,10 @@
     background-color: rgb(255, 255, 255);
     padding: 5px 48px 5px 20px;
     border-radius: 66px;
-    width: 350px;
+    width: 90%;
     outline: none;
     box-shadow: rgb(0 0 0 / 22%) 3px 3px 15px -8px;
-    margin: 15px 80px;
+    margin: 15px 0 15px 5px;
     font-size: x-small;
 }
 

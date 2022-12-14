@@ -44,7 +44,7 @@ export class NavBarsService {
           {
             id: 4,
             icon: 'fa-solid fa-kitchen-set',
-            label: 'Preparo das comidas',
+            label: 'Preparo',
             linkTo: '/foods',
           },
           {
@@ -93,7 +93,7 @@ export class NavBarsService {
           {
             id: 4,
             icon: 'fa-solid fa-kitchen-set',
-            label: 'Preparo das comidas',
+            label: 'Preparo',
             linkTo: '/foods',
           },
         ]
@@ -116,7 +116,7 @@ export class NavBarsService {
             icon: 'fa-solid fa-table',
             label: 'Mesas',
             linkTo: '/mesas',
-          }
+          },
         ]
 
       default:
