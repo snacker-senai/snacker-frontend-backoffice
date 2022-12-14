@@ -27,16 +27,16 @@ export const OrderCard = (props: IOrderCardProps) => {
                 <h1 className="time">{moment(props.time).format('H:mm:ss')}</h1>
             </div>
             {props.products.map((product) => (
-                <div className="order-item">
+                <div className="order-item" key={`order-item-${product.productName}`}>
                     <div className="item-info">
                         <div className="p-d-flex p-ai-center" style={{ gap: '8px' }}>
                             <div className="item-quantity">{product.quantity}</div>
                             <div className="item-name">{product.productName}</div>
                         </div>
                         <Button
-                            label={props.altButtonLabel} 
-                            onClick={() => props.handleAltButtonClick(product.orderHasProductId!)} 
-                            icon="pi pi-check" 
+                            label={props.altButtonLabel}
+                            onClick={() => props.handleAltButtonClick(product.orderHasProductId!)}
+                            icon="pi pi-check"
                         />
                     </div>
                     {product.details && (

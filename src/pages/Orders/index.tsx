@@ -37,7 +37,7 @@ export const Orders = () => {
 
         try {
             await OrderService.setOrderItemStatusByOrderId(orderId, 2)
-            
+
             const filteredOrders = orders.map(order => ({
                 ...order,
                 productsWithQuantity: order.productsWithQuantity.filter(product => product.orderHasProductId !== orderId)
@@ -54,7 +54,7 @@ export const Orders = () => {
     useEffect(() => {
         const getOrdersOnInit = async () => {
             setShowSpinnerLoading(true)
-            await getOrders() 
+            await getOrders()
             setShowSpinnerLoading(false)
         }
 
@@ -89,6 +89,7 @@ export const Orders = () => {
                     table={order.table}
                     time={order.createdAt}
                     products={order.productsWithQuantity}
+                    key={`order-${order.id}`}
                 />
             ))}
         </div>

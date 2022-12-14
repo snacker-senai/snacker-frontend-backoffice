@@ -63,7 +63,7 @@ export const OrdersDialog = ({ tableId, visible, onHide }: OrdersDialogProps) =>
     return (
       <div className="order-card">
         {products.map((product) => (
-          <div className="product-info">
+          <div className="product-info" key={`product-${product.productId}`}>
             <div className="product-name">{product.quantity}x {product.productName}</div>
             <div className="product-price">R$ {product.price * product.quantity}</div>
           </div>

@@ -78,7 +78,7 @@ export const Products = () => {
             ) :
                 (<div className="products-list">
                     {products.map(product => (
-                        <div className="product-card">
+                        <div className="product-card" key={`product-${product.id}`}>
                             <div className="product-image">
                                 <img src={product.image} alt={product.name} />
                                 <Button

@@ -82,7 +82,7 @@ const Cart = ({ tables, onClickSubmit, isVisible, products, onClickBack, onClick
                     <label>Número da mesa</label>
                     <select className="dropdown" value={tableSelected} onChange={(e) => setTableSelected(Number(e.target.value))}>
                         {optionsTables.map(table => (
-                            <option value={table.code} selected={tableSelected === table.code}>{table.name}</option>
+                            <option key={`table-${table.code}`} value={table.code} selected={tableSelected === table.code}>{table.name}</option>
                         ))}
                     </select>
                 </div>

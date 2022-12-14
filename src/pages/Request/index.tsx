@@ -150,7 +150,6 @@ const Request = () => {
                                 <h2>{category?.name}</h2>
                                 <div className='group-products' >
                                     {category?.products?.map((product, index) => (
-
                                         <div onClick={() => onClickProduct(product)}
                                             className='product'
                                             key={`products-id-${product?.id}-${index}`}>
