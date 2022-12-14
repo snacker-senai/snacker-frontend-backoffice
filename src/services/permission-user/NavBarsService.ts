@@ -62,7 +62,7 @@ export class NavBarsService {
           {
             id: 10,
             icon: 'fa-solid fa-money-bill',
-            label: 'Pedidos',
+            label: 'Realizar pedidos',
             linkTo: '/pedidos',
           },
           {
@@ -108,7 +108,7 @@ export class NavBarsService {
           {
             id: 10,
             icon: 'fa-solid fa-money-bill',
-            label: 'Pedidos',
+            label: 'Realizar pedidos',
             linkTo: '/pedidos',
           },
           {
