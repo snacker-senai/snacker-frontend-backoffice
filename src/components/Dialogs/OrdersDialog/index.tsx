@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useRef } from 'react'
 import { Button } from "primereact/button"
 import { Dialog } from "primereact/dialog"
 import { useEffect, useState } from "react"
-import { TailSpin } from "react-loader-spinner"
 import { OrderWithProducts } from "../../../services/order/Models"
 import { OrderService } from "../../../services/order/OrderService"
 import './styles.css'
+import { Toast } from 'primereact/toast'
+import { Loading } from '../../Loading'
 
 interface IProductWithQuantity {
   productId: number
@@ -28,6 +30,7 @@ interface OrdersDialogProps {
 export const OrdersDialog = ({ tableId, visible, onHide }: OrdersDialogProps) => {
   const [orders, setOrders] = useState<OrderWithProducts[]>([])
   const [isLoading, setIsLoading] = useState(false)
+  const toast = useRef<any>(null)
 
   const getOrders = async () => {
     setIsLoading(true)
@@ -73,39 +76,56 @@ export const OrdersDialog = ({ tableId, visible, onHide }: OrdersDialogProps) =>
     )
   }
 
+  const showSuccess = (sumary, detail: string) => {
+    toast.current.show({ severity: 'success', summary: sumary, detail: detail, life: 3000 });
+  }
+
+  const showError = (sumary, detail: string) => {
+    toast.current.show({ severity: 'error', summary: sumary, detail: detail, life: 3000 });
+  }
+
   const closeBill = async () => {
-    await OrderService.closeBillByTableId(tableId!)
-    onHide()
+    setIsLoading(true)
+
+    try {
+      await OrderService.closeBillByTableId(tableId!)
+      onHide()
+      showSuccess('Conta finalizado com sucesso', '')
+    } catch (error) {
+      console.log(error)
+      showError('Erro ao finalizar a conta!', 'Contate o Administrador do Sistema!')
+    }
+
+    setIsLoading(false)
   }
 
   return (
-    <Dialog visible={visible} onHide={onHide} style={{ width: '60%' }} header="Lista de pedidos">
-      {isLoading ? (
-        <div className="loading">
-          <TailSpin color="#273c42" height={80} width={80} />
-        </div>
-      ) : (
-        <>
-          {!!orders.length && (
-            <>
-              <div className="content">
-                {orders.map(order => renderBillProducts(order.productsWithQuantity, order.orderStatus))}
-              </div>
-              <div className="totalPrice">
-                Total: R$ {(getTotalPrice())}
-              </div>
-              <div className="p-d-flex p-jc-end p-mt-3">
-                <Button label="Fechar conta" onClick={closeBill} />
-              </div>
-            </>
-          )}
-          {!orders.length && (
-            <div className="p-d-flex p-jc-center p-my-6">
-              <span style={{ fontSize: '1.15em' }}>Nenhum pedido realizado</span>
+
+    <>
+      <Toast ref={toast} />
+      {isLoading && <Loading visible={isLoading} />}
+      <Dialog visible={visible} onHide={onHide} style={{ width: '60%' }} header="Lista de pedidos">
+        {orders.length > 0 && (
+          <>
+            <div className="content">
+              {orders.map(order => renderBillProducts(order.productsWithQuantity, order.orderStatus))}
             </div>
-          )}
-        </>
-      )}
-    </Dialog>
+            <div className="totalPrice">
+              Total: R$ {(getTotalPrice())}
+            </div>
+            <div className="p-d-flex p-jc-end p-mt-3">
+              <Button label="Fechar conta" onClick={closeBill} />
+            </div>
+          </>
+        )}
+
+        {orders.length === 0 && (
+          <div className="p-d-flex p-jc-center p-my-6">
+            <span style={{ fontSize: '1.15em' }}>Nenhum pedido realizado</span>
+          </div>
+        )}
+
+      </Dialog>
+    </>
   )
 }
