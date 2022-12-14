@@ -139,10 +139,6 @@
   box-shadow: none !important;
 }
 
-.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
-  color: var(--theme-color) !important;
-}
-
 .p-dropdown-item .p-ink {
   background-color: var(--theme-color) !important;
 }
@@ -179,4 +175,20 @@
 .p-checkbox .p-checkbox-box.p-highlight {
   border-color: var(--theme-color) !important;
   background: var(--theme-color) !important;
+}
+
+.p-paginator-page {
+  background-color: var(--theme-secondaryColor) !important;
+  color: var(--theme-secondaryFontColor) !important;
+  filter: opacity(0.35);
+}
+
+.p-tabview-ink-bar {
+  background-color: var(--theme-secondaryColor) !important;
+}
+
+.p-highlight {
+  background-color: var(--theme-secondaryColor) !important;
+  color: var(--theme-secondaryFontColor) !important;
+  filter: opacity(0.5);
 }

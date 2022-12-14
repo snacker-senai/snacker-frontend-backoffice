@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import './styles.css'
 import { useEffect, useRef, useState } from 'react';
@@ -9,10 +10,12 @@ import { ProductService } from '../../services/product/ProductService';
 import { Loading } from '../../components/Loading';
 import { Toast } from 'primereact/toast';
 import { DashboardCard } from '../../components/DashboardCard';
-import { ImCancelCircle } from 'react-icons/im'
 import { MdOutlineDoneOutline } from 'react-icons/md'
+import { AiOutlineUser } from 'react-icons/ai'
 import { FiInbox } from 'react-icons/fi'
 import LayoutEmpty from '../../components/LayoutEmpty';
+import { Requester } from '../../services/configuration-proxy/ConfigurationProxy';
+import moment from 'moment';
 
 
 interface informationCharData {
@@ -42,61 +45,147 @@ const backgroundColorsDashboard = [
 
 export const Dashboards = () => {
     const [rangeFilters, setRangeFilters] =
-        useState<Date | Date[] | undefined>(undefined);
+        useState<Date | Date[] | undefined>(getDefaultRangeFilters());
     const [productsDashboard, setProductsDashboard] = useState<ProductsFilterDashboard[]>([])
     const [informationCharData, setInformationCharData] = useState<informationCharData>()
+    const [informationCharData2, setInformationCharData2] = useState<informationCharData>()
     const [showSpinnerLoading, setShowSpinnerLoading] = useState(false)
+    const [usersCount, setUsersCount] = useState()
+    const [finishedOrders, setFinishedOrders] = useState()
+    const [_topSellingCategories, setTopSellingCategories] = useState([])
+    const [topSellingCategory, setTopSellingCategory] = useState("")
+    const [activeProductsCount, setActiveProductsCount] = useState()
     const toast = useRef<any>(null)
 
     useEffect(() => {
-        if (!rangeFilters) {
-            const previuysYear = new Date().getFullYear() - 1
-            const month = new Date().getMonth()
-            const day = new Date().getDay()
+        const onLoad = async () => {
+            const getProducts = async () => {
+                const products = await ProductService.filterProdutctsDashboard(
+                    rangeFilters![0],
+                    rangeFilters![1]
+                )
 
-            setRangeFilters([
-                new Date(previuysYear, month, day),
-                new Date()
+                setProductsDashboard(products)
+
+                return products
+            }
+
+            const [products, categories] = await Promise.all([
+                getProducts(),
+                getTopSellingCategories(rangeFilters![0], rangeFilters![1]),
+                getUsersCount(),
+                getFinishedOrders(),
+                getActiveProductsCount()
             ])
 
-            ProductService
-                .filterProdutctsDashboard(
-                    new Date(previuysYear, month, day),
-                    new Date())
-                .then(products => setProductsDashboard(products))
+            buildDashboards(products, categories.topSellingCategories)
         }
 
-        buildDashboard()
-    }, [productsDashboard])
+        onLoad()
+    }, [])
 
-    const getLabels = () => {
+    function getDefaultRangeFilters () {
+        const previuysYear = new Date().getFullYear()
+        const month = new Date().getMonth() - 6
+        const day = new Date().getDay()
+
+        return [new Date(previuysYear, month, day), new Date()]
+    }
+
+    const getLabels = (products: any) => {
         let labels: string[] = []
 
-        productsDashboard.forEach(product => labels.push(product.name))
+        products.forEach(product => labels.push(product.name))
 
         return labels
     }
 
-    const getData = () => {
+    const getTopSellingCategoriesLabels = (categories: any) => {
+        let labels: string[] = []
+
+        categories.forEach((category: any) => labels.push(category.name))
+
+        return labels
+    }
+
+    const getData = (products: any) => {
         let data: number[] = []
-        productsDashboard.forEach(product => data.push(product.quantity))
+        products.forEach(product => data.push(product.quantity))
 
         return data
     }
 
-    const filtersBackgroundColors = () => {
+    const getTopSellingCategoriesData = (categories: any) => {
+        let data: number[] = []
+        categories.forEach((category: any) => data.push(category.quantity))
+
+        return data
+    }
+
+    const getUsersCount = async () => {
+        const response = await Requester.get('/user/count')
+        setUsersCount(response.data)
+
+        return response.data
+    }
+
+    const getFinishedOrders = async () => {
+        const response = await Requester.get('/order/finished')
+        setFinishedOrders(response.data)
+
+        return response.data
+    }
+
+    const getActiveProductsCount = async () => {
+        const response = await Requester.get('/product/actives')
+        setActiveProductsCount(response.data)
+
+        return response.data
+    }
+
+    const getTopSellingCategories = async (initialDate: Date, finalDate: Date) => {
+        const initialDateFormat = moment(initialDate).format().toString()
+        const finalDateFormat = moment(finalDate).format().toString()
+
+        const { data } = await Requester.get(`/productcategory/topselling?initialDate=${initialDateFormat}&finalDate=${finalDateFormat}`)
+        
+        const topSellingCategories = data.map(item => {
+            let quantity = 0
+
+            item.forEach(category => {
+                quantity += category.quantity
+            })
+
+            return {
+                name: item[0].name,
+                quantity
+            }
+        })
+
+        setTopSellingCategory(topSellingCategories[0].name)
+
+        setTopSellingCategories(topSellingCategories)
+
+        return {
+            topSellingCategories,
+            topSellingCategory: topSellingCategories[0].name
+        }
+    }
+
+    const filtersBackgroundColors = (products: any) => {
         let backgroundColorsFilter: string[] = []
-        for (let i = 0; i < productsDashboard.length; i++) {
+        for (let i = 0; i < products.length; i++) {
             backgroundColorsFilter.push(backgroundColorsDashboard[i])
         }
 
         return backgroundColorsFilter
     }
 
-    const buildDashboard = () => {
-        const labels = getLabels()
-        const data = getData()
-        const backgroundColors = filtersBackgroundColors()
+    const buildDashboards = (products: any, categories: any) => {
+        const labels = getLabels(products)
+        const data = getData(products)
+        const backgroundColors = filtersBackgroundColors(products)
+        console.log(backgroundColors)
 
         setInformationCharData({
             labels: labels,
@@ -104,6 +193,19 @@ export const Dashboards = () => {
                 backgroundColor: backgroundColors,
                 data: data,
                 hoverBackgroundColor: backgroundColorsDashboard
+            }]
+        })
+
+        const backgroundColors2 = filtersBackgroundColors(categories)
+        const topSellingCategoriesLabels = getTopSellingCategoriesLabels(categories)
+        const topSellingCategoriesData = getTopSellingCategoriesData(categories)
+
+        setInformationCharData2({
+            labels: topSellingCategoriesLabels,
+            datasets: [{
+                backgroundColor: backgroundColors2,
+                data: topSellingCategoriesData,
+                hoverBackgroundColor: backgroundColors2
             }]
         })
     }
@@ -127,6 +229,8 @@ export const Dashboards = () => {
                 const valuesDashboard = await ProductService.filterProdutctsDashboard(range[0], range[1])
                 setProductsDashboard(valuesDashboard)
 
+                getTopSellingCategories(range[0], range[1])
+
                 if (valuesDashboard.length === 0) {
                     showSuccess('Nenhum produto encontrado nesse período!', '')
                 }
@@ -144,13 +248,11 @@ export const Dashboards = () => {
         <div className="container-dashboards">
             <Loading visible={showSpinnerLoading} />
             <Toast ref={toast} />
-
-
-
             <Calendar
                 id="range"
                 value={rangeFilters}
                 onChange={async (e) => {
+                    console.log(e.value)
                     setRangeFilters(e.value)
                     await invokeFilter(e.value)
                 }}
@@ -170,28 +272,24 @@ export const Dashboards = () => {
                 <>
                     <div className="cards">
                         <DashboardCard
-                            title="Pedidos cancelados"
-                            value="56"
-                            icon={<ImCancelCircle />}
-                            backgroundColor="#618044"
+                            title="Quantidade de funcionários"
+                            value={String(usersCount)}
+                            icon={<AiOutlineUser />}
                         />
                         <DashboardCard
                             title="Pedidos concluídos"
-                            value="432"
+                            value={String(finishedOrders)}
                             icon={<MdOutlineDoneOutline />}
-                            backgroundColor="#49683b"
                         />
                         <DashboardCard
-                            title="Pedidos cancelados (%)"
-                            value="12%"
-                            icon={<ImCancelCircle />}
-                            backgroundColor="#34623f"
-                        />
-                        <DashboardCard
-                            title="Quantidade de produtos"
-                            value="89"
+                            title="Categoria mais vendida"
+                            value={topSellingCategory}
                             icon={<FiInbox />}
-                            backgroundColor="#27412a"
+                        />
+                        <DashboardCard
+                            title="Quantidade de produtos ativos"
+                            value={String(activeProductsCount)}
+                            icon={<FiInbox />}
                         />
                     </div>
                     <div className="dashboards">
@@ -201,7 +299,7 @@ export const Dashboards = () => {
                         </div>
                         <div className="dashboard-c">
                             <h1 style={{ marginTop: '50px' }}>Categorias mais vendidas</h1>
-                            <Chart type="pie" data={informationCharData} options={lightOptions} />
+                            <Chart type="pie" data={informationCharData2} options={lightOptions} />
                         </div>
                     </div>
                 </>

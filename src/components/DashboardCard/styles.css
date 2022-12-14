@@ -1,5 +1,5 @@
 .dashboardcard {
-    background-color: blueviolet;
+    background-color: var(--theme-secondaryColor);
     color: white;
     padding: 28px;
     display: flex;
@@ -13,6 +13,10 @@
     margin-top: auto;
     margin-bottom: auto;
     box-shadow: rgba(0, 0, 0, 0.10) 0px 3px 8px;
+}
+
+.dashboardcard:nth-child(even) {
+    background-color: var(--theme-color);
 }
 
 .dashboardcard-title {

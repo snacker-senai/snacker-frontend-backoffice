@@ -121,3 +121,9 @@
 .cart-items .title-empty {
     margin-top: 20px;
 }
+
+.cart-table .dropdown {
+    padding:  8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
