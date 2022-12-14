@@ -23,7 +23,7 @@ import { Loading } from '../../Loading';
 import { RestaurantCategoryService } from '../../../services/restaurant-category/RestaurantCategory';
 import { Restaurant, RestaurantCategory } from '../../../services/employee/Models'
 import { RestaurantService } from '../../../services/restaurant/RestaurantService';
-import { formIsValid, useResetForm } from '../../../util/form';
+import { useFormIsValid, useResetForm } from '../../../util/form';
 
 
 interface RestaurantDialogProps {
@@ -259,6 +259,8 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
 
     const { isFormFieldValid } = useValidateInput(formik)
 
+    const disabledButton = !useFormIsValid(formik)
+
     const renderFooter = () => {
         if (action === Action.UPDATE) {
             switch (tabPanelCurrent) {
@@ -273,7 +275,7 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
                     return (
                         <div>
                             <Button label='Voltar' onClick={() => nextTabPanel(0)}></Button>
-                            <Button type='submit' disabled={!formIsValid(formik)} label={labelMain} onClick={() => formik.handleSubmit()}></Button>
+                            <Button type='submit' disabled={disabledButton} label={labelMain} onClick={() => formik.handleSubmit()}></Button>
                         </div>
                     )
             }
@@ -303,7 +305,7 @@ export const RestaurantsDialog = ({ restaurant, visible, onHide }: RestaurantDia
                     return (
                         <div>
                             <Button label='Voltar' onClick={() => nextTabPanel(1)}></Button>
-                            <Button type='submit' disabled={!formIsValid(formik)} label={labelMain} onClick={async () => await formik.handleSubmit()}></Button>
+                            <Button type='submit' disabled={disabledButton} label={labelMain} onClick={async () => await formik.handleSubmit()}></Button>
                         </div>
                     )
             }

@@ -154,7 +154,7 @@
   box-shadow: none !important;
 }
 
-.p-tabview .p-tabview-nav li .p-tabview-nav-link > .p-ink,
+.p-tabview .p-tabview-nav li .p-tabview-nav-link>.p-ink,
 .p-tabview .p-tabview-nav li .p-tabview-nav-link:focus {
   background-color: var(--theme-color) !important;
 }
@@ -168,10 +168,15 @@
   color: var(--theme-color) !important;
 }
 
-.p-tabview .p-tabview-nav-btn.p-link { 
+.p-tabview .p-tabview-nav-btn.p-link {
   box-shadow: none !important;
 }
 
 .p-float-label label {
   color: black !important;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+  border-color: var(--theme-color) !important;
+  background: var(--theme-color) !important;
 }

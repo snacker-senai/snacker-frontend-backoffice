@@ -17,7 +17,7 @@ import { classNames } from 'primereact/utils';
 import { Table } from '../../../services/table/Models';
 import { TableService } from '../../../services/table/TableService';
 import { Loading } from '../../Loading';
-import { formIsValid, useResetForm } from '../../../util/form';
+import { useFormIsValid, useResetForm } from '../../../util/form';
 
 interface PropsTablesDialog {
     table?: Table
@@ -68,9 +68,11 @@ export const TablesDialog = (props: PropsTablesDialog) => {
 
     const { isFormFieldValid } = useValidateInput(formik)
 
+    const disabledButton = !useFormIsValid(formik)
+
     const renderFooter = () => {
         return (
-            <Button type='submit' disabled={!formIsValid(formik)} label={props.table?.id ? 'Alterar' : 'Cadastrar'} onClick={() => formik.handleSubmit()}></Button>
+            <Button type='submit' disabled={disabledButton} label={props.table?.id ? 'Alterar' : 'Cadastrar'} onClick={() => formik.handleSubmit()}></Button>
         )
     }
 

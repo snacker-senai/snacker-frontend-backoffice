@@ -22,7 +22,7 @@ import { EmployeesService } from '../../../services/employee/EmployeesService';
 import { Employee, UserType } from "./../../../services/employee/Models";
 import UserTypeService from '../../../services/user-type/UserTypeService';
 import { Loading } from '../../Loading';
-import { formIsValid, useResetForm } from '../../../util/form';
+import { useFormIsValid, useResetForm } from '../../../util/form';
 
 interface PropsEmployeeDialog {
     employee?: Employee
@@ -35,8 +35,6 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
     const [usersType, setUsersType] = useState<any[]>([])
     const [showSpinnerLoading, setShowSpinnerLoading] = useState(false)
     const toast = useRef<any>(null);
-
-    console.log(usersType)
 
     const loadingUsersTypes = () => {
         setShowSpinnerLoading(true)
@@ -67,6 +65,8 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
     const nextTabPanel = (index: number) => {
         setTabPanelCurrent(index)
     }
+
+
 
     const handleSubmit = async (form: EmployeeDialogForm) => {
         setShowSpinnerLoading(true)
@@ -133,6 +133,8 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
 
     const { isFormFieldValid } = useValidateInput(formik)
 
+    const disabledButton = !useFormIsValid(formik)
+
     const renderFooter = () => {
         switch (tabPanelCurrent) {
             case 0:
@@ -146,7 +148,7 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
                 return (
                     <div>
                         <Button label='voltar' onClick={() => nextTabPanel(0)}></Button>
-                        <Button type='submit' disabled={!formIsValid(formik)} label={props.employee?.id ? 'alterar' : 'cadastrar'} onClick={() => formik.handleSubmit()}></Button>
+                        <Button type='submit' disabled={disabledButton} label={props.employee?.id ? 'alterar' : 'cadastrar'} onClick={() => formik.handleSubmit()}></Button>
                     </div>
                 )
         }
@@ -258,14 +260,16 @@ export const EmployeeDialog = (props: PropsEmployeeDialog) => {
                             </span>
                         </div>
                         <div className="employee-dialog-group">
-                            <Dropdown
-                                value={formik.values.userType || usersType[0]}
-                                options={usersType}
-                                onChange={(e) => onChangeUserType(e.target.value)}
-                                optionLabel="name"
-                                name="userType"
-                            />
-                            <label htmlFor="userType">Tipo de usuário</label>
+                            <span className="p-float-label">
+                                <Dropdown
+                                    value={formik.values.userType || usersType[0]}
+                                    options={usersType}
+                                    onChange={(e) => onChangeUserType(e.target.value)}
+                                    optionLabel="name"
+                                    name="userType"
+                                />
+                                <label htmlFor="userType">Tipo de usuário</label>
+                            </span>
                         </div>
                     </TabPanel>
                 </TabView>

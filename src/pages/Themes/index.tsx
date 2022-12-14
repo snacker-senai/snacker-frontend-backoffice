@@ -10,6 +10,7 @@ import { Loading } from '../../components/Loading';
 import { Toast } from 'primereact/toast';
 import { useTheme } from '../../context/ThemeContext';
 import { FileUpload } from 'primereact/fileupload';
+import InputUploadFile from '../../components/InputUploadFile';
 
 const Themes = () => {
     const themesNow = useTheme().theme
@@ -43,13 +44,9 @@ const Themes = () => {
         setIsLoading(false)
     }
 
-    const customBase64Uploader = (event) => {
-        const file = event.files[0];
-        const fileReader = new FileReader();
-        fileReader.onload = (e) => {
-            setNewThemes({ ...newThemes, icon: e.target?.result?.toString() })
-        }
-        fileReader.readAsDataURL(file);
+
+    const onChangeInputFile = (fileBase64?: string) => {
+        setNewThemes({ ...newThemes, icon: fileBase64 })
     }
 
     return (
@@ -62,7 +59,7 @@ const Themes = () => {
             </div>
 
             <div className='themes__logo'>
-                <FileUpload auto chooseLabel='Seleciona a logo' mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" uploadHandler={customBase64Uploader} customUpload={true} />
+                <InputUploadFile label='Logo' onChange={onChangeInputFile} />
             </div>
 
             <div className="group-colors">

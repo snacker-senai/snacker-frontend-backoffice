@@ -19,7 +19,8 @@ import { Product, ProductCategory } from "./../../../services/product/Models";
 import { Loading } from '../../Loading';
 import { ProductService } from '../../../services/product/ProductService';
 import { ProductCategoryService } from '../../../services/product-category/ProductCategoryService';
-import { formIsValid, useResetForm } from '../../../util/form';
+import { useFormIsValid, useResetForm } from '../../../util/form';
+import InputUploadFile from '../../InputUploadFile';
 
 interface PropsProductDialog {
     product?: Product
@@ -119,9 +120,11 @@ export const ProductDialog = (props: PropsProductDialog) => {
 
     const { isFormFieldValid } = useValidateInput(formik)
 
+    const disabledButton = !useFormIsValid(formik)
+
     const renderFooter = () => {
         return (
-            <Button type='submit' disabled={!formIsValid(formik)} label={props.product?.id ? 'Alterar' : 'Cadastrar'} onClick={() => formik.handleSubmit()}></Button>
+            <Button type='submit' disabled={disabledButton} label={props.product?.id ? 'Alterar' : 'Cadastrar'} onClick={() => formik.handleSubmit()}></Button>
         )
     }
 
@@ -170,25 +173,8 @@ export const ProductDialog = (props: PropsProductDialog) => {
                     </div>
 
                     <div className="product-dialog-group">
-                        <span className="p-float-label">
-                            <InputText
-                                id="image"
-                                value={formik.values.image}
-                                name="image"
-                                onChange={formik.handleChange}
-                                className={classNames({ 'p-invalid': isFormFieldValid('image') }, 'input p-inputtext-sm block mb-2')}
-                            />
-                            <label htmlFor="cellphone">URL da imagem</label>
-                        </span>
-                        <span className="p-float-label">
-                            <InputText
-                                id="price"
-                                value={formik.values.price}
-                                name="price"
-                                onChange={formik.handleChange}
-                                className={classNames({ 'p-invalid': isFormFieldValid('price') }, 'input p-inputtext-sm block mb-2')}
-                            />
-                            <label htmlFor="cellphone">Preço</label>
+                        <span>
+                            <InputUploadFile className='input p-inputtext-sm block mb-2' label='Imagem' onChange={(base64?: string) => formik.setFieldValue('image', base64)} />
                         </span>
                     </div>
                     <div className="product-dialog-group">
@@ -201,6 +187,16 @@ export const ProductDialog = (props: PropsProductDialog) => {
                                 name="productsCategory"
                             />
                             <label htmlFor="productsCategory">Categoria</label>
+                        </span>
+                        <span className="p-float-label">
+                            <InputText
+                                id="price"
+                                value={formik.values.price}
+                                name="price"
+                                onChange={formik.handleChange}
+                                className={classNames({ 'p-invalid': isFormFieldValid('price') }, 'input p-inputtext-sm block mb-2')}
+                            />
+                            <label htmlFor="cellphone">Preço</label>
                         </span>
                     </div>
                     <div className="product-dialog-group" style={{ justifyContent: 'right' }}>

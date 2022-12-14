@@ -17,6 +17,7 @@
     margin: 10px;
 }
 
+.product-dialog-group span,
 .product-dialog-group .p-float-label,
 .product-dialog-group .p-float-label input,
 .product-dialog-group .p-float-label .p-password,
@@ -43,4 +44,15 @@
 
 .product-dialog-group .field-checkbox label {
     margin-right: 10px;
+}
+
+@media only screen and (max-width: 750px) {
+    .product-dialog-group {
+        flex-wrap: wrap;
+        margin: 0;
+    }
+
+    .product-dialog-group .p-float-label {
+        width: 100%;
+    }
 }

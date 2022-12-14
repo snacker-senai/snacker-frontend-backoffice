@@ -18,7 +18,7 @@ import { RestaurantCategory } from '../../../services/employee/Models';
 import { RestaurantCategoryService } from '../../../services/restaurant-category/RestaurantCategory';
 import { Loading } from '../../Loading';
 import { ProductsCategoryDialogSchema } from '../CategoriesDialog/schema';
-import { formIsValid, useResetForm } from '../../../util/form';
+import { useFormIsValid, useResetForm } from '../../../util/form';
 
 interface PropsRestaurantCategoriesDialog {
     category?: RestaurantCategory
@@ -64,9 +64,11 @@ export const RestaurantCategoriesDialog = (props: PropsRestaurantCategoriesDialo
 
     const { isFormFieldValid } = useValidateInput(formik)
 
+    const disabledButton = !useFormIsValid(formik)
+
     const renderFooter = () => {
         return (
-            <Button type='submit' disabled={!formIsValid(formik)} label={props.category?.id ? 'Alterar' : 'Cadastrar'} onClick={() => formik.handleSubmit()}></Button>
+            <Button type='submit' disabled={disabledButton} label={props.category?.id ? 'Alterar' : 'Cadastrar'} onClick={() => formik.handleSubmit()}></Button>
         )
     }
 
