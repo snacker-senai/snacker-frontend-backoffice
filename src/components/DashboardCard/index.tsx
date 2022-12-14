@@ -4,12 +4,11 @@ type DashboardCardProps = {
     title: string
     value: string
     icon: React.ReactNode
-    backgroundColor: string
 }
 
-export const DashboardCard = ({ title, value, icon, backgroundColor }: DashboardCardProps) => {
+export const DashboardCard = ({ title, value, icon }: DashboardCardProps) => {
     return (
-        <div className="dashboardcard" style={{ backgroundColor }}>
+        <div className="dashboardcard">
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span className="dashboardcard-title">{title}</span>
                 {icon}

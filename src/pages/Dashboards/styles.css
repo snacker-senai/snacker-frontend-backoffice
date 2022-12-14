@@ -102,3 +102,7 @@
     width: 100%;
   }
 }
+
+.pi-calendar {
+  color: var(--theme-secondaryFontColor) !important;
+}
