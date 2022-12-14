@@ -71,6 +71,8 @@ export const Tables = () => {
     }
 
     const rightToolbarTemplates = () => {
+        if (isWaiter) return <></>
+
         return (
             <Button
                 label="Adicionar mesa"

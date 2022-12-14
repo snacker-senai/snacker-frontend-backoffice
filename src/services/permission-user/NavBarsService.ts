@@ -111,6 +111,12 @@ export class NavBarsService {
             label: 'Pedidos',
             linkTo: '/pedidos',
           },
+          {
+            id: 7,
+            icon: 'fa-solid fa-table',
+            label: 'Mesas',
+            linkTo: '/mesas',
+          }
         ]
 
       default:
