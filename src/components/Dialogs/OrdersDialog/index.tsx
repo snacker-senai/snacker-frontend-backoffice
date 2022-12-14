@@ -2,7 +2,7 @@
 import { Button } from "primereact/button"
 import { Dialog } from "primereact/dialog"
 import { useEffect, useState } from "react"
-import { Circles } from "react-loader-spinner"
+import { TailSpin } from "react-loader-spinner"
 import { OrderWithProducts } from "../../../services/order/Models"
 import { OrderService } from "../../../services/order/OrderService"
 import './styles.css'
@@ -82,7 +82,7 @@ export const OrdersDialog = ({ tableId, visible, onHide }: OrdersDialogProps) =>
     <Dialog visible={visible} onHide={onHide} style={{ width: '60%' }} header="Lista de pedidos">
       {isLoading ? (
         <div className="loading">
-          <Circles color="#00BFFF" height={80} width={80} />
+          <TailSpin color="#273c42" height={80} width={80} />
         </div>
       ) : (
         <>

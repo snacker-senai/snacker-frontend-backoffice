@@ -24,19 +24,27 @@
 }
 
 .order-card .order-status {
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 0.95em;
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 4px;
 }
 
 .order-card .status-1 {
-  color: blue;
+  background: #80B0FF;
+  color: #142239;
 }
 
 .order-card .status-2 {
-  color: orange;
+  background: #EAC969;
+  color: #84641C;
 }
 
 .order-card  .status-3 {
-  color: green;
+  background: #58CEA4;
+  color: #284A3D;
 }
 
 .order-card .subtotal {

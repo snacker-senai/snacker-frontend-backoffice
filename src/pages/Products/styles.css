@@ -99,8 +99,10 @@
   padding-right: 9px;
   padding-left: 9px;
   font-weight: bold;
-  background-color: rgb(45, 211, 109);
-  color: rgb(14, 70, 46);
+  /* background-color: rgb(45, 211, 109);
+  color: rgb(14, 70, 46); */
+  background-color: rgb(219, 241, 220);
+  color: rgb(99, 133, 99);
   border-radius: 7px;
   font-size: 0.95em;
 }
@@ -110,8 +112,10 @@
   padding-right: 9px;
   padding-left: 9px;
   font-weight: bold;
-  background-color: rgb(255, 35, 86);
-  color: rgb(67, 8, 16);
+  /* background-color: rgb(255, 35, 86);
+  color: rgb(67, 8, 16); */
+  background-color: rgb(250, 242, 195);
+  color: rgb(134, 125, 92);
   border-radius: 7px;
   font-size: 0.95em;
 }

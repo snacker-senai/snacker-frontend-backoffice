@@ -8,7 +8,7 @@
 .img-box {
   width: 60%;
   height: 100%;
-  background-color: var(--primary-500);
+  background-color: var(--theme-color);
   display: flex;
   align-items: center;
   justify-content: center;
